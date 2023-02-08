@@ -1,0 +1,8 @@
+site_name: OptimaV2 Document
+site_url: "https://example.enerzai.com/optimav2"
+repo_url: "https://github.com/ENERZAi/OptimaV2-Docs"
+nav:
+  - Home: index.md
+theme: readthedocs
+plugins:
+  - section-index
