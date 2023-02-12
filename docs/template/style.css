@@ -1,0 +1,63 @@
+.tabbed-set {
+  position: relative;
+  display: flex;
+  flex-flow: column wrap;
+  margin: 1em 0;
+}
+
+.tabbed-set>input {
+  position: absolute;
+  display: none;
+}
+
+.tabbed-labels {
+  display: flex;
+  max-width: 100%;
+  overflow: auto;
+  box-shadow: 0 -1px #C0C0C0 inset;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.tabbed-labels::-webkit-scrollbar {
+  display: none;
+}
+
+.tabbed-labels>label {
+  flex-shrink: 0;
+  width: auto;
+  margin: 0;
+  padding: 12px 16px 12px 16px;
+  font-weight: 700;
+  font-size: 1rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 250ms, color 250ms;
+  scroll-margin-inline-start: 1.25rem;
+}
+
+.tabbed-labels>label:hover {
+  background-color: #d3d3d3;
+}
+
+.tabbed-content {
+  width: 100%;
+}
+
+.tabbed-block {
+  display: none;
+}
+
+.tabbed-set>input:nth-child(4):checked~.tabbed-labels> :nth-child(4),
+.tabbed-set>input:nth-child(3):checked~.tabbed-labels> :nth-child(3),
+.tabbed-set>input:nth-child(2):checked~.tabbed-labels> :nth-child(2),
+.tabbed-set>input:nth-child(1):checked~.tabbed-labels> :nth-child(1) {
+  background-color: #55a5d9;
+}
+
+.tabbed-set>input:nth-child(4):checked~.tabbed-content> :nth-child(4),
+.tabbed-set>input:nth-child(3):checked~.tabbed-content> :nth-child(3),
+.tabbed-set>input:nth-child(2):checked~.tabbed-content> :nth-child(2),
+.tabbed-set>input:nth-child(1):checked~.tabbed-content> :nth-child(1) {
+  display: block;
+}

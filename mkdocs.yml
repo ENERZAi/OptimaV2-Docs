@@ -13,5 +13,19 @@ nav:
   - "Runtime API":
     - Functions: "runtime/functions.md"
 theme: readthedocs
+extra_css:
+  - "template/style.css"
 plugins:
   - section-index
+markdown_extensions: 
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
