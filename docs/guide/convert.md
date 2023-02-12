@@ -144,3 +144,123 @@ Then you may get image which illustrates subgraph allocated model graph. There w
 [^2]: (TODO) creating json must be more convenient (torch2nx integration?? - but devicekind access makes a problem a bit complex)
 [^3]: It depends on a runtime specification
 [^4]: 이를 위해서는 torch2nx merge가 필요합니다 - 매우 적은 변경
+
+----
+
+The OptimaV2 Manager is an entrypoint class to the entire OptimaV2 optimization and compilation process.
+The user only needs to provide the following information.
+
+1. The name of the model.
+2. List of devices to use. Provide as list of optimav2.devices.DeviceEnum enumeration. (TODO: 사용할 지 정하기)
+3. Gpickle file extracted from torch2nx. Explained above.
+4. Directory of where to dump compilation outputs.
+4. JSON file that denotes where each kernel is allocated to each device. Explained above.
+5. (Optional) Representative Dataset if SNPE is used.
+
+Invoking the optimize method of the manager class will run the entire OptimaV2 optimization process. Parameters are to be given like below.
+(TODO: 조금 더 Formal 한 방식으로 function template 제공 방법 찾아보기)
+```python
+def optimize(
+    self,
+    module_name: str, # Name of module
+    device_info: List[devices.DeviceEnum], # List of all devices to be considered.
+    model_graph_or_gpickle: Union[str, DiGraph], # Path of model gpickle extracted from torch2nx.
+    output_folder_dir: str, # Path of output directory compilation resutls will be exported to.
+    device_alloc_per_kernel_json_dir: str,  # JSON file containing operation to device mapping.
+    sample_inputs: Optional[List[Tuple[torch.Tensor]]] = None, # Optional Representative Dataset
+    need_gpu=False, # (Float16 only) Pass "True" when float16 models are converted.
+):
+```
+
+Sample Usage of Manager class
+```python
+
+# Import Manager from optima_v2
+from optima_v2.manager import Manager
+
+# ... 
+manager_instance = Manager()
+manager_instance.optimize(
+    "MediapipeNet",
+    [
+        devices.DeviceEnum.DEVICE_KIND_HEXAGON,
+        devices.DeviceEnum.DEVICE_KIND_X64,
+    ],
+    "~/models/mediapipe/mediapipe.gpickle",
+    "~/outputs/",
+    "~/models/mediapipe/mediapipe_allocation.json",
+    representative_data,
+)
+
+```
+
+After invoking this function,
+
+
+
+**Expected Output Tree**
+```
+~/outputs/MediapipeNet/
+	|- model.meta (metadata)
+	|- Subgraph_0\
+	|- Subgraph_1\
+	|- ...
+	|- Subgraph_i(OpenVino)\
+	|		|- subgraph_i.blob
+  |
+	|- Subgraph_j(SNPE)\
+	|		|- subgraph_j.dlc  
+	|
+	|- Subgraph_k(LLVM)\
+	|		|- <subgraph_name>.meta
+	|		|- <kernel_1_name>.ll
+	|		|- <kernel_2_name>.ll
+	|		|- ......
+	|
+	|- Subgraph_o(SPIRV)\
+			|- <subgraph_name>.meta
+			|- <kernel_1_name>.spv
+			|- <kernel_2_name>.spv
+			|- ......
+
+```
+
+
+### Notes on Representative Data
+The format of representative dataset is as follows
+```
+List[Tuple[torch.Tensor]]]
+```
+The outermost list represents the batch, and the inner tuple represents each input for the model.
+
+The example below illustrates how representative data is collected.
+
+```python
+
+    repr_data = []
+
+    for input_tuple in some_dataset_iterator:
+        # get input_tuple
+
+        repr_data.append(input_tuple)
+
+        output = model(*input_tuple)
+        
+        # Sample of how this input will 
+
+    # ...
+
+    manager_instance = Manager()
+    manager_instance.optimize(
+        "MediapipeNet",
+        [
+            devices.DeviceEnum.DEVICE_KIND_HEXAGON,
+            devices.DeviceEnum.DEVICE_KIND_X64,
+        ],
+        "~/models/mediapipe/mediapipe.gpickle",
+        "~/outputs/",
+        "~/models/mediapipe/mediapipe_allocation.json",
+        repr_data,
+    )
+
+```
