@@ -207,7 +207,7 @@ After invoking this function,
 	|- ...
 	|- Subgraph_i(OpenVino)\
 	|		|- subgraph_i.blob
-  |
+    |
 	|- Subgraph_j(SNPE)\
 	|		|- subgraph_j.dlc  
 	|
