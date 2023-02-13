@@ -1,12 +1,10 @@
 # How to convert your ML model and compile it
-This section introduces how to convert your ML model into OptimaIR and then compile it into dynamic library (which will be used to deploy your model in your target device using runtime. please refer to [User Guide/Inference](inference.md)).
+The document describes the steps to convert a machine learning (ML) model into a dynamic library that can be used for deployment on a target device. The process involves two steps:
 
-This section is again divided by two steps
-
-1. convert ML model(Pytorch, for now) to networkx model and allocate each operation into device(s)
-    1. User provide ML model (for now, only torch is available) and converts it into networkx which should be saved in "gpickle" format using *torch2nx* library. 
-
-    2. User creates "json file" that enumerates which device is allocated for each operation in graph. [^1] 
+1. Converting the ML model (Pytorch, for now) into a networkx model and allocating each operation into one or multiple devices
+    1. A user provides a machine learning model (implemented using the PyTorch framework) to convert into a graph representation using the *torch2nx* library. The output is then saved in the "gpickle" format. The "gpickle" format is a serialization format that is commonly used in Python to store networkx graphs.
+ 
+    2. User creates a "json file" that maps operations within the graph representation of the model to specific devices, such as GPUs or CPUs. This information can be used to optimize the execution of the model on different devices. [^1]
 
 2. Takes above mentioned files (gpickle and json) and then converts into binary (TO BE REWRITTEN BELOW)
     1. initialize graph module
@@ -20,10 +18,11 @@ This section is again divided by two steps
 ## convert ML model to networkx model
 
 ### how to create gpickle file for networkx model
-You should prepare two things 1) install package 2) ready to provide a model
+To prepare for using the torch2nx library, you need to do two things: install the package and be ready to provide a model.
 
-- you should install *torch2nx* and be able to import *zaiConverter*
-- you should provide pytorch model as a torch.nn.Module instance and sample input data (as a list and order must match with that of arguments in forward method of provided model) to feed into the model. Following is an example
+1. Installation: You need to install torch2nx and be able to import zaiConverter.
+
+2. Model Preparation: You need to provide a PyTorch model as a torch.nn.Module instance and sample input data (as a list, and the order must match the order of arguments in the forward method of the provided model). Here is an example:
 
 ````python
   
@@ -44,7 +43,7 @@ model = SampleModel()
 sample_input_list = [torch.rand(1, 3, 32, 32), torch.rand(1, 1, 32, 32)] # shape of each arguments matches with that of tensor x and tensor y
 ````
 
-Now, you provide a model and sample data to get a gpickle file
+Now, you can provide the model and sample data to get a gpickle file using the *torch2nx* library.
 
 ````python
 import zaiConverter
@@ -61,14 +60,14 @@ graph_converter.reset_module()
 graph_converter.export_to_gpickle(temp_gpickle_save_filename, nx_graph)
 ````
 
-Device allocation json file is a json file that indicates which device(processor) is assigned for each operation.
+The device allocation JSON file is a JSON file that indicates which device (processor) is assigned to each operation in the graph. 
 
-For example, the above "SampleModel" contains two operations - convolution and add. Then you should allocate device(s)/processor(s) available in your target device into the two operations. 
+For example, if the above "SampleModel" contains two operations - convolution and add - you need to allocate the available device(s)/processor(s) in your target device to the two operations.
 
-The required json file has key-value pairs of which key is an operation name and value is an allocated devices. Supported devices is as follows [^3]:
+The required JSON file has key-value pairs, where the key is the operation name and the value is the allocated device. The supported devices are [^3]:
 
 + "X86",
-+ "X64", - tested
++ "X64", (Tested)
 + "ARM",
 + "ARM64",
 + "NVIDIA",
@@ -76,13 +75,13 @@ The required json file has key-value pairs of which key is an operation name and
 + "INTELGPU",
 + "MALI",
 + "ADRENO",
-+ "HEXAGON", - tested
++ "HEXAGON", (Tested)
 + "MYRIAD",
 + "ARA1",
 + "TPU",
 + "CV22",
 
-To generate json file, you must create a template json providing a default device.[^2]
+To generate the JSON file, you need to create a template JSON file with a default device.[^2]
 
 ````python
 import pickle
@@ -105,19 +104,20 @@ with open(model_json_filename, "w") as f:
     json.dump(alloc_dict, f)
 ````
 
-Then you should get a json file like following:
+Then, you will get a JSON file like this:
 ````json
 {"conv2d_2": "X64:0", "add_5": "X64:0"}
 ````
 
-You can customize this json file as you want like following (this example indicates that convolution operation is run on hexagon and then add tensors on x86-64 architecture processor)
+You can customize this JSON file as you wish, for example, the following JSON file indicates that the convolution operation runs on hexagon and then adds tensors on an x86-64 architecture processor:
+
 ````json
 {"conv2d_2": "HEXAGON:0", "add_5": "X64:1"}
 ````
 
 **Graph visualization**
 
-Device allocation is much easier when visualization of graph is provided. To visualize the graph, you should install *pygraphviz*
+Device allocation becomes much easier with a visual representation of the graph. To visualize the graph, you need to install pygraphviz.
 ````bash
 # (Linux)
 sudo apt-get install graphviz graphviz-dev
@@ -125,7 +125,7 @@ pip install pygraphviz
 # (For other OS, please refer to https://pygraphviz.github.io/documentation/stable/install.html)
 ````
 
-Following code let you know how to allocate each operation using graph illustration.[^4]
+The following code shows you how to allocate each operation using a graph illustration. [^4]
 ````python
 from pathlib import Path
 visual_graph_dir = "<SOME DIRECTORY PATH WHERE VISUALIZED GRAPH WILL BE SAVED>"
@@ -134,7 +134,7 @@ graph_converter.plot_network(Path(visual_graph_dir), visual_graph_filename, \
                              model_json_filename, figsizenum=5)
 ````
 
-Then you may get image which illustrates subgraph allocated model graph. There will be (n+1) colors. "n" is a number of devices used in json and one color is for all tensors (either dynamic or static). By controlling figsizenum (from 5 to about 40), you can adjust image size.
+Then, you may get an image that illustrates the subgraph allocated model graph. There will be (n+1) colors, where "n" is the number of devices used in the JSON file, and one color represents all tensors (either dynamic or static). By controlling the figsizenum (from 5 to about 40), you can adjust the size of the image.
 
 ![Visualized Graph](../img/samplemodel.png)
 
