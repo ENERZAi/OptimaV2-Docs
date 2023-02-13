@@ -10,10 +10,25 @@ nav:
     - "Inference": "guide/inference.md"
   - "Opto Language":
     - "Builtin Functions": "kernel/builtin.md"
-  - "Runtime API":
-    - Functions: "runtime/functions.md"
+  - "Runtime API Reference":
+    - "C++": "runtime/cpp.md"
+    - "Python": "runtime/python.md"
 theme: readthedocs
+extra_css:
+  - "template/style.css"
+extra_javascript:
+  - "template/sync-tabs.js"
 plugins:
   - section-index
-markdown_extensions:
+markdown_extensions: 
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
   - footnotes
+  - md_in_html
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
