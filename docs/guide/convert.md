@@ -177,14 +177,15 @@ Sample Usage of Manager class
 
 # Import Manager from optima_v2
 from optima_v2.manager import Manager
+from optima_v2.devices import DeviceEnum
 
 # ... 
 manager_instance = Manager()
 manager_instance.optimize(
     "MediapipeNet",
     [
-        devices.DeviceEnum.DEVICE_KIND_HEXAGON,
-        devices.DeviceEnum.DEVICE_KIND_X64,
+        DeviceEnum.DEVICE_KIND_HEXAGON,
+        DeviceEnum.DEVICE_KIND_X64,
     ],
     "~/models/mediapipe/mediapipe.gpickle",
     "~/outputs/",
