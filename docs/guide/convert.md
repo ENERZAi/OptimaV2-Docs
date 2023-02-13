@@ -213,8 +213,8 @@ After invoking this function,
 	|
 	|- Subgraph_k(LLVM)\
 	|		|- <subgraph_name>.meta
-	|		|- <kernel_1_name>.ll
-	|		|- <kernel_2_name>.ll
+	|		|- <kernel_1_name>.so
+	|		|- <kernel_2_name>.so
 	|		|- ......
 	|
 	|- Subgraph_o(SPIRV)\
