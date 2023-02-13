@@ -15,3 +15,5 @@ nav:
 theme: readthedocs
 plugins:
   - section-index
+markdown_extensions:
+  - footnotes
