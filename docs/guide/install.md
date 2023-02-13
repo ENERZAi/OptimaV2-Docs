@@ -1,6 +1,6 @@
 # Installation guide
 
-There are several ways to install OptimaV2. This document will guide you for installing the OptimaV2 in your system.
+This document will guide you for installing the OptimaV2 in your systemm and OptimaV2 runtime on your target.
 
 There are 3 components required to compile and run your model with OptimaV2
 
@@ -9,7 +9,9 @@ There are 3 components required to compile and run your model with OptimaV2
 * torch2nx 
 * torch-mlir (To be deprecated)
 
-This guide will let you install all requirements for using OptimaV2, Assuming you have host system satisfying _System requirements_ and python 3.10 or above installed with virtual environment tool (venv or anaconda).
+This guide will let you install all requirements for using OptimaV2, Assuming you have host system satisfying _System requirements_ connected to ENERZAi local network, and python 3.10 or above installed with virtual environment tool (venv or anaconda).
+
+Since OptimaV2 is on alpha testing phase, it is not yet open to public network yet. Therefore, you must be connected to ENERZAi local network for installation. We apologize for this inconvenience.
 
 ### System requirements
 
@@ -58,6 +60,7 @@ Installing OptimaV2 via pip is just simple as below
 ```bash
 conda create -n OptimaV2
 ```
+We recommend you installing OptimaV2 on python virtual environment to prevent version mismatches with your original installation. Moreover, we highly recommend you to not install it with 'sudo', since it will install and might change pre-installed package versions system wide.
 
 **Step 1:** Install torch-mlir (This dependency is going to be deprecated will be removed in future releases)
 ```bash
@@ -68,23 +71,28 @@ pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80  --no-
 ```bash
 pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80 zaiConverter==1.4.2
 ```
+This process will prompt you to enter github token or username if you don't have access privilege to torch2nx library. In this case, contact OptimaV2 team. We will grant you permissions for installing torch2nx
 
 **Step 3** Install OptimaV2 compiler
 ```bash
 pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80 optima-v2==0.1.0
 ```
 
-Now your installation is complete for OptimaV2 compiler and user interface. However, you will need to install OptimaV2 runtime to verify OptimaV2 installation is complete
+Now, your installation should be complete for OptimaV2 compiler and user interface. You should have no problem compiling your model down to runtime binary. However, We recommend you to install OptimaV2 runtime and verify your OptimaV2 installation before using it. Such steps are described from Step 4.
 
-**Step 4:** Install OptimaV2 runtime
+**Step 4:** Install OptimaV2 runtime (Recommended)
 ```bash
 pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80 optima-v2-runtime==0.1.0
 ```
 
-**Step 5:** Verify your installation
+This will install OptimaV2 runtime on your system.
+
+**Step 5:** Verify your installation (Recommended)
 ```bash
 python3 python/tests/test_manager/test.py > log.txt
 ```
+This test internally tests some of our test models. It compiles sample pytorch model down to binary using OptimaV2 and runs it on OptimaV2 runtime. Output from OptimaV2 runtime is verified using output from pytorch.
+
 Detailed test output will be written in log.txt. This will take few minutes to complete. If your terminal shows OK at the end, your installation is complete.
 
 If this outputs 'E' in the terminal, it means there was some problem during your installation. In this case, please send us log.txt file and contact us. We will be greateful to help you out.
@@ -209,13 +217,13 @@ cd OptimaV2
 git submodule update --init --remote --recursive
 ```
 
-**Step 2**: Install torch2nx (You will need read privilege to torch2nx)
+**Step 2**: Install torch2nx(zaiConverter)
 
 ```bash
-pip install git+ssh://git@github.com/ENERZAi/torch2nx 
+pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80 zaiConverter==1.4.2
 ```
 
-**Step 3:** Install runtime (For this process, you will need to be inside ENERZAi local network)
+**Step 3:** Install runtime
 
 ```bash
 # This installs runtime from enerzai private pypi. Therefore, you need to be inside the enerzai internal network
@@ -239,3 +247,28 @@ python3 python/tests/test_manager/test.py > log.txt
 ```
 
 If this finishes with OK, it verifies your installation was successful
+
+
+## Installing OptimaV2 Runtime
+
+Installing OptimaV2 runtime can be done with single _pip install_ command.
+```bash
+pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80 optima-v2-runtime==0.1.0
+```
+
+Just make sure you install your OptimaV2 runtime on your target device (The device you will run inference).
+
+
+## Troubleshooting
+1. Building MLIR fails with compiler or linker errors
+   * It turns out compilation with MLIR fails when built with GNU toolchains. We recommend using LLVM toolchain for building MLIR
+2. Torch2nx installation requires github token or password, but I don't have one
+   * Please contact OptimaV2 team. We will grant you permissions for installing torch2nx
+
+## Contact us
+We will be always grateful to help you with using OptimaV2 runtime. 
+You can contact one of our team members
+* Jaewoo Kim (김재우) jaewoo.kim@enerzai.com
+* Jaeyoon Yoo (유재윤) jaeyoon.yoo@enerzai.com
+* Jinhwan Shin (신진환) jinhwan.shin@enerzai.com
+* Changbeom Kang (강창범) changbeom.kang@enerzai.com
