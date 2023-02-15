@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://example.enerzai.com/optimav2/guide/inference/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Inference - OptimaV2 Document</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+        <link href="../../template/style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Inference";
+        var mkdocs_page_input_path = "guide/inference.md";
+        var mkdocs_page_url = "/optimav2/guide/inference/";
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> OptimaV2 Document
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About</a>
+                </li>
+              </ul>
+              
+                      <p class="caption"><span class="caption-text">User Guide</span></p>
+              
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../install/">Install</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../convert/">Convert</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Inference</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#install-requirements">Install Requirements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#import-the-runtime">Import the runtime</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#create-the-context">Create the context</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#load-the-model">Load the model</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#create-the-request">Create the request</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#set-input-tensors">Set input tensors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#run-inference">Run inference</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#get-output-tensors">Get output tensors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#get-profile-data">Get profile data</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              
+                      <p class="caption"><span class="caption-text">Opto Language</span></p>
+              
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../kernel/builtin/">Builtin Functions</a>
+                  </li>
+              </ul>
+              
+                      <p class="caption"><span class="caption-text">Runtime API Reference</span></p>
+              
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../runtime/cpp/">C++</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../runtime/python/">Python</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">OptimaV2 Document</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+          <li>User Guide &raquo;</li>
+      <li>Inference</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ENERZAi/OptimaV2-Docs/edit/master/docs/guide/inference.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="run-the-model-from-optimav2">Run the model from OptimaV2<a class="headerlink" href="#run-the-model-from-optimav2" title="Permanent link">&para;</a></h1>
+<h2 id="install-requirements">Install Requirements<a class="headerlink" href="#install-requirements" title="Permanent link">&para;</a></h2>
+<p>OptimaV2에서 변환한 모델을 실행하는 OptimaV2-Runtime을 실행하기 위해서 필요한 요구사항은 다음과 같습니다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">C++</label><label for="__tabbed_1_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>Ubuntu 18.04 이상(최소 지원 버전, Ubuntu 20.04 이상 권장)</li>
+<li>C++ 17 이상을 컴파일 할 수 있는 컴파일러(GCC 9 이상 또는 Clang 10 이상)</li>
+<li>CMake 3.21 이상</li>
+<li>Make 또는 Ninja</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Ubuntu 18.04 이상(최소 지원 버전, Ubuntu 20.04 이상 권장)</li>
+<li>Python 3.6 이상(최소 지원 버전, Python 3.9 이상 권장)</li>
+</ul>
+</div>
+</div>
+</div>
+<p>다음 과정을 통해 필요한 requirements를 설치합니다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">C++</label><label for="__tabbed_2_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
+
+<span class="c1"># ninja 대신 make를 사용한다면 `ninja-build` 생략</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>build-essentials<span class="w"> </span>ninja-build<span class="w"> </span>curl
+
+<span class="c1"># ubuntu 20.04이하 사용자는 CMake github repository에서 최신 binary를 다운로드해 설치.    </span>
+<span class="c1"># AMD64(x86_64)는 아래 command 이용:</span>
+curl<span class="w"> </span>-fsSLo<span class="w"> </span>cmake.tar.gz<span class="w"> </span>https://github.com/Kitware/CMake/releases/download/v3.25.2/cmake-3.25.2-linux-x86_64.tar.gz
+tar<span class="w"> </span>xzf<span class="w"> </span>cmake.tar.gz
+sudo<span class="w"> </span>cp<span class="w"> </span>-R<span class="w"> </span>cmake-3.25.2-linux-x86_64<span class="w"> </span>/usr/local
+
+<span class="c1"># AArch64(ARM64)는 아래 command 이용:</span>
+curl<span class="w"> </span>-fsSLo<span class="w"> </span>cmake.tar.gz<span class="w"> </span>https://github.com/Kitware/CMake/releases/download/v3.25.2/cmake-3.25.2-linux-aarch64.tar.gz
+tar<span class="w"> </span>xzf<span class="w"> </span>cmake.tar.gz
+sudo<span class="w"> </span>cp<span class="w"> </span>-R<span class="w"> </span>cmake-3.25.2-linux-aarch644<span class="w"> </span>/usr/local
+
+<span class="c1"># ubuntu 22.04이상 사용자는 apt를 통해 바로 설치.</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>cmake
+
+<span class="c1"># runtime sdk 다운로드 방법은 구두로 전달.</span>
+
+<span class="c1"># /usr/local 에 runtime sdk 를 설치합니다.</span>
+<span class="c1"># 다른 경로에 설치할 경우 별도의 cmake option이 필요할 수 있습니다.</span>
+sudo<span class="w"> </span>tar<span class="w"> </span>xzf<span class="w"> </span>optima-v2-runtime.0.1.0.x64-linux.tar.gz<span class="w"> </span>-C<span class="w"> </span>/usr/local
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="c1"># conda, virtualenv 등을 활용해서 가상환경 생성했다고 가정하고 수행합니다.</span>
+<span class="c1"># TODO: deploy server의 IP를 URL으로 고정하기</span>
+pip<span class="w"> </span>install<span class="w"> </span>--index<span class="w"> </span>http://192.168.0.80:12321<span class="w"> </span>--trusted-host<span class="w"> </span><span class="m">192</span>.168.0.80<span class="w"> </span>optima-v2-runtime<span class="o">==</span><span class="m">0</span>.1.0
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="import-the-runtime">Import the runtime<a class="headerlink" href="#import-the-runtime" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">C++</label><label for="__tabbed_3_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><code>CMakeLists.txt</code>를 작성합니다.
+<div class="highlight"><pre><span></span><code>find_package(OptimaV2-Runtime REQUIRED)
+add_executable(Sample Sample.cpp)
+target_link_libraries(Sample PRIVATE OptimaV2::Runtime)
+</code></pre></div></p>
+<p><code>Sample.cpp</code> 파일을 생성하고 코드를 작성합니다.
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;OptimaV2/Runtime.h&gt;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">rt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">optima_v2</span><span class="o">::</span><span class="nn">runtime</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</div>
+<div class="tabbed-block">
+<p><code>sample.py</code>파일을 생성하고 runtime을 import합니다.
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">optima_v2.runtime</span> <span class="k">as</span> <span class="nn">rt</span>
+</code></pre></div></p>
+</div>
+</div>
+</div>
+<h2 id="create-the-context">Create the context<a class="headerlink" href="#create-the-context" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">C++</label><label for="__tabbed_4_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><code>rt::Context</code> 객체를 생성합니다. <code>rt::Context</code> 객체는 런타임에 할당되는 모든 자원, 플러그인 등을 관리하는 객체입니다.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>여기서부터 명시하지 않는 이상 모든 code는 위에 작성한 <code>main</code>함수에 작성됩니다.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="k">auto</span><span class="w"> </span><span class="n">Context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rt</span><span class="o">::</span><span class="n">Context</span><span class="p">();</span>
+</code></pre></div>
+<p><code>rt::ContextOptions</code> 객체를 통해 context 초기화 옵션을 제공할 수 있습니다. <code>ContextOptions</code> 객체를 사용하여 context를 초기화 하려면 다음과 같이 진행합니다.
+<div class="highlight"><pre><span></span><code><span class="k">auto</span><span class="w"> </span><span class="n">Options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rt</span><span class="o">::</span><span class="n">ContextOptions</span><span class="p">();</span>
+
+<span class="n">Options</span><span class="p">.</span><span class="n">LogLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rt</span><span class="o">::</span><span class="n">LogLevel</span><span class="o">::</span><span class="n">Verbose</span><span class="p">;</span><span class="w"> </span><span class="c1">// setup verbosity of logger.</span>
+<span class="n">Options</span><span class="p">.</span><span class="n">LogPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">filesystem</span><span class="o">::</span><span class="n">path</span><span class="p">(</span><span class="s">&quot;runtime.log&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// set file path of log. default is stdout.</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">Context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rt</span><span class="o">::</span><span class="n">Context</span><span class="p">(</span><span class="n">Options</span><span class="p">);</span>
+</code></pre></div></p>
+<p>기본적으로 runtime은 runtime에 설치된 기본 extension을 로드합니다. 하지만 별도의 extension을 제공받았고, 그것이 runtime이 설치된 경로에 존재하지 않는다면 다음 방법으로 extension을 로드할 수 있습니다.
+<div class="highlight"><pre><span></span><code><span class="n">Context</span><span class="p">.</span><span class="n">loadExtension</span><span class="p">(</span><span class="s">&quot;path/to/extension&quot;</span><span class="p">);</span>
+</code></pre></div></p>
+</div>
+<div class="tabbed-block">
+<p><code>rt.Context</code> 객체를 생성합니다.
+<div class="highlight"><pre><span></span><code><span class="n">context</span> <span class="o">=</span> <span class="n">rt</span><span class="o">.</span><span class="n">Context</span><span class="p">()</span>
+</code></pre></div></p>
+<p>필요한 경우 <code>loglevel</code>이나 <code>log_path</code>를 지정할 수 있습니다. <code>loglevel</code>을 지정하면 보다 자세한 log가 출력되고, <code>log_path</code>를 지정할 경우 그 경로에 logfile을 작성합니다.
+<div class="highlight"><pre><span></span><code><span class="n">context</span> <span class="o">=</span> <span class="n">rt</span><span class="o">.</span><span class="n">Context</span><span class="p">(</span><span class="n">loglevel</span><span class="o">=</span><span class="n">rt</span><span class="o">.</span><span class="n">LogLevel</span><span class="o">.</span><span class="n">Verbose</span><span class="p">,</span> <span class="n">log_path</span><span class="o">=</span><span class="s2">&quot;runtime.log&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<p>기본적으로 runtime은 runtime에 설치된 기본 extension을 로드합니다. 하지만 별도의 extension을 제공받았고, 그것이 runtime이 설치된 경로에 존재하지 않는다면 다음 방법으로 extension을 로드할 수 있습니다.
+<div class="highlight"><pre><span></span><code><span class="n">context</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="s2">&quot;path/to/extension&quot;</span><span class="p">);</span>
+</code></pre></div></p>
+</div>
+</div>
+</div>
+<h2 id="load-the-model">Load the model<a class="headerlink" href="#load-the-model" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">C++</label><label for="__tabbed_5_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>모델을 로드하는 방법은 간단합니다. 한 줄의 코드면 모델을 로드할 수 있습니다.
+<div class="highlight"><pre><span></span><code><span class="k">auto</span><span class="w"> </span><span class="n">Model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Context</span><span class="p">.</span><span class="n">loadModel</span><span class="p">(</span><span class="s">&quot;sample_model&quot;</span><span class="p">);</span>
+</code></pre></div></p>
+<p>모델을 로드한 이후, 모델의 input과 output tensor정보를 얻으려면 다음과 같이 수행합니다.
+<div class="highlight"><pre><span></span><code><span class="c1">// 모든 input tensor info를 가져올 때 다음과 같이 수행합니다.</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">InputCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Model</span><span class="p">.</span><span class="n">getInputTensorCount</span><span class="p">();</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">InputCount</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Model</span><span class="p">.</span><span class="n">getInputTensorInfo</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// do something with Info</span>
+<span class="p">}</span>
+
+<span class="c1">// 만약 특정 index 또는 특정 이름의 tensor의 info를 가져올 때에는 다음과 같이 수행합니다.</span>
+<span class="c1">// via index</span>
+<span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Model</span><span class="p">.</span><span class="n">getInputTensorInfo</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="c1">// via name</span>
+<span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Model</span><span class="p">.</span><span class="n">getInputTensorInfo</span><span class="p">(</span><span class="s">&quot;input1&quot;</span><span class="p">);</span>
+
+<span class="c1">// output tensor의 정보를 가져오려면 getInputTensor* 계열 함수 대신</span>
+<span class="c1">// getOutputTensor* 계열의 함수를 사용합니다.</span>
+</code></pre></div></p>
+</div>
+<div class="tabbed-block">
+<p>모델을 로드하는 방법은 간단합니다. 한 줄의 코드면 모델을 로드할 수 있습니다.
+<div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;sample_model&quot;</span><span class="p">);</span>
+</code></pre></div></p>
+<p>모델을 로드한 이후, 모델의 input과 output tensor정보를 얻으려면 다음과 같이 수행합니다.
+<div class="highlight"><pre><span></span><code><span class="o">//</span> <span class="n">모든</span> <span class="nb">input</span> <span class="n">tensor</span> <span class="n">info를</span> <span class="n">가져올</span> <span class="n">때</span> <span class="n">다음과</span> <span class="n">같이</span> <span class="n">수행합니다</span><span class="o">.</span>
+<span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">input_tensors_info</span><span class="p">:</span>
+    <span class="c1"># do something with info</span>
+    <span class="k">pass</span>
+
+<span class="o">//</span> <span class="n">만약</span> <span class="n">특정</span> <span class="n">index</span> <span class="n">또는</span> <span class="n">특정</span> <span class="n">이름의</span> <span class="n">tensor의</span> <span class="n">info를</span> <span class="n">가져올</span> <span class="n">때에는</span> <span class="n">다음과</span> <span class="n">같이</span> <span class="n">수행합니다</span><span class="o">.</span>
+<span class="o">//</span> <span class="n">via</span> <span class="n">index</span>
+<span class="n">info</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_input_tensor_info</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">//</span> <span class="n">via</span> <span class="n">name</span>
+<span class="n">info</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_input_tensor_info</span><span class="p">(</span><span class="s2">&quot;input1&quot;</span><span class="p">)</span>
+
+<span class="o">//</span> <span class="n">output</span> <span class="n">tensor의</span> <span class="n">정보를</span> <span class="n">가져오려면</span> <span class="n">get_input_</span><span class="o">*</span> <span class="n">계열</span> <span class="n">함수</span> <span class="n">대신</span>
+<span class="o">//</span> <span class="n">get_output_</span><span class="o">*</span> <span class="n">계열의</span> <span class="n">함수를</span> <span class="n">사용합니다</span><span class="o">.</span>
+</code></pre></div></p>
+</div>
+</div>
+</div>
+<h2 id="create-the-request">Create the request<a class="headerlink" href="#create-the-request" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">C++</label><label for="__tabbed_6_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><code>rt::InferRequest</code> 객체를 생성합니다. <code>rt::InferRequest</code> 객체는 하나의 inference를 나타내는 객체이며 독립적입니다.
+따라서 하나의 모델에서 여러개의 <code>rt::InferRequest</code> 객체를 생성할 수 있으며, 이를 동시에 실행하여 throughput을 달성할 수 있습니다.
+<div class="highlight"><pre><span></span><code><span class="k">auto</span><span class="w"> </span><span class="n">Req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Model</span><span class="p">.</span><span class="n">createRequest</span><span class="p">();</span>
+
+<span class="c1">// 만약 동시에 여러 inference를 수행하고자 한다면 다음과 같이 여러개를 만들 수 있습니다.</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">rt</span><span class="o">::</span><span class="n">InferRequest</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Reqs</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Reqs</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Model</span><span class="p">.</span><span class="n">createRequest</span><span class="p">());</span>
+</code></pre></div></p>
+</div>
+<div class="tabbed-block">
+<p><code>rt.InferRequest</code> 객체를 생성합니다. <code>rt.InferRequest</code> 객체는 하나의 inference를 나타내는 객체이며 독립적입니다.
+따라서 하나의 모델에서 여러개의 <code>rt.InferRequest</code> 객체를 생성할 수 있으며, 이를 동시에 실행하여 throughput을 달성할 수 있습니다.
+<div class="highlight"><pre><span></span><code><span class="n">req</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">create_request</span><span class="p">();</span>
+
+<span class="o">//</span> <span class="n">만약</span> <span class="n">동시에</span> <span class="n">여러</span> <span class="n">inference를</span> <span class="n">수행하고자</span> <span class="n">한다면</span> <span class="n">다음과</span> <span class="n">같이</span> <span class="n">여러개를</span> <span class="n">만들</span> <span class="n">수</span> <span class="n">있습니다</span><span class="o">.</span>
+<span class="n">reqs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">reqs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">create_request</span><span class="p">())</span>
+</code></pre></div></p>
+</div>
+</div>
+</div>
+<h2 id="set-input-tensors">Set input tensors<a class="headerlink" href="#set-input-tensors" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">C++</label><label for="__tabbed_7_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Runtime의 tensor는 사용자가 생성할 수 없습니다. 이는 tensor memory를 device에서 관리하기 때문입니다. 따라서 <code>rt::Tensor</code> 객체를 사용자가 생성해서 대입하는 것이 아닌
+모델로부터 <code>rt::Tensor</code> 객체를 받아 값을 복사하는 방식으로 데이터를 입력/출력 하게 됩니다.</p>
+<p>모델의 input tensor에 데이터를 입력하기 위해 다음과 같이 수행합니다.
+<div class="highlight"><pre><span></span><code><span class="c1">// 모든 input tensor에 값을 입력하는 경우 다음과 같이 수행합니다.</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="n">Tensor</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Req</span><span class="p">.</span><span class="n">getInputTensors</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 단순 복사를 진행하려면 wrapper method인 copyFrom()을 사용할 수 있습니다.</span>
+<span class="w">    </span><span class="n">Tensor</span><span class="p">.</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">InputBuffer</span><span class="p">,</span><span class="w"> </span><span class="n">InputBufferLength</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// device memory에 직접 접근하고 싶다면, 다음과 같이 수행합니다.</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">Buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Tensor</span><span class="p">.</span><span class="n">getBuffer</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="o">*</span><span class="n">Ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Buffer</span><span class="p">.</span><span class="n">data</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// do something with Ptr</span>
+<span class="p">}</span>
+
+<span class="c1">// Tensor를 하나씩 가져온다면 다음과 같은 방법도 가능합니다.</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Req</span><span class="p">.</span><span class="n">getInputTensor</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// via index</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Req</span><span class="p">.</span><span class="n">getInputTensor</span><span class="p">(</span><span class="s">&quot;input_1&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// via name</span>
+<span class="c1">// 데이터를 입력하는 방법은 위와 동일합니다.</span>
+<span class="n">Tensor</span><span class="p">.</span><span class="n">copyFrom</span><span class="p">(...);</span>
+</code></pre></div></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>위에서 생성한 <code>Buffer</code> 변수는 <code>BufferHolder</code> RTTI 객체로 runtime 및 backend에서 사용하는 내부 memory를 hold하고 변수 범위를 벗어날 때 자동으로 release합니다.
+따라서 위의 <code>Buffer</code>변수의 값을 이동/복사하는 것은 모델 실행시 device에 따라 undefined behavior를 유발할 수 있습니다.
+대신 <code>rt::Tensor</code> 객체를 보관하였다가 <code>getBuffer()</code> 메서드를 통해 필요시 buffer를 제공 받는 것이 권장됩니다.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>C++의 <code>rt::Tensor</code> 객체는 입력 값의 형식을 검증하지 않습니다. 사용 시 유의를 요합니다.</p>
+</div>
+</div>
+<div class="tabbed-block">
+<p>Runtime의 tensor는 사용자가 생성할 수 없습니다. 이는 tensor memory를 device에서 관리하기 때문입니다. 따라서 <code>rt.Tensor</code> 객체를 사용자가 생성해서 대입하는 것이 아닌
+모델로부터 <code>rt.Tensor</code> 객체를 받아 값을 복사하는 방식으로 데이터를 입력/출력 하게 됩니다.</p>
+<p>모델의 input tensor에 데이터를 입력하기 위해 다음과 같이 수행합니다.
+<div class="highlight"><pre><span></span><code><span class="c1"># Tensor 하나하나 값을 입력하는 방법</span>
+<span class="k">for</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="n">req</span><span class="o">.</span><span class="n">input_tensors</span><span class="p">:</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+    <span class="n">tensor</span><span class="o">.</span><span class="n">copy_from</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>  <span class="c1"># tensor의 값은 numpy의 ndarray를 받습니다.</span>
+
+<span class="c1"># Tensor를 하나씩 가져온다면 다음과 같은 방법도 가능합니다.</span>
+<span class="n">tensor</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">get_input_tensor</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># via index</span>
+<span class="n">tensor</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">get_input_tensor</span><span class="p">(</span><span class="s2">&quot;input_1&quot;</span><span class="p">)</span>  <span class="c1"># via name</span>
+
+<span class="c1"># 한번에 입력하고 싶다면 아래와 같이 수행합니다.</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
+<span class="n">req</span><span class="o">.</span><span class="n">set_inputs</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+
+<span class="c1"># dict 도 지원합니다.</span>
+<span class="n">req</span><span class="o">.</span><span class="n">set_inputs</span><span class="p">({</span><span class="s2">&quot;input_1&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;input_2&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)})</span>
+</code></pre></div></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Numpy의 <code>ndarray</code> 객체는 다양한 형태의 array를 지원합니다. 하지만 OptimaV2 Runtime은 C 형식의 배열(Row-major)이면서 contiguous한 배열만을 지원합니다.
+위의 조건에 맞지 않는 경우 예외를 발생합니다.</p>
+</div>
+</div>
+</div>
+</div>
+<h2 id="run-inference">Run inference<a class="headerlink" href="#run-inference" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">C++</label><label for="__tabbed_8_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>모델에 입력 값을 입력했다면, inference를 수행할 수 있습니다. OptimaV2 Runtime의 모든 inference는 asynchronous합니다. 이는 <code>infer()</code> 메서드를 수행해도 block되지 않는 것을 나타냅니다.
+<code>wait()</code> 으로 대기할 수 있지만, callback을 등록하여 throughput을 증가하는 방법이 권장됩니다.</p>
+<p>Synchronous한 방법
+<div class="highlight"><pre><span></span><code><span class="n">Req</span><span class="p">.</span><span class="n">infer</span><span class="p">();</span>
+<span class="n">Req</span><span class="p">.</span><span class="n">wait</span><span class="p">();</span>
+
+<span class="c1">// timeout이 필요한 경우 다음과 같이 수행합니다.</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="o">::</span><span class="nn">literals</span><span class="p">;</span><span class="w"> </span><span class="c1">// for ms literal</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Req</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">100</span><span class="n">ms</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// infer() not finished before 100ms timeout</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// infer() finished before 100ms timeout</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p>Callback을 이용한 asynchronous한 방법
+<div class="highlight"><pre><span></span><code><span class="n">Req</span><span class="p">.</span><span class="n">setCallback</span><span class="p">([](</span><span class="n">rt</span><span class="o">::</span><span class="n">InferRequest</span><span class="o">&amp;</span><span class="w"> </span><span class="n">Req</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception_ptr</span><span class="w"> </span><span class="n">Error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Req: 자기 자신, Error: 예외 객체</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// error was thrown during inference</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Get outputs</span>
+<span class="w">    </span><span class="c1">// Set input data and infer again</span>
+
+<span class="w">    </span><span class="n">Req</span><span class="p">.</span><span class="n">infer</span><span class="p">();</span><span class="w"> </span><span class="c1">// This code is safe.</span>
+<span class="p">});</span>
+
+<span class="n">Req</span><span class="p">.</span><span class="n">infer</span><span class="p">();</span>
+</code></pre></div></p>
+</div>
+<div class="tabbed-block">
+<p>모델에 입력 값을 입력했다면, inference를 수행할 수 있습니다. OptimaV2 Runtime의 모든 inference는 asynchronous합니다. 이는 <code>infer()</code> 메서드를 수행해도 block되지 않는 것을 나타냅니다.
+<code>wait()</code> 으로 대기할 수 있지만, callback을 등록하여 throughput을 증가하는 방법이 권장됩니다.</p>
+<p>Synchronous한 방법
+<div class="highlight"><pre><span></span><code><span class="n">req</span><span class="o">.</span><span class="n">infer</span><span class="p">()</span>
+<span class="n">req</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+<span class="c1"># timeout이 필요한 경우 다음과 같이 수행합니다.</span>
+<span class="c1"># ms 단위 정수를 인자로 받습니다.</span>
+<span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="c1"># infer() not finished before timeout</span>
+    <span class="k">pass</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># infer() finished before timeout</span>
+    <span class="k">pass</span>
+</code></pre></div></p>
+<p>Callback을 이용한 asynchronous한 방법
+<div class="highlight"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">callback</span><span class="p">(</span><span class="n">req</span><span class="o">:</span><span class="w"> </span><span class="n">rt</span><span class="p">.</span><span class="n">InferRequest</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="o">:</span><span class="w"> </span><span class="n">Exception</span><span class="p">)</span><span class="o">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">ex</span><span class="o">:</span>
+<span class="w">        </span><span class="cp"># error was thrown during inference.</span>
+<span class="w">        </span><span class="k">return</span>
+
+<span class="w">    </span><span class="cp"># Get outputs</span>
+<span class="w">    </span><span class="cp"># Set input data and infer again</span>
+
+<span class="w">    </span><span class="n">req</span><span class="p">.</span><span class="n">infer</span><span class="p">()</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">safe</span><span class="p">.</span>
+
+<span class="n">req</span><span class="p">.</span><span class="n">set_callback</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
+<span class="n">req</span><span class="p">.</span><span class="n">infer</span><span class="p">()</span>
+</code></pre></div></p>
+</div>
+</div>
+</div>
+<h2 id="get-output-tensors">Get output tensors<a class="headerlink" href="#get-output-tensors" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">C++</label><label for="__tabbed_9_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Inference가 완료되었다면 output tensor의 값을 가져올 수 있습니다.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>inference완료 전이나 inference 시작 전에도 output tensor를 가져와 값을 읽을 수는 있습니다. 하지만 이는 undefined behavior입니다. 권장되지 않습니다.</p>
+</div>
+<p>결과를 가져오기 위해서는 다음과 같이 수행합니다.
+<div class="highlight"><pre><span></span><code><span class="c1">// 모든 tensor의 값을 가져오려면 다음과 같이 수행합니다.</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="n">Tensor</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Req</span><span class="p">.</span><span class="n">getOutputTensors</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 단순 복사를 진행하려면 wrapper method인 copyTo()을 사용할 수 있습니다.</span>
+<span class="w">    </span><span class="n">Tensor</span><span class="p">.</span><span class="n">copyTo</span><span class="p">(</span><span class="n">OutputBuffer</span><span class="p">,</span><span class="w"> </span><span class="n">OutputBufferLength</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// device memory에 직접 접근하고 싶다면, 다음과 같이 수행합니다.</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">Buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Tensor</span><span class="p">.</span><span class="n">getBuffer</span><span class="p">();</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="o">*</span><span class="n">Ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Buffer</span><span class="p">.</span><span class="n">data</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// do something with Ptr</span>
+<span class="p">}</span>
+
+<span class="c1">// Tensor를 하나씩 가져온다면 다음과 같은 방법도 가능합니다.</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Req</span><span class="p">.</span><span class="n">getOutputTensor</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// via index</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Req</span><span class="p">.</span><span class="n">getOutputTensor</span><span class="p">(</span><span class="s">&quot;input_1&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// via name</span>
+<span class="c1">// 데이터를 출력하는 방법은 위와 동일합니다.</span>
+<span class="n">Tensor</span><span class="p">.</span><span class="n">copyTo</span><span class="p">(...);</span>
+</code></pre></div></p>
+</div>
+<div class="tabbed-block">
+<p>Inference가 완료되었다면 output tensor의 값을 가져올 수 있습니다.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>inference완료 전이나 inference 시작 전에도 output tensor를 가져와 값을 읽을 수는 있습니다. 하지만 이는 undefined behavior입니다. 권장되지 않습니다.</p>
+</div>
+<p>결과를 가져오기 위해서는 다음과 같이 수행합니다.
+<div class="highlight"><pre><span></span><code><span class="c1"># Tensor 하나하나 값을 출력하는 방법</span>
+<span class="k">for</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="n">req</span><span class="o">.</span><span class="n">output_tensors</span><span class="p">:</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="c1"># Tensor를 하나씩 가져온다면 다음과 같은 방법도 가능합니다.</span>
+<span class="n">tensor</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">get_output_tensor</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># via index</span>
+<span class="n">tensor</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">get_output_tensor</span><span class="p">(</span><span class="s2">&quot;input_1&quot;</span><span class="p">)</span>  <span class="c1"># via name</span>
+
+<span class="c1"># 한번에 배열로 가져올 수도 있습니다</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">get_outputs</span><span class="p">()</span>
+</code></pre></div></p>
+</div>
+</div>
+</div>
+<h2 id="get-profile-data">Get profile data<a class="headerlink" href="#get-profile-data" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">C++</label><label for="__tabbed_10_2">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Inference 수행 후 프로파일링 정보를 가져올 수 있습니다.
+프로파일링 정보를 통해 어느 부분에서 병목인지 등 최적화를 수행할 때 이용할 수 있습니다.</p>
+<p>프로파일링 정보는 다음 종류를 제공합니다.</p>
+<ul>
+<li><code>ModelInit</code>: 전체 모델이 로드 될 때 걸린 시간을 나타냅니다.</li>
+<li><code>SubgraphInit</code>: 모델이 일부분인 subgraph를 로드될 때 걸린 시간을 나타냅니다.</li>
+<li><code>RequestInit</code>: <code>rt::InferRequest</code> 객체를 생성하고 초기화 할 때 걸린 시간을 나타냅니다.</li>
+<li><code>TransferFromInput</code>: 입력 tensor에서 값을 입력할 때 device로 전송될 때 걸린 시간을 나타냅니다.</li>
+<li><code>TransferToOutput</code>: 출력 tensor에서 값을 출력할 때 device로 전송할 때 걸린 시간을 나타냅니다.</li>
+<li><code>LayerExecute</code> 레이어 하나(kernel)를 실행하는데 걸린 시간을 나타냅니다.</li>
+<li><code>Wait</code>: 레이어 하나 혹은 subgraph 하나를 실행하기 위해 대기한 시간(queue에서 대기, 혹은 다른 레이어/subgraph가 실행 완료될 때 까지 대기)을 나타냅니다.</li>
+<li><code>BufferCopy</code>: subgraph 사이 이기종간 buffer를 복사할 때 걸린 시간을 나타냅니다.</li>
+<li><code>ModelExecute</code>: 전체 모델이 실행된 시간(<code>LayerExecute</code> + <code>Wait</code> + <code>BufferCopy</code>)을 나타냅니다.</li>
+<li><code>SubgraphExecute</code>: subgraph가 실행된 시간(<code>LayerExecute</code> + <code>Wait</code>)을 나타냅니다.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// 프로파일링 정보를 가져오려면 다음과 같이 수행합니다.</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">Datas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Req</span><span class="p">.</span><span class="n">getProfileData</span><span class="p">();</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Data</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Datas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// &lt;OptimaV2/Runtime/Utils/StreamHelper.h&gt;를 include 해야합니다.</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>추후 통계 자료와 graph plotting을 제공하는 편의성 기능이 도입될 예정입니다.</p>
+</div>
+</div>
+<div class="tabbed-block">
+<p>Inference 수행 후 프로파일링 정보를 가져올 수 있습니다.
+프로파일링 정보를 통해 어느 부분에서 병목인지 등 최적화를 수행할 때 이용할 수 있습니다.</p>
+<p>프로파일링 정보는 다음 종류를 제공합니다.</p>
+<ul>
+<li><code>ModelInit</code>: 전체 모델이 로드 될 때 걸린 시간을 나타냅니다.</li>
+<li><code>SubgraphInit</code>: 모델이 일부분인 subgraph를 로드될 때 걸린 시간을 나타냅니다.</li>
+<li><code>RequestInit</code>: <code>rt.InferRequest</code> 객체를 생성하고 초기화 할 때 걸린 시간을 나타냅니다.</li>
+<li><code>TransferFromInput</code>: 입력 tensor에서 값을 입력할 때 device로 전송될 때 걸린 시간을 나타냅니다.</li>
+<li><code>TransferToOutput</code>: 출력 tensor에서 값을 출력할 때 device로 전송할 때 걸린 시간을 나타냅니다.</li>
+<li><code>LayerExecute</code> 레이어 하나(kernel)를 실행하는데 걸린 시간을 나타냅니다.</li>
+<li><code>Wait</code>: 레이어 하나 혹은 subgraph 하나를 실행하기 위해 대기한 시간(queue에서 대기, 혹은 다른 레이어/subgraph가 실행 완료될 때 까지 대기)을 나타냅니다.</li>
+<li><code>BufferCopy</code>: subgraph 사이 이기종간 buffer를 복사할 때 걸린 시간을 나타냅니다.</li>
+<li><code>ModelExecute</code>: 전체 모델이 실행된 시간(<code>LayerExecute</code> + <code>Wait</code> + <code>BufferCopy</code>)을 나타냅니다.</li>
+<li><code>SubgraphExecute</code>: subgraph가 실행된 시간(<code>LayerExecute</code> + <code>Wait</code>)을 나타냅니다.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 프로파일링 정보를 가져오려면 다음과 같이 수행합니다.</span>
+<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">req</span><span class="o">.</span><span class="n">profile_data</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>추후 통계 자료와 graph plotting을 제공하는 편의성 기능이 도입될 예정입니다.</p>
+</div>
+</div>
+</div>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../convert/" class="btn btn-neutral float-left" title="Convert"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../kernel/builtin/" class="btn btn-neutral float-right" title="Builtin Functions">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ENERZAi/OptimaV2-Docs" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../convert/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../kernel/builtin/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../template/sync-tabs.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://example.enerzai.com/optimav2/guide/convert/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Convert - OptimaV2 Document</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+        <link href="../../template/style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Convert";
+        var mkdocs_page_input_path = "guide/convert.md";
+        var mkdocs_page_url = "/optimav2/guide/convert/";
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> OptimaV2 Document
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../about/">About</a>
+                </li>
+              </ul>
+              
+                      <p class="caption"><span class="caption-text">User Guide</span></p>
+              
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../install/">Install</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Convert</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#convert-ml-model-to-networkx-model">convert ML model to networkx model</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#how-to-create-gpickle-file-for-networkx-model">how to create gpickle file for networkx model</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#compile">compile</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#notes-on-representative-data">Notes on Representative Data</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../inference/">Inference</a>
+                  </li>
+              </ul>
+              
+                      <p class="caption"><span class="caption-text">Opto Language</span></p>
+              
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../kernel/builtin/">Builtin Functions</a>
+                  </li>
+              </ul>
+              
+                      <p class="caption"><span class="caption-text">Runtime API Reference</span></p>
+              
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../runtime/cpp/">C++</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../runtime/python/">Python</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">OptimaV2 Document</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+          <li>User Guide &raquo;</li>
+      <li>Convert</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ENERZAi/OptimaV2-Docs/edit/master/docs/guide/convert.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="how-to-convert-your-ml-model-and-compile-it">How to convert your ML model and compile it<a class="headerlink" href="#how-to-convert-your-ml-model-and-compile-it" title="Permanent link">&para;</a></h1>
+<p>The document describes the steps to convert a machine learning (ML) model into a dynamic library that can be used for deployment on a target device. The process involves two steps:</p>
+<ol>
+<li>
+<p>Converting the ML model (Pytorch, for now) into a networkx model and allocating each operation into one or multiple devices</p>
+<ol>
+<li>
+<p>A user provides a machine learning model (implemented using the PyTorch framework) to convert into a graph representation using the <em>torch2nx</em> library. The output is then saved in the "gpickle" format. The "gpickle" format is a serialization format that is commonly used in Python to store networkx graphs.</p>
+</li>
+<li>
+<p>User creates a "json file" that maps operations within the graph representation of the model to specific devices, such as GPUs or CPUs. This information can be used to optimize the execution of the model on different devices. <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+</li>
+</ol>
+</li>
+<li>
+<p>Takes above mentioned files (gpickle and json) and then converts into binary (TO BE REWRITTEN BELOW)</p>
+<ol>
+<li>initialize graph module</li>
+<li>allocate kernel</li>
+<li>kernel compile</li>
+<li>graph split</li>
+<li>extract representative dataset</li>
+<li>export to runtime</li>
+<li>convert onnx</li>
+</ol>
+</li>
+</ol>
+<h2 id="convert-ml-model-to-networkx-model">convert ML model to networkx model<a class="headerlink" href="#convert-ml-model-to-networkx-model" title="Permanent link">&para;</a></h2>
+<h3 id="how-to-create-gpickle-file-for-networkx-model">how to create gpickle file for networkx model<a class="headerlink" href="#how-to-create-gpickle-file-for-networkx-model" title="Permanent link">&para;</a></h3>
+<p>To prepare for using the torch2nx library, you need to do two things: install the package and be ready to provide a model.</p>
+<ol>
+<li>
+<p>Installation: You need to install torch2nx and be able to import zaiConverter.</p>
+</li>
+<li>
+<p>Model Preparation: You need to provide a PyTorch model as a torch.nn.Module instance and sample input data (as a list, and the order must match the order of arguments in the forward method of the provided model). Here is an example:</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<span class="k">class</span> <span class="nc">SampleModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SampleModel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">out1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">out2</span> <span class="o">=</span> <span class="n">out1</span> <span class="o">+</span> <span class="n">y</span>
+        <span class="k">return</span> <span class="n">out2</span>
+
+<span class="c1"># model and sample_input_data will be used in the below code block</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">SampleModel</span><span class="p">()</span>
+<span class="n">sample_input_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">)]</span> <span class="c1"># shape of each arguments matches with that of tensor x and tensor y</span>
+</code></pre></div>
+<p>Now, you can provide the model and sample data to get a gpickle file using the <em>torch2nx</em> library.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">zaiConverter</span>
+<span class="kn">from</span> <span class="nn">zaiConverter.pytorch_module</span> <span class="kn">import</span> <span class="n">converter</span>
+
+<span class="c1"># Convert model to Networkx specification</span>
+<span class="n">need_gpu</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># or False</span>
+<span class="n">temp_gpickle_save_filename</span> <span class="o">=</span> <span class="s2">&quot;&lt;SOME PATH WHERE GPICKLE WILL BE SAVED&gt;&quot;</span>
+<span class="n">graph_converter</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">Torch2GraphConverter</span><span class="p">(</span><span class="n">tf_flip</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">torch_flip</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">nx_graph</span> <span class="o">=</span> <span class="n">graph_converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">fake_torch_data</span><span class="o">=</span><span class="n">sample_input_list</span><span class="p">,</span> <span class="n">gpu</span><span class="o">=</span><span class="n">need_gpu</span>
+<span class="p">)</span>
+<span class="n">graph_converter</span><span class="o">.</span><span class="n">reset_module</span><span class="p">()</span>
+<span class="n">graph_converter</span><span class="o">.</span><span class="n">export_to_gpickle</span><span class="p">(</span><span class="n">temp_gpickle_save_filename</span><span class="p">,</span> <span class="n">nx_graph</span><span class="p">)</span>
+</code></pre></div>
+<p>The device allocation JSON file is a JSON file that indicates which device (processor) is assigned to each operation in the graph. </p>
+<p>For example, if the above "SampleModel" contains two operations - convolution and add - you need to allocate the available device(s)/processor(s) in your target device to the two operations.</p>
+<p>The required JSON file has key-value pairs, where the key is the operation name and the value is the allocated device. The supported devices are <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>:</p>
+<ul>
+<li>"X86",</li>
+<li>"X64", (Tested)</li>
+<li>"ARM",</li>
+<li>"ARM64",</li>
+<li>"NVIDIA",</li>
+<li>"AMDGPU",</li>
+<li>"INTELGPU",</li>
+<li>"MALI",</li>
+<li>"ADRENO",</li>
+<li>"HEXAGON", (Tested)</li>
+<li>"MYRIAD",</li>
+<li>"ARA1",</li>
+<li>"TPU",</li>
+<li>"CV22",</li>
+</ul>
+<p>To generate the JSON file, you need to create a template JSON file with a default device.<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="c1"># Create json file #</span>
+<span class="n">model_json_filename</span><span class="o">=</span><span class="s2">&quot;&lt;SOME PATH WHERE JSON WILL BE SAVED&gt;&quot;</span>
+<span class="n">default_device</span><span class="o">=</span><span class="s2">&quot;&lt;SOME DEVICE&gt;&quot;</span> <span class="c1"># You must select among above candidates</span>
+<span class="n">alloc_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">temp_gpickle_save_filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">generalized_graph</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">node_name</span> <span class="ow">in</span> <span class="n">nx</span><span class="o">.</span><span class="n">topological_sort</span><span class="p">(</span><span class="n">generalized_graph</span><span class="p">):</span>
+        <span class="n">nx_dict</span> <span class="o">=</span> <span class="n">generalized_graph</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node_name</span><span class="p">][</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">nx_dict</span><span class="p">[</span><span class="s2">&quot;kind&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;OpNode&quot;</span><span class="p">:</span>
+            <span class="n">alloc_dict</span><span class="p">[</span><span class="n">node_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">default_device</span> <span class="o">+</span> <span class="s2">&quot;:0&quot;</span>
+            <span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">model_json_filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">alloc_dict</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</code></pre></div>
+<p>Then, you will get a JSON file like this:
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;conv2d_2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;X64:0&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;add_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;X64:0&quot;</span><span class="p">}</span>
+</code></pre></div></p>
+<p>You can customize this JSON file as you wish, for example, the following JSON file indicates that the convolution operation runs on hexagon and then adds tensors on an x86-64 architecture processor:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;conv2d_2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HEXAGON:0&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;add_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;X64:1&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Graph visualization</strong></p>
+<p>Device allocation becomes much easier with a visual representation of the graph. To visualize the graph, you need to install pygraphviz.
+<div class="highlight"><pre><span></span><code><span class="c1"># (Linux)</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>graphviz<span class="w"> </span>graphviz-dev
+pip<span class="w"> </span>install<span class="w"> </span>pygraphviz
+<span class="c1"># (For other OS, please refer to https://pygraphviz.github.io/documentation/stable/install.html)</span>
+</code></pre></div></p>
+<p>The following code shows you how to allocate each operation using a graph illustration. <sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">visual_graph_dir</span> <span class="o">=</span> <span class="s2">&quot;&lt;SOME DIRECTORY PATH WHERE VISUALIZED GRAPH WILL BE SAVED&gt;&quot;</span>
+<span class="n">visual_graph_filename</span> <span class="o">=</span> <span class="s2">&quot;&lt;VISUALIZED GRAPH FILENAME&gt;&quot;</span>
+<span class="n">graph_converter</span><span class="o">.</span><span class="n">plot_network</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">visual_graph_dir</span><span class="p">),</span> <span class="n">visual_graph_filename</span><span class="p">,</span> \
+                             <span class="n">model_json_filename</span><span class="p">,</span> <span class="n">figsizenum</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div></p>
+<p>Then, you may get an image that illustrates the subgraph allocated model graph. There will be (n+1) colors, where "n" is the number of devices used in the JSON file, and one color represents all tensors (either dynamic or static). By controlling the figsizenum (from 5 to about 40), you can adjust the size of the image.</p>
+<p><img alt="Visualized Graph" src="../../img/samplemodel.png" /></p>
+<h2 id="compile">compile<a class="headerlink" href="#compile" title="Permanent link">&para;</a></h2>
+<hr />
+<p>The OptimaV2 Manager is an entrypoint class to the entire OptimaV2 optimization and compilation process.
+The user only needs to provide the following information.</p>
+<ol>
+<li>The name of the model.</li>
+<li>List of devices to use. Provide as list of optimav2.devices.DeviceEnum enumeration. (TODO: 사용할 지 정하기)</li>
+<li>Gpickle file extracted from torch2nx. Explained above.</li>
+<li>Directory of where to dump compilation outputs.</li>
+<li>JSON file that denotes where each kernel is allocated to each device. Explained above.</li>
+<li>(Optional) Representative Dataset if SNPE is used.</li>
+</ol>
+<p>Invoking the optimize method of the manager class will run the entire OptimaV2 optimization process. Parameters are to be given like below.
+(TODO: 조금 더 Formal 한 방식으로 function template 제공 방법 찾아보기)
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">module_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="c1"># Name of module</span>
+    <span class="n">device_info</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">devices</span><span class="o">.</span><span class="n">DeviceEnum</span><span class="p">],</span> <span class="c1"># List of all devices to be considered.</span>
+    <span class="n">model_graph_or_gpickle</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DiGraph</span><span class="p">],</span> <span class="c1"># Path of model gpickle extracted from torch2nx.</span>
+    <span class="n">output_folder_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="c1"># Path of output directory compilation resutls will be exported to.</span>
+    <span class="n">device_alloc_per_kernel_json_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>  <span class="c1"># JSON file containing operation to device mapping.</span>
+    <span class="n">sample_inputs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="c1"># Optional Representative Dataset</span>
+    <span class="n">need_gpu</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="c1"># (Float16 only) Pass &quot;True&quot; when float16 models are converted.</span>
+<span class="p">):</span>
+</code></pre></div></p>
+<p>Sample Usage of Manager class
+<div class="highlight"><pre><span></span><code><span class="c1"># Import Manager from optima_v2</span>
+<span class="kn">from</span> <span class="nn">optima_v2.manager</span> <span class="kn">import</span> <span class="n">Manager</span>
+<span class="kn">from</span> <span class="nn">optima_v2.devices</span> <span class="kn">import</span> <span class="n">DeviceEnum</span>
+
+<span class="c1"># ... </span>
+<span class="n">manager_instance</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">()</span>
+<span class="n">manager_instance</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span>
+    <span class="s2">&quot;MediapipeNet&quot;</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="n">DeviceEnum</span><span class="o">.</span><span class="n">DEVICE_KIND_HEXAGON</span><span class="p">,</span>
+        <span class="n">DeviceEnum</span><span class="o">.</span><span class="n">DEVICE_KIND_X64</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;~/models/mediapipe/mediapipe.gpickle&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;~/outputs/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;~/models/mediapipe/mediapipe_allocation.json&quot;</span><span class="p">,</span>
+    <span class="n">representative_data</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></p>
+<p>After invoking this function,</p>
+<p><strong>Expected Output Tree</strong>
+<div class="highlight"><pre><span></span><code>~/outputs/MediapipeNet/
+    |- model.meta (metadata)
+    |- Subgraph_0\
+    |- Subgraph_1\
+    |- ...
+    |- Subgraph_i(OpenVino)\
+    |       |- subgraph_i.blob
+    |
+    |- Subgraph_j(SNPE)\
+    |       |- subgraph_j.dlc  
+    |
+    |- Subgraph_k(LLVM)\
+    |       |- &lt;subgraph_name&gt;.meta
+    |       |- &lt;kernel_1_name&gt;.so
+    |       |- &lt;kernel_2_name&gt;.so
+    |       |- ......
+    |
+    |- Subgraph_o(SPIRV)\
+            |- &lt;subgraph_name&gt;.meta
+            |- &lt;kernel_1_name&gt;.spv
+            |- &lt;kernel_2_name&gt;.spv
+            |- ......
+</code></pre></div></p>
+<h3 id="notes-on-representative-data">Notes on Representative Data<a class="headerlink" href="#notes-on-representative-data" title="Permanent link">&para;</a></h3>
+<p>The format of representative dataset is as follows
+<div class="highlight"><pre><span></span><code>List[Tuple[torch.Tensor]]]
+</code></pre></div>
+The outermost list represents the batch, and the inner tuple represents each input for the model.</p>
+<p>The example below illustrates how representative data is collected.</p>
+<div class="highlight"><pre><span></span><code>    <span class="n">repr_data</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">input_tuple</span> <span class="ow">in</span> <span class="n">some_dataset_iterator</span><span class="p">:</span>
+        <span class="c1"># get input_tuple</span>
+
+        <span class="n">repr_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">input_tuple</span><span class="p">)</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">*</span><span class="n">input_tuple</span><span class="p">)</span>
+
+        <span class="c1"># Sample of how this input will </span>
+
+    <span class="c1"># ...</span>
+
+    <span class="n">manager_instance</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">()</span>
+    <span class="n">manager_instance</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span>
+        <span class="s2">&quot;MediapipeNet&quot;</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="n">devices</span><span class="o">.</span><span class="n">DeviceEnum</span><span class="o">.</span><span class="n">DEVICE_KIND_HEXAGON</span><span class="p">,</span>
+            <span class="n">devices</span><span class="o">.</span><span class="n">DeviceEnum</span><span class="o">.</span><span class="n">DEVICE_KIND_X64</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;~/models/mediapipe/mediapipe.gpickle&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;~/outputs/&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;~/models/mediapipe/mediapipe_allocation.json&quot;</span><span class="p">,</span>
+        <span class="n">repr_data</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>sample input 만드는 것은 manager가 사용할 것이고 optional이기 때문에 2번 step에서 설명하면 좋겠습니다]&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>(TODO) creating json must be more convenient (torch2nx integration?? - but devicekind access makes a problem a bit complex)&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>It depends on a runtime specification&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>이를 위해서는 torch2nx merge가 필요합니다 - 매우 적은 변경&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../install/" class="btn btn-neutral float-left" title="Install"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../inference/" class="btn btn-neutral float-right" title="Inference">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ENERZAi/OptimaV2-Docs" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../install/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../inference/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../template/sync-tabs.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
