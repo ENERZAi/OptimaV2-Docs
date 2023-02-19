@@ -90,18 +90,12 @@ import json
 # Create json file #
 model_json_filename="<SOME PATH WHERE JSON WILL BE SAVED>"
 default_device="<SOME DEVICE>" # You must select among above candidates
-alloc_dict = {}
-with open(temp_gpickle_save_filename, "rb") as f:
-    generalized_graph = pickle.load(f)
-    for node_name in nx.topological_sort(generalized_graph):
-        nx_dict = generalized_graph.nodes[node_name]["data"]
-        if nx_dict["kind"] == "OpNode":
-            alloc_dict[node_name] = (
-                default_device + ":0"
-            )
 
-with open(model_json_filename, "w") as f:
-    json.dump(alloc_dict, f)
+## it is staticmethod and thus you can choose any one
+graph_converter.get_onedevice_allocator(model_json_filename, default_device, temp_gpickle_save_filename)
+# or
+converter.Torch2GraphConverter.get_onedevice_allocator(model_json_filename, default_device, temp_gpickle_save_filename)
+
 ````
 
 Then, you will get a JSON file like this:
@@ -125,13 +119,15 @@ pip install pygraphviz
 # (For other OS, please refer to https://pygraphviz.github.io/documentation/stable/install.html)
 ````
 
-The following code shows you how to allocate each operation using a graph illustration. [^4]
+The following code shows you how to allocate each operation using a graph illustration.
 ````python
 from pathlib import Path
-visual_graph_dir = "<SOME DIRECTORY PATH WHERE VISUALIZED GRAPH WILL BE SAVED>"
 visual_graph_filename = "<VISUALIZED GRAPH FILENAME>"
-graph_converter.plot_network(Path(visual_graph_dir), visual_graph_filename, \
-                             model_json_filename, figsizenum=5)
+
+## it is staticmethod and thus you can choose any one
+graph_converter.plot_network(visual_graph_filename, temp_gpickle_save_filename, model_json_filename, figsizenum=5)
+# or
+converter.Torch2GraphConverter.plot_network(visual_graph_filename, temp_gpickle_save_filename, model_json_filename, figsizenum=5)
 ````
 
 Then, you may get an image that illustrates the subgraph allocated model graph. There will be (n+1) colors, where "n" is the number of devices used in the JSON file, and one color represents all tensors (either dynamic or static). By controlling the figsizenum (from 5 to about 40), you can adjust the size of the image.
@@ -143,7 +139,6 @@ Then, you may get an image that illustrates the subgraph allocated model graph. 
 [^1]: sample input 만드는 것은 manager가 사용할 것이고 optional이기 때문에 2번 step에서 설명하면 좋겠습니다]
 [^2]: (TODO) creating json must be more convenient (torch2nx integration?? - but devicekind access makes a problem a bit complex)
 [^3]: It depends on a runtime specification
-[^4]: 이를 위해서는 torch2nx merge가 필요합니다 - 매우 적은 변경
 
 ----
 
