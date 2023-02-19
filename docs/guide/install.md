@@ -1,5 +1,7 @@
 # Installation guide
 
+version : 0.1.0 alpha
+
 This document will guide you for installing the OptimaV2 in your systemm and OptimaV2 runtime on your target.
 
 There are 3 components required to compile and run your model with OptimaV2
@@ -37,24 +39,59 @@ Since OptimaV2 is on alpha testing phase, it is not yet open to public network y
 
 === "Using Docker"
 
-    Using docker image is the simplest way for using OptimaV2 However, this is limited for system with amd64 (or x86_64) and CUDA support. 
+    Using docker image is the simplest and fastest way to try using OptimaV2. We recommend this way if you want to try OptimaV2 in simple way.
+
+    A. __CPU only__
+
+    For the CPU only version, we provide two docker images. Debug build, and Release build. Both of them of capable of experiencing full funcitonality of OptimaV2 (except functionalties that requires cuda support). However, release build is more optimized to performance, while debug build allows loading symbols for inspecting code with debugger.
+
+    Pull the default optima-v2 image 
+
+    ```bash
+    # For debug mode
+    docker pull ezcr.enerzai.com/optima-v2-debug:0.1.0
+    # For release mode
+    docker pull ezcr.enerzai.com/optima-v2-release:0.1.0
+    ``` 
+
+    Run the image with optima-v2
+
+    ```bash
+    # For debug mode
+    docker run -it ezcr.enerzai.com/optima-v2-debug:0.1.0 /bin/bash
+    # For release mode
+    docker run -it ezcr.enerzai.com/optima-v2-release:0.1.0 /bin/bash
+    ```
+
+    These docker images should have complete setup for using and testing OptimaV2 and OptimaV2 runtime on cpu.
+
+    B. __With CUDA__
+
+    If you can use CUDA, we also provide us docker image with CUDA support. This way, OptimaV2 can build project towards CUDA supported GPU targets.
 
     From the enerzai docker registry, you can pull the image with this command
 
     ```bash
-    docker pull ezcr.enerzai.com/optima-v2:<version>
+    docker pull ezcr.enerzai.com/optima-v2-gpu:0.1.0
     ```
 
     Now you can run the image using 
 
     ```bash
-    docker run --gpus all -it ezcr.enerzai.com/optima-v2:<version> /bin/bash
+    docker run --gpus all -it ezcr.enerzai.com/optima-v2:0.1.0 /bin/bash
     ```
 
     This image has all requirements already installed including OptimaV2 runtime. You can import torch2nx on your code and try out OptimaV2 directly!
 
 === "Install using pip"
     We can also install OptimaV2 components using python pip. We have our dedicated pypi server hosted in Garnet. You can install using pip from it. However, you must be connected to ENERZAi internal network
+
+    __Requirements__
+
+     * python 3.10
+     * virtual python environment (recommended)
+     * Connection to enerzai internal network 
+       * We will have to access Garnet hosted pypi server
 
     Installing OptimaV2 via pip is just simple as below
 
@@ -69,8 +106,9 @@ Since OptimaV2 is on alpha testing phase, it is not yet open to public network y
     pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80  --no-deps -f .  --pre torch-mlir==20221010.622
     ```
 
-    **Step 2:** Install torch2nx (zaiConverter)
+    **Step 2:** Install torch2nx and quan (zaiConverter)
     ```bash
+    pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80 quan==0.0.1
     pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80 zaiConverter==1.4.2
     ```
     This process will prompt you to enter github token or username if you don't have access privilege to torch2nx library. In this case, contact OptimaV2 team. We will grant you permissions for installing torch2nx
@@ -87,17 +125,7 @@ Since OptimaV2 is on alpha testing phase, it is not yet open to public network y
     pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80 optima-v2-runtime==0.1.0
     ```
 
-    This will install OptimaV2 runtime on your system.
-
-    **Step 5:** Verify your installation (Recommended)
-    ```bash
-    python3 python/tests/test_manager/test.py > log.txt
-    ```
-    This test internally tests some of our test models. It compiles sample pytorch model down to binary using OptimaV2 and runs it on OptimaV2 runtime. Output from OptimaV2 runtime is verified using output from pytorch.
-
-    Detailed test output will be written in log.txt. This will take few minutes to complete. If your terminal shows OK at the end, your installation is complete.
-
-    If this outputs 'E' in the terminal, it means there was some problem during your installation. In this case, please send us log.txt file and contact us. We will be greateful to help you out.
+    This should successfully install OptimaV2 runtime on your system.
 
 
 === "Building from source (Full)"
