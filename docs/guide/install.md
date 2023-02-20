@@ -318,7 +318,7 @@ You can skip these if you only compile the model. But if you intend to run model
     - Python 3.6 or above. (Python 3.10 recommended)
     - Compiler toolchain which can compile C++ 17 sources
         - Clang 10 or above
-        - GCC 7 or above (minimum version to compile, 9 or above recommended)
+        - GCC 8 or above (minimum version to compile, 9 or above recommended)
     - cURL (required for install scripts)
     - Git
 
