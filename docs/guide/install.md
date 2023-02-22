@@ -262,8 +262,8 @@ You can skip these if you only compile the model. But if you intend to run model
 
     - Compiler toolchain which can compile C++ 17 sources
         - Clang 10 or above
-        - GCC 7 or above (minimum version to compile, 9 or above recommended)
-        - Android NDK (API Level 25 or above)
+        - GCC 8 or above (minimum version to compile, 9 or above recommended)
+        - Android NDK (API Level 26 or above)
     - CMake 3.21 or above
     - Make or Ninja
     
