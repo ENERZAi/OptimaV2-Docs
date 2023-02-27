@@ -10,6 +10,13 @@ nav:
     - "Inference": "guide/inference.md"
   - "Opto Language":
     - "Builtin Functions": "kernel/builtin.md"
+    - "About" : "kernel/about.md"
+    - "Tutorial" : 
+      - "Basics" : "kernel/Tutorial/Basics.md"
+      - "Chapter1" : "kernel/Tutorial/Chapter1.md"
+      - "Chapter2" : "kernel/Tutorial/Chapter2.md"
+      - "Chapter3" : "kernel/Tutorial/Chapter3.md"
+      - "Chapter4" : "kernel/Tutorial/Chapter4.md"
   - "Runtime API Reference":
     - "C++": "runtime/cpp.md"
     - "Python": "runtime/python.md"
