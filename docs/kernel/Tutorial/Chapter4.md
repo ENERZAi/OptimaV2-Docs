@@ -42,3 +42,10 @@ module ifElseExample(){
     !{0}
 }
 ```
+
+### Print
+We can print compile-time values on the console. This is helpful in debugging, or examining the output.
+```
+print(<expression>))
+```
+We can print any value in opto language using print statement including non values, or runtime expressions and runtime type.

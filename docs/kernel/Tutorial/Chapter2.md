@@ -34,9 +34,17 @@ Moreover, for 'let b = 2', expression 'a + b' is responsible for returning. At t
 
 This is how code is structured in functional programming and Opto. Since let binding connects the declaration of the variable and expression following after it, it is an important building block in composing expressions.
 
+There are also some cases we want to execute the expression, but ignore its output. In such cases, we can give '_' instead of name.
+```
+let _ = <init expression>
+<nex expreession>
+```
+In this case, output of the init expression will be ignored, and let expression will not define any symbol
+
 ### List and tuples
 Two frequently used data type in compile time code is list and tuple. These data types both store sequence of values. 
 ```
+let a, b = (2, 3)
 let listExample = [1, 2, 3, a + b] // list of int (list<int32>)
 let tupleExample = (3, !{2}, [2,3,4]) // tuple of (int32, runtime_expression, list list of intetgers) (tuple<int32, rt_expr, list<int32>>)
 ```
@@ -50,16 +58,28 @@ You can think of tuple as a list that can have multiple types per element. While
 
 #### Using the list or tuple
 Accessing list or tuple is simple as below.
+
+Get single element
 ```
-// Get single element
 let listElement = listExample[0]
 let tupleElement = tupleExample[0]
+```
+We can Slice list or tuple and get subset of it using [<begin index>:<end index>]. end index must be greater or equal than begin index, and range of begin and end index should be between (0, len(list or tuple)]
+```
+let slicedList = listExample[0:2] // returns [1, 2]
+let slicedTuple= tupleExample[1:3] // returns (!{2}, [2,3,4])
+```
+If we want to slice until the end of list or tuple, we can omit 'end' index
+Note that begin index 
+```
+let slicedList = listExample[1:] // returns [2, 3, 5]
+let slicedTuple= tupleExample[2:] // returns ([2,3,4])
 
-// Slice list or tuple
-let listElement = listExample[0:2] // returns [1, 2]
-let tupleElement = tupleExample[1:3] // returns (!{2}, [2,3,4])
-
-// Get length of list or tuple
+let emptyList = listExample[4:] // returns []
+let emptyTuple= tupleExample[3:] // returns ()
+```
+Get length of list or tuple
+```
 let listLength = len(listExample) // returns 3
 let listSubsetLength = len(listExample[0:2]) // returns 2
 let tupleLength = len(tupleExample) // returns 3

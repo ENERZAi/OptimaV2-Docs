@@ -122,7 +122,7 @@ module recursion_example(){
             }
         }
 
-    fibonacci <| 10 // result : 34
+    fibonacci <| 10 // result : 55
 }
 ```
 This code computes fibonacci sequence. Recursive functions defines its name in its captured environment. This is accomplished by fixed point combinator, used to define recursive functions without using mutable values.
