@@ -172,7 +172,7 @@ The key differences are
 
 1. Since there is no 'none' type in runtime, we must return same type in both if and else block or return nothing from neither of the blocks
 2. Return type must be number type
-        * Note : this restriction will be removed after 
+        * Note : this restriction will be removed after
 3. 'else' block is omittable only if 'if' block returns nothing
 
 ```

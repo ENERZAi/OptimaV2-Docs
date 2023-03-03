@@ -12,13 +12,14 @@ nav:
     - "Builtin Functions": "kernel/builtin.md"
     - "About" : "kernel/about.md"
     - "Tutorial" : 
-      - "Basics" : "kernel/Tutorial/Basics.md"
+      - "Introduction" : "kernel/Tutorial/Introduction.md"
       - "Chapter1" : "kernel/Tutorial/Chapter1.md"
       - "Chapter2" : "kernel/Tutorial/Chapter2.md"
       - "Chapter3" : "kernel/Tutorial/Chapter3.md"
       - "Chapter4" : "kernel/Tutorial/Chapter4.md"
       - "Chapter5" : "kernel/Tutorial/Chapter5.md"
       - "Chapter6" : "kernel/Tutorial/Chapter6.md"
+      - "Chapter7" : "kernel/Tutorial/Chapter7.md"
   - "Runtime API Reference":
     - "C++": "runtime/cpp.md"
     - "Python": "runtime/python.md"
