@@ -9,10 +9,9 @@ nav:
     - "Convert": "guide/convert.md"
     - "Inference": "guide/inference.md"
   - "Opto Language":
-    - "Builtin Functions": "kernel/builtin.md"
     - "About" : "kernel/about.md"
     - "Tutorial" : 
-      - "Introduction" : "kernel/Tutorial/Introduction.md"
+      - "How to read this tutorial" : "kernel/Tutorial/HowToRead.md"
       - "Chapter1" : "kernel/Tutorial/Chapter1.md"
       - "Chapter2" : "kernel/Tutorial/Chapter2.md"
       - "Chapter3" : "kernel/Tutorial/Chapter3.md"

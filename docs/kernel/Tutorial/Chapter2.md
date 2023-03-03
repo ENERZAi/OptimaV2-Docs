@@ -130,8 +130,8 @@ __Rounding rule__
 
 Rounding rule determines conversion from floating point values to integer values. Rounding rule follows python's default rounding rule.
 
-* If value is positive, we perform floor(value) which is nearest integer that is less or equal than given value.
-* If value is negative, we perform ceil(value) which is nearest integer that is greater or equal than given value.
+* If value is **positive**, performs **floor**(value) which is nearest integer that is less or equal than given value.
+* If value is **negative**, performs **ceil**(value) which is nearest integer that is greater or equal than given value.
 
 In C++, this rule can be implemented as follows (where 'result' means casted output and 'value' means input floating point value).
 ```c++

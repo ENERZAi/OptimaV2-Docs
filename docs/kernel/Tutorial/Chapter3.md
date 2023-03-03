@@ -58,10 +58,10 @@ let foo = lambda (a) {
 }
 
 ```
-'foo' is actually a higher order function that returns partial function inside with parameter, which is defined using first parameter 'a'. Therefore, when we call 'foo <| 3 <|4', we end up evaluating higher order function first with 'a = 3' and evaluate internal partial function with 'b = 4'.  
+'foo' is actually a higher order function that returns another function inside with parameter, which is defined using first parameter 'a'. Therefore, when we call 'foo <| 3 <|4', we end up evaluating higher order function first with 'a = 3' and evaluate internal partial function with 'b = 4'.  
 
 
-If you want to write the function in-line, you can also write like following.
+If you want to write the function in-line, you can also write like following using 'lambda'.
 ```
 template<//>
 module function_example(){
@@ -73,7 +73,7 @@ module function_example(){
 This example does exactly same thing as above. The only difference is syntax.
 
 #### Closure
-Actually, more accurate name of calling 'function' we've discussing is 'closure'. It is called closure because our functions captures values automatically that were in the environment when it is defined.  See the following example.
+Actually, accurate name of calling 'function' in Opto is 'closure'. It is called closure because our functions capture values automatically that were in the environment when it is defined.  See the following example.
 ```
 template<//>
 module closure_example(){
@@ -107,7 +107,7 @@ While c is defined inside scope of if/else statement, we can still compute the '
 
 ### Recursions
 Recursions are very important feature in Opto. Many critical functionalities are built with recursions in Opto. It is used when generating nested for loops, variable indices, and lots more.
-Defining recursive function (closure) is not really different from defining non-recursive functions, but we need 'rec' identifer after 'let'.
+Defining recursive function (closure) is not really different from defining non-recursive functions, but we need to write 'rec' (stands for 'recursion') after 'let'.
 ```
 template<//>
 module recursion_example(){

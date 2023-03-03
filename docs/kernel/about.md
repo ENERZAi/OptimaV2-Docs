@@ -3,7 +3,7 @@
 Opto language is custom language for OptimaV2, designed to let you create any type of layer you wish, while preserving inference performance and human readability.
 Most of layers used in OptimaV2 is implemented using Opto. You can even design your own kernel and add it to OptimaV2 using Opto. Opto is one of the key feature of OptimaV2, providing scalability and flexibility while preserving fast performance and human readability.
 
-Opto is designed to be 
+Opto is designed to be
 1. Easy to understand, write layers
 2. Simple and concise
 3. Difficult to make mistakes
