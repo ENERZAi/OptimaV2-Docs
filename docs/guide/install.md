@@ -58,12 +58,15 @@ Since OptimaV2 is on alpha testing phase, it is not yet open to public network y
 
     ```bash
     # For debug mode
-    docker run -it ezcr.enerzai.com/optima-v2-debug:0.1.0 /bin/bash
+    docker run -v /var/run/docker.sock:/var/run/docker.sock -it ezcr.enerzai.com/optima-v2-debug:0.1.0 /bin/bash
     # For release mode
-    docker run -it ezcr.enerzai.com/optima-v2-release:0.1.0 /bin/bash
+    docker run -v /var/run/docker.sock:/var/run/docker.sock -it ezcr.enerzai.com/optima-v2-release:0.1.0 /bin/bash
     ```
 
     These docker images should have complete setup for using and testing OptimaV2 and OptimaV2 runtime on cpu.
+
+    !!! note 
+        We Should mount docker socket, so we can use DooD(docker out of docker) in the image. SNPE converter integrated in OptimaV2 uses DooD.
 
     B. __With CUDA__
 
@@ -111,7 +114,7 @@ Since OptimaV2 is on alpha testing phase, it is not yet open to public network y
     pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80 quan==0.0.1
     pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80 zaiConverter==1.4.2
     ```
-    This process will prompt you to enter github token or username if you don't have access privilege to torch2nx library. In this case, contact OptimaV2 team. We will grant you permissions for installing torch2nx
+    This process will install zaiOptimizer and quan. These packages are used to read pytorch and convert it into some format that OptimaV2 can understand.
 
     **Step 3** Install OptimaV2 compiler
     ```bash
@@ -467,10 +470,11 @@ You can skip these if you only compile the model. But if you intend to run model
 
 ## Troubleshooting
 1. Building MLIR fails with compiler or linker errors
-   * It turns out compilation with MLIR fails when built with GNU toolchains. We recommend using LLVM toolchain for building MLIR
-2. Torch2nx installation requires github token or password, but I don't have one
-   * Please contact OptimaV2 team. We will grant you permissions for installing torch2nx
-
+      * It turns out compilation with MLIR fails when built with GNU toolchains. We recommend using LLVM toolchain for building MLIR
+2. Pip install fails to find corresponding modules
+      1. Check if you python version matches python 3.10. If you don't have it, we recommend creating the environment virtually.
+      2. If your versions match, check if you are connected to ENERZAi internal network
+      3. If it still doesn't work, don't hesitate to contact us.
 ## Contact us
 We will be always grateful to help you with using OptimaV2 runtime. 
 You can contact one of our team members
