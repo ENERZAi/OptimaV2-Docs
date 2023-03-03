@@ -94,6 +94,8 @@ result
 The initial value of the sum is stored in 'initialSum' with zero. When for loops starts its iteration, initialSum is captured in value called 'sumOnUpdate'. In the body of for loop, the returned value from the last expression is stored in 'sumOnUpdate' for the next iteration. Since we are adding value loaded from 'data' and passing it to 'sumOnUpdate', 'sumOnUpdate' in the next iteration will equal ('sumOnUpdate' in current iteration + loaded value from 'data).  When this procedure continues, we end up adding all elements in 'data'.
 The return value of the for loop is the value of the 'sumOnUpdate' updated from the last iteration. Therefore, 'result' becomes the result we want.
 
+We can use iterator variables when we need to use the result of the body expression of for, but please note that number of return values and number of iterator variables should match unless there are no iterator variables
+
 If we don't require any iterator variables, we can omit bracket '[]', and for loop won't return any values.
 
 #### Automatically generating nested for loops
@@ -134,7 +136,21 @@ returnedValue
 ```
 
 How cool is that? We have successfully created nested for loop using list of iterator names and loop range lists.
-Just like normal runtime for loops we can omit '[]' bracket if we don't need iterator variables. Just be careful that rt_for is compile time expression. Thats why we had to give the name 'updateValue' as a string in compile time, so its converted into identifier in runtime. Also, we have to put compile time expression inside the body of rt_for.
+Just like normal runtime for loops we can omit '[]' bracket or leave it empty if we don't need iterator variables. If there are no iterator variables, return value of the body will be ignored.
+
+```
+// rt_for without iterator variables
+rt_for(iteratorNames : loops)} {
+        // Body function
+        // Note rt_for is the compile time expression. Therefore, body has to be compile time expression
+        !{
+            let value = load(src, iteratorNames)
+            store(dest, iteratorNames, value) 
+        }
+    }
+```
+
+Just be careful that rt_for is compile time expression. Thats why we had to give the name 'updateValue' as a string in compile time, so its converted into identifier in runtime. Also, we have to put compile time expression inside the body of rt_for.
 
 Here is the description of each section in rt_for expression
 
@@ -146,3 +162,23 @@ Here is the description of each section in rt_for expression
 * itr range list : list of iteration variables used for each loop level. beginning  of the list indicates outermost loop. Given as list of list with 3 values indicating [begin index, end index, step size]
 * update_value : name of the value to be updated
 * initial_value : value to initialize update_value in the first loop
+
+
+### Runtime if statements
+
+We can use if statement in runtime just like what we did in copmile time. However, it is important to note some differences between these two cases.
+
+The key differences are
+
+1. Since there is no 'none' type in runtime, we must return same type in both if and else block or return nothing from neither of the blocks
+2. Return type must be number type
+        * Note : this restriction will be removed after 
+3. 'else' block is omittable only if 'if' block returns nothing
+
+```
+    let returnVal  = if(cast</f32/>(${t[0]}) + 1.0f > cast</f32/>(${t[1]} - 1i)){
+        cast</f32/>(cast</i32/>(${t[1]} - 1i))
+    } else {
+        cast</f32/>(${t[0]}) + 1.0f
+    }
+```

@@ -115,3 +115,27 @@ let wrongExample = [1,2] @ [!{1}, !{2}] // error (cannot merge between list<int3
 // It's fine to merge between tuples regardless of types
 let correctExample = (1, 2) @ (!{1}, !{2}) // result : (1, 2, !{1}, !{2})
 ```
+
+### Type casting
+
+In opto, we can cast between number typee using 'cast' function. Here is an simple example
+```
+let intValue = 0
+let f32Value = cast</f32/>(intValue)
+```
+
+There are no restrictions in casting unless we are casting between number types. Casting between any type other than number types are not allowed.
+
+__Rounding rule__
+
+Rounding rule determines conversion from floating point values to integer values. Rounding rule follows python's default rounding rule. That is,
+1. If value is positive, we round down to nearest integer that is less or equal than given value.
+2. If value is negative, we round up to nearest integer that is greater or equal than given value.
+
+In C++, this rule can be implemented as follows (where 'result' means casted output and 'value' means input floating point value)
+```c++
+double absoluteVal = static_cast<double>(std::abs(value));
+long result = if value > 0 ? absoluteVal : -absoluteVal;
+```
+
+Type casting can be done both in compile time and runtime, and their casting rules are identical.

@@ -18,6 +18,7 @@ nav:
       - "Chapter3" : "kernel/Tutorial/Chapter3.md"
       - "Chapter4" : "kernel/Tutorial/Chapter4.md"
       - "Chapter5" : "kernel/Tutorial/Chapter5.md"
+      - "Chapter6" : "kernel/Tutorial/Chapter6.md"
   - "Runtime API Reference":
     - "C++": "runtime/cpp.md"
     - "Python": "runtime/python.md"
