@@ -12,7 +12,7 @@ module tutorial(){
     !{0}
 }
 ```
-Don't forget Primary purpose of opto language is to generate suitable runtime code that can execute the layer.
+Don't forget primary purpose of opto language is to generate suitable runtime code that can execute the layer.
 This code will generate a runtime code that receives zero arguments, and returns int32 value in runtime. From now on, let's inspect how it works, starting from the 'Module'.
 
 ## Module
@@ -68,7 +68,7 @@ module tutorial(){
 }
 
 ```
-This code defines a with list of three runtime code blocks as a list, and receives compile time argument 'selection'. According to the value of 'selection', this code will generate runtime code that 'selection' variable points to. that is, if selection is zero, the generated code will be exactly same as what we saw above. However, if selection equals '2', generated runtime code will look like this.
+This code defines a with list of three runtime code blocks as a list, and receives compile time argument 'selection'. According to the value of 'selection', this code will generate runtime code that 'selection' variable points to. That is, if selection is zero, the generated code will be exactly same as what we saw above. However, if selection equals '2', generated runtime code will look like this.
 
 ```fsharp
 // Runtime code output
@@ -80,7 +80,7 @@ module tutorial(){
 
 We can see that 3rd argument (which is 2 in index) is the output of the code.
 
-### Embedding compile time expressions in compile time.
+### Embedding compile time expressions in compile time
 Sometimes, we might want to use value evaluated in compile time in runtime. To provide solution for this, opto language provides compile time code block. It is pretty much similar with runtime code block in compile time code. However, we start '$' sign instead of '!'. In other words, we can use ${} to express compile time code block in runtime. We can put any compile time code inside ${}. Despite ${} block is embedded in runtime code, it will be evaluated in compile time.
 
 ```
@@ -92,7 +92,7 @@ module tutorial(){
 }
 ```
 Here is the use case of compile time code block in runtime code. We want to use 'valueToAdd' variable in runtime, which is given as compile time parameter (which is static in runtime). we can simply use ${} and put 'valueToAdd' inside. Then, 'valueToAdd' variable will be evaluated, and embedded as runtime code output.
-The following is result of the above code when 'selection' was '2'. and 'valueToAdd' was '4'
+The following is result of the above code when 'selection' was '2', and 'valueToAdd' was '4'
 
 ```
 module tutorial(){
@@ -102,7 +102,7 @@ module tutorial(){
 ```
 Do you see how it works? The value '4' (which was the compile time value) is embedded inside runtime code.
 
-We can put any expression that can be converter into runtime code inside compile time code block. Following still works.
+We can put any expression that can be converted into runtime code inside compile time code block. Following still works.
 
 ```
 template</selection : idx, valueToAdd : int32/>
