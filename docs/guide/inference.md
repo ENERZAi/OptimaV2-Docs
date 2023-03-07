@@ -170,7 +170,7 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
 
 ## Set input tensors
 === "C++"
-    Becauseof the device manages tensor memory, tensors cannot be created by user. So users should use `rt::Tensor` objects that are provided by `rt::InferRequest` and copy datas using methods in `rt::Tensor`.
+    Because the device manages tensor memory, tensors cannot be created by user. So users should use `rt::Tensor` objects that are provided by `rt::InferRequest` and copy datas using methods in `rt::Tensor`.
 
     To give input tensor data for the model, refer the code below:
 
@@ -205,7 +205,7 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
         `rt::Tensor` in C++ API does not verify shape and/or type of input value. Use with caution.
 
 === "Python"
-    Becauseof the device manages tensor memory, tensors cannot be created by user. So users should use `rt.Tensor` objects that are provided by `rt.InferRequest` and copy datas using methods in `rt.Tensor`.
+    Because the device manages tensor memory, tensors cannot be created by user. So users should use `rt.Tensor` objects that are provided by `rt.InferRequest` and copy datas using methods in `rt.Tensor`.
 
     To give input tensor data for the model, refer the code below:
 
@@ -349,7 +349,7 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
 
     !!! warning
         You can get output tensor before finish the inference, even before run the inference. But it is not expected usage and it may cause undefined behavior. It is not recommended.
-    
+
     To get output tensors, refer the code below:
 
     ```python

@@ -25,9 +25,9 @@ Since OptimaV2 is on alpha testing phase, it is not yet open to public network y
     * At least 8GB or more ram is recommended
     
 === "OptimaV2 Runtime"
-    * CPU : amd64 (Intel64) or arm64 based processor
+    * CPU : arm, amd64(Intel64) or arm64 based processor
         * Tested on following platforms
-            * raspberry pi (64bit ubuntu, 64bit raspbian)
+            * raspberry pi (64bit ubuntu, 64bit raspbian, 32bit debian bullseye)
             * Qualcomm SM-8150 develepment board (ubuntu 18.04 LTS)
             * amd64 based linux systems
     * Operating system : Linux (ubuntu 18.04 with python 3.6 or above)
@@ -285,7 +285,7 @@ You can skip these if you only compile the model. But if you intend to run model
 
     __Step 2.__ Download prebuilt OptimaV2 Runtime
     
-    Prebuilt binaries are downloaded from EZDist. Link here: [Download](http://192.168.0.80:32123/packages/optima-v2-runtime)
+    Prebuilt binaries are downloaded from EZDist. Link here: [Download](http://192.168.0.80:32123/packages/OptimaV2-Runtime)
 
     After download the runtime, extract downloaded zip file to preferred location. `/usr/local` is suggested but anywhere is fine.
 
@@ -324,6 +324,16 @@ You can skip these if you only compile the model. But if you intend to run model
 
     !!! note
         Due to `protoc` and `cmake` supports only AMD64(x86_64, x64) and ARM64(aarch64) systems, only AMD64 and ARM64 systems can build OptimaV2 Runtime.
+
+    !!! note
+        You can use Docker image that requirements are preinstalled. After __Step 1__, start container with volume mount
+        (`docker run --rm -it -v /path/to/repo:/workspace/app ezcr.enerzai.com/optima-v2-runtime:0.1.3`)
+        and type `cd /workspace/app` inside Docker container. Then jump to __Step 5.__
+
+        Docker image supports AMD64 and ARM64 platforms and cross build supports only on AMD64 platform.
+
+    !!! note
+        If you want to cross compile OptimaV2 Runtime for other devices(Raspberry Pi, QRB, etc.), please refer [here](../runtime/cross-build.md)
 
     __Step 1.__ Clone a repository
     !!! note
@@ -381,25 +391,14 @@ You can skip these if you only compile the model. But if you intend to run model
     | SNPE backend     | -                      | `-DENABLE_SNPE=ON`    | This feature requires invoke `download-snpe.sh` script above. |
 
     !!! note
-        There are many flags that are not documented yet. Although these flags are declared, not working. 
-
-    Also, `install` script has concept "triplet" to support installing packages for various architecutures and OSes.
-
-    Supported triplets are:
-
-    - `x64-linux`
-    - `aarch64-linux`
-    - `arm-linux`
-    - `x64-android`
-    - `aarch64-android`
-    - `arm-android`
+        There are many flags that are not documented yet. Although you can declare these flags, it`ll not working. 
 
     After decide which target and features are enabled, run commands below:
     ```bash
     # Install requirements.
-    # example: python -m Scripts.install --triplet=x64-linux protobuf fmt
+    # example: python -m Scripts.install protobuf fmt
     # for more detail: python -m Scripts.install --help
-    python -m Scripts.install --triplet=<triplet> <packages>
+    python -m Scripts.install <packages>
     ```
 
     The `install` script will auto-detect compiler and build dependencies for OptimaV2 Runtime. If you want to force `install` script to use specific compiler, flags in below list can be used.
@@ -408,11 +407,14 @@ You can skip these if you only compile the model. But if you intend to run model
     - `--use-clang=VERSION` : Use specific version of Clang. If not found, `install` will be failed.
     - `--ignore-gcc` : Make `install` ignore GCC. This forces `install` to use Clang.
     - `--use-gcc=VERSION` : Use specific version of GCC. If not found, `install` will be failed.
-    
+
     After run command above, the folder named `third_party` will be created.
+    
+    Please check name of folder inside `third_party/installed` folder. Its name is your `triplet` that required below.
+
     If you have problems running `install` script, please let us know. We`ll support you.
 
-    __Step 5.__ Generate cmake
+    __Step 5.__ Configure cmake
     ```bash
     # example: cmake -DTHIRD_PARTY_ROOT="$(pwd)/third_party/installed/x64-linux" -DENABLE_NATIVE=ON -B build -S . -G Ninja
     # default install path is: "${CMAKE_BUILD_DIR}/install". To override this, use "-DCMAKE_INSTALL_PREFIX=<install>".
@@ -420,13 +422,30 @@ You can skip these if you only compile the model. But if you intend to run model
     ```
 
     If you want to force CMake using Clang, add this flag: `-DCMAKE_TOOLCHAIN_FILE=CMake/UseClang.cmake`. You also can force CMake using GCC via this flag: `-DCMAKE_TOOLCHAIN_FILE=CMake/UseGCC.cmake`.
-    
+
     These CMake script will auto-detect compiler and use it. If you want to use specific compiler version, use this flag for Clang: `-DTARGET_LLVM_VERSION=VERSION` and this flag for GCC: `-DTARGET_GCC_VERSION=VERSION`. 
 
     __Step 6.__ Build the runtime
     ```bash
     cmake --build build --target install
     ```
+
+    __Step 7.__ Generate python wheel
+
+    This is extra step for who want to build python wheels.
+
+    To generate wheel, you should enable python binding feature(`-DENABLE_PYTHON=ON`) and build with target `install`.
+
+    !!! note
+        To generate python wheel, it is not allowed to change install prefix to usual install path like `/usr` or `/usr/local`. `setup.py` copies built libraries in install path during build wheel and does not check files whether are part of the runtime or not. It may cause undesired behavior. To prevent this problem, use other paths or do not change install path.  
+
+    `setup.py` in OptimaV2 Runtime re-uses built libraries rather than re-build entire runtime again. To inform `setup.py` to where is library located, enviroment variables are used.
+
+    ``` bash
+    INSTALL_PATH=<install_path> pip wheel --wheel-dir wheel-out Bindings/Python
+    ```
+
+    You can see built wheel file located in `wheel-out` folder.
 
 ## Troubleshooting
 1. Building MLIR fails with compiler or linker errors
