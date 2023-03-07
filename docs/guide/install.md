@@ -92,6 +92,7 @@ Since OptimaV2 is on alpha testing phase, it is not yet open to public network y
     __Requirements__
 
      * python 3.10
+     * Ubuntu 22.04
      * virtual python environment (recommended)
      * Connection to enerzai internal network 
        * We will have to access Garnet hosted pypi server
@@ -104,31 +105,36 @@ Since OptimaV2 is on alpha testing phase, it is not yet open to public network y
     ```
     We recommend you installing OptimaV2 on python virtual environment to prevent version mismatches with your original installation. Moreover, we highly recommend you to not install it with 'sudo', since it will install and might change pre-installed package versions system wide.
 
-    **Step 1:** Install torch-mlir (This dependency is going to be deprecated will be removed in future releases)
+    **Step 1:** Install requirements
+
+    We need to install some required packages for running OptimaV2
+    ```bash
+    sudo apt-get update
+    sudo apt-get install -y libmlir-15-dev mlir-15-tools lld-15 llvm-15
+    ```
+
+    **Step 2:** Install torch-mlir (This dependency is going to be deprecated will be removed in future releases)
     ```bash
     pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80  --no-deps -f .  --pre torch-mlir==20221010.622
     ```
 
-    **Step 2:** Install torch2nx and quan (zaiConverter)
+    **Step 3:** Install torch2nx and quan (zaiConverter)
     ```bash
     pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80 quan==0.0.1
     pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80 zaiConverter==1.4.2
     ```
     This process will install zaiOptimizer and quan. These packages are used to read pytorch and convert it into some format that OptimaV2 can understand.
 
-    **Step 3** Install OptimaV2 compiler
+    **Step 4** Install OptimaV2 compiler
     ```bash
     pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80 optima-v2==0.1.0
     ```
 
     Now, your installation should be complete for OptimaV2 compiler and user interface. You should have no problem compiling your model down to runtime binary. However, We recommend you to install OptimaV2 runtime and verify your OptimaV2 installation before using it. Such steps are described from Step 4.
 
-    **Step 4:** Install OptimaV2 runtime (Recommended)
-    ```bash
-    pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80 optima-v2-runtime==0.1.0
-    ```
-
-    This should successfully install OptimaV2 runtime on your system.
+    **Step 5:** Install OptimaV2 runtime (Recommended)
+    
+    Refer to **Installing OptimaV2 Runtime** in the next section for more details
 
 
 === "Building from source (Full)"
@@ -272,88 +278,54 @@ Since OptimaV2 is on alpha testing phase, it is not yet open to public network y
     pip install dist/optima_v2-0.1.0-cp310-cp310-linux_x86_64.whl
     ```
 
-    **Step 5:** Verify your installation
+    **Step 5:** Install OptimaV2 Runtime
 
-    ```bash
-    # You can run simple test to verify your installation
-    # From the OptimaV2 root directory
-    python3 python/tests/test_manager/test.py > log.txt
-    ```
-
-    If this finishes with OK, it verifies your installation was successful
-
-
-    ## Installing OptimaV2 Runtime
-
-    Installing OptimaV2 runtime can be done with single _pip install_ command.
-    ```bash
-    pip install --index http://192.168.0.80:12321 --trusted-host 192.168.0.80 optima-v2-runtime==0.1.0
-    ```
-
-    Just make sure you install your OptimaV2 runtime on your target device (The device you will run inference).
+    Refer to **Installing OptimaV2 Runtime** in the next section for more details
 
 ## Installing OptimaV2 Runtime
 You can skip these if you only compile the model. But if you intend to run model on target device, OptimaV2 Runtime should be installed on host device.
-
 === "Install with prebuilt binaries"
     This is for users who wants to use Runtime C++ API.
-
     First, you need to install requirements for OptimaV2 Runtime. Requirements are listed below:
-
     - Compiler toolchain which can compile C++ 17 sources
         - Clang 10 or above
         - GCC 8 or above (minimum version to compile, 9 or above recommended)
         - Android NDK (API Level 26 or above)
     - CMake 3.21 or above
     - Make or Ninja
-    
     __Step 1.__ Install requirements
     ```
     # Use GCC
     sudo apt install build-essentials cmake ninja-build
-
     # Use GCC with cross compile toolchains
     # ARM64
     sudo apt install crossbuild-essential-arm64 cmake ninja-build
-
     # ARM
     sudo apt install crossbuild-essential-armhf cmake ninja-build
-
     # Use Clang
     sudo apt install llvm clang cmake ninja-build
     ```
-
     __Step 2.__ Download prebuilt OptimaV2 Runtime
-    
-    Prebuilt binaries are downloaded from EZDist. Link here: [Download](http://192.168.0.80:32123/packages/optima-v2-runtime)
-
+    Prebuilt binaries are downloaded from EZDist. Link here: [Download](http://192.168.0.80:32123/packages/OptimaV2-Runtime)
     After download the runtime, extract downloaded zip file to preferred location. `/usr/local` is suggested but anywhere is fine.
-
 === "Install via pip"
     This is for users who want to use Runtime Python API, and it is simplest way to use the runtime.
-
     OptimaV2 Runtime is provided on internal pypi server. Because of that reason, to install OptimaV2 Runtime Python API, you must be connected to ENERZAi internal network.
-
     __Step 1__: Create new virtual environment to install OptimaV2 Runtime(Not a mandatory but recommended)
     ```
     # use conda
     conda create -n OptimaV2-Runtime
-
     # you can also use virtualenv
     python -m venv .venv
     source .venv/bin/activate
     ```
-
     __Step 2__: Install OptimaV2 Runtime
     ```
     pip install --index http://remote.enerzai.com:12321 --trusted-host remote.enerzai.com optima-v2-runtime==0.1.0
     ```
-
 === "Build from source (full)"
     You can build your own version of OptimaV2 Runtime from source.
-
     First, you needs to install requirements for OptimaV2 Runtime. Requirements are listed below:
-
     - Ubuntu 18.04 or later. (Ubuntu 20.04 recommended)
     - Python 3.6 or above. (Python 3.10 recommended)
     - Compiler toolchain which can compile C++ 17 sources
@@ -361,57 +333,52 @@ You can skip these if you only compile the model. But if you intend to run model
         - GCC 8 or above (minimum version to compile, 9 or above recommended)
     - cURL (required for install scripts)
     - Git
-
     !!! note
         Due to `protoc` and `cmake` supports only AMD64(x86_64, x64) and ARM64(aarch64) systems, only AMD64 and ARM64 systems can build OptimaV2 Runtime.
-
+    !!! note
+        You can use Docker image that requirements are preinstalled. After __Step 1__, start container with volume mount
+        (`docker run --rm -it -v /path/to/repo:/workspace/app ezcr.enerzai.com/optima-v2-runtime:0.1.3`)
+        and type `cd /workspace/app` inside Docker container. Then jump to __Step 5.__
+        Docker image supports AMD64 and ARM64 platforms and cross build supports only on AMD64 platform.
+    !!! note
+        If you want to cross compile OptimaV2 Runtime for other devices(Raspberry Pi, QRB, etc.), please refer [here](../runtime/cross_build.md)
     __Step 1.__ Clone a repository
     !!! note
         This requires permissions to access OptimaV2-Runtime repository. Please contact OptimaV2 team. The team will grant you permissions for access the repository.
-    
     ```bash
     git clone git@github.com:ENERZAi/OptimaV2-Runtime
     cd OptimaV2-Runtime
     ```
-
     __Step 2.__ Create new virtual environment
     ```bash
     # use conda
     conda create -n OptimaV2-Runtime
-
     # you can also use virtualenv
     python3 -m venv .venv
     source .venv/bin/activate
     ```
-
     __Step 3.__ Install python requirements
     ```bash
     pip install -r requirements.txt
     ```
-
     __Step 4.__ Install runtime requirements
     ```bash
     # Install cmake
     # This script auto-detect architecture of host system. You can change this with "--arch" flag. Support architectures: amd64, arm64
     # Default install path is "/usr/local". So `sudo` is required. You can change this path with "--install" flag.
     sudo Scripts/download-cmake.sh
-
     # Install protoc
     # This script auto-detect architecture of host system. You can change this with "--arch" flag. Support architectures: amd64, arm64
     # Default install path is "/usr/local". So `sudo` is required. You can change this path with "--install" flag.
     sudo Scripts/download-protoc.sh
-
     # Install SNPE
     # This is a mandatory if you intend to enable SNPE backend.
     # Also, AMD64 systems are only supported system.
     Scripts/download-snpe.sh
     export SNPE_ROOT=$(pwd)/snpe-1.68.0.3932
     ```
-
     OptimaV2 Runtime uses its own dependency management script called `install` and requirements may differ depends on what features you enabled.
-
     To install requirements properly, please refer table below.
-
     | feature          | `install` packages     | `cmake` argument      | note                                                          |
     |------------------|------------------------|-----------------------|---------------------------------------------------------------|
     | Base requirement | `protobuf fmt`         | -                     |                                                               |
@@ -419,54 +386,45 @@ You can skip these if you only compile the model. But if you intend to run model
     | Python API       | `pybind11`             | `-DENABLE_PYTHON=ON`  |                                                               |
     | Native backend   | `openmp`               | `-DENABLE_NATIVE=ON`  |                                                               |
     | SNPE backend     | -                      | `-DENABLE_SNPE=ON`    | This feature requires invoke `download-snpe.sh` script above. |
-
     !!! note
-        There are many flags that are not documented yet. Although these flags are declared, not working. 
-
-    Also, `install` script has concept "triplet" to support installing packages for various architecutures and OSes.
-
-    Supported triplets are:
-
-    - `x64-linux`
-    - `aarch64-linux`
-    - `arm-linux`
-    - `x64-android`
-    - `aarch64-android`
-    - `arm-android`
-
+        There are many flags that are not documented yet. Although you can declare these flags, it`ll not working.
     After decide which target and features are enabled, run commands below:
     ```bash
     # Install requirements.
-    # example: python -m Scripts.install --triplet=x64-linux protobuf fmt
+    # example: python -m Scripts.install protobuf fmt
     # for more detail: python -m Scripts.install --help
-    python -m Scripts.install --triplet=<triplet> <packages>
+    python -m Scripts.install <packages>
     ```
-
     The `install` script will auto-detect compiler and build dependencies for OptimaV2 Runtime. If you want to force `install` script to use specific compiler, flags in below list can be used.
-
     - `--ignore-clang` : Make `install` ignore Clang. This forces `install` to use GCC.
     - `--use-clang=VERSION` : Use specific version of Clang. If not found, `install` will be failed.
     - `--ignore-gcc` : Make `install` ignore GCC. This forces `install` to use Clang.
     - `--use-gcc=VERSION` : Use specific version of GCC. If not found, `install` will be failed.
-    
     After run command above, the folder named `third_party` will be created.
+    Please check name of folder inside `third_party/installed` folder. Its name is your `triplet` that required below.
     If you have problems running `install` script, please let us know. We`ll support you.
-
-    __Step 5.__ Generate cmake
+    __Step 5.__ Configure cmake
     ```bash
     # example: cmake -DTHIRD_PARTY_ROOT="$(pwd)/third_party/installed/x64-linux" -DENABLE_NATIVE=ON -B build -S . -G Ninja
     # default install path is: "${CMAKE_BUILD_DIR}/install". To override this, use "-DCMAKE_INSTALL_PREFIX=<install>".
     cmake -DTHIRD_PARTY_ROOT="$(pwd)/third_party/installed/<triplet>" <cmake flags> -B build -S . -G Ninja
     ```
-
     If you want to force CMake using Clang, add this flag: `-DCMAKE_TOOLCHAIN_FILE=CMake/UseClang.cmake`. You also can force CMake using GCC via this flag: `-DCMAKE_TOOLCHAIN_FILE=CMake/UseGCC.cmake`.
-    
-    These CMake script will auto-detect compiler and use it. If you want to use specific compiler version, use this flag for Clang: `-DTARGET_LLVM_VERSION=VERSION` and this flag for GCC: `-DTARGET_GCC_VERSION=VERSION`. 
-
+    These CMake script will auto-detect compiler and use it. If you want to use specific compiler version, use this flag for Clang: `-DTARGET_LLVM_VERSION=VERSION` and this flag for GCC: `-DTARGET_GCC_VERSION=VERSION`.
     __Step 6.__ Build the runtime
     ```bash
     cmake --build build --target install
     ```
+    __Step 7.__ Generate python wheel
+    This is extra step for who want to build python wheels.
+    To generate wheel, you should enable python binding feature(`-DENABLE_PYTHON=ON`) and build with target `install`.
+    !!! note
+        To generate python wheel, it is not allowed to change install prefix to usual install path like `/usr` or `/usr/local`. `setup.py` copies built libraries in install path during build wheel and does not check files whether are part of the runtime or not. It may cause undesired behavior. To prevent this problem, use other paths or do not change install path.
+    `setup.py` in OptimaV2 Runtime re-uses built libraries rather than re-build entire runtime again. To inform `setup.py` to where is library located, enviroment variables are used.
+    ``` bash
+    INSTALL_PATH=<install_path> pip wheel --wheel-dir wheel-out Bindings/Python
+    ```
+    You can see built wheel file located in `wheel-out` folder.
 
 ## Troubleshooting
 1. Building MLIR fails with compiler or linker errors
