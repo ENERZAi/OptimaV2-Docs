@@ -12,7 +12,7 @@ OptimaV2 considers **operating-system driven targets as a first-priority**. We a
 - Make easy to add customized layer
     - It extends the scope of AI researchers by supporting complex operations that are not compatible with MHLO, TOSA, and other similar technologies."
 
-### (Desired) Features
+### Desired Features
 - **Reasonably light and fast inference time**
     - our first target is to surpass tensorflow(tf-lite), and we will aim to target tvm based compilers
 - **Reasonably fast compile time**
@@ -34,9 +34,9 @@ Optima can be divided by four part including runtime as illustrated below
 ![Visualized Graph](../img/optima_arch.png)
 
 ### Front-end
-- It covers all work to be done in graph level
-- It takes networkx graph and parse it to convert into Optima graph
-- It optimizes a graph level optimization such as graph fusion, graph spliting
+- Covers all work to be done in graph level
+- Takes networkx graph and parse it to convert into Optima graph
+- Optimizes a graph level optimization such as graph fusion, graph spliting
 
 ### Middle-end
 - It covers all work to be done in kernel(operation) level
