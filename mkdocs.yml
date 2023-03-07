@@ -22,11 +22,17 @@ nav:
   - "Runtime API Reference":
     - "C++": "runtime/cpp.md"
     - "Python": "runtime/python.md"
-theme: readthedocs
-extra_css:
-  - "template/style.css"
-extra_javascript:
-  - "template/sync-tabs.js"
+  - Misc:
+    - "Cross Compile": "runtime/cross_build.md"
+
+theme:
+  name: material
+  features:
+    - content.tabs.link
+  hljs_languages:
+    - cpp
+    - python
+    - bash
 plugins:
   - section-index
 markdown_extensions: 
