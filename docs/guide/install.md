@@ -232,12 +232,9 @@ Since OptimaV2 is on alpha testing phase, it is not yet open to public network y
 
     g. Now, we build and install MLIR. This process might take several minutes depending on your system. You also need root privilege to install MLIR on your system.
 
-
         cmake --build llvm-project/build --target all -j"$(nproc)"
         sudo cmake --install llvm-project/build && \
         ln -s /app/llvm-project/build/bin/llvm-lit /usr/local/bin/llvm-lit
-    
-
 
     h. Install protocol buffer. 
     
@@ -441,3 +438,4 @@ You can contact one of our team members
 * Jaeyoon Yoo (유재윤) [jaeyoon.yoo@enerzai.com](mailto:jaeyoon.yoo@enerzai.com)
 * Jinhwan Shin (신진환) [jinhwan.shin@enerzai.com](mailto:jinhwan.shin@enerzai.com)
 * Changbeom Kang (강창범) [changbeom.kang@enerzai.com](mailto:changbeom.kang@enerzai.com)
+* Seongju Lee (이성주) [seongju.lee@enerzai.com](mailto:seongju.lee@enerzai.com)
