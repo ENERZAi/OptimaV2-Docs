@@ -10,11 +10,11 @@ OptimaV2 considers **operating-system driven targets as a first-priority**. We a
 - Make AI models run fast in edge device
     - It provides short inference time compared to existing solutions such as tflite
 - Make easy to add customized layer
-    - It extends the scope of AI researchers by supporting complex operations that are not compatible with MHLO, TOSA, and other similar technologies."
+    - It extends the scope of AI researchers by supporting complex operations that are not compatible with MHLO, TOSA, and other similar technologies.
 
 ### Desired Features
 - **Reasonably light and fast inference time**
-    - our first target is to surpass tensorflow(tf-lite), and we will aim to target tvm based compilers
+    - Our first target is to surpass tensorflow(tf-lite), and we will aim to target tvm based compilers
 - **Reasonably fast compile time**
     - Compile time should not take too long for the user
 - **Quantization support (Not part of  MVP requirement)**
@@ -31,7 +31,7 @@ OptimaV2 considers **operating-system driven targets as a first-priority**. We a
 
 ## Optima Composition
 Optima can be divided by four part including runtime as illustrated below
-![Visualized Graph](../img/optima_arch.png)
+![Visualized Graph](img/optima_arch.png)
 
 ### Front-end
 - Covers all work to be done in graph level
@@ -39,18 +39,18 @@ Optima can be divided by four part including runtime as illustrated below
 - Optimizes a graph level optimization such as graph fusion, graph spliting
 
 ### Middle-end
-- It covers all work to be done in kernel(operation) level
-- It provides our own language called Opto to support various and complex operation
-- It optimizes a kernel level optimization such as tiling, packing
-- It lowers all kernels into formats which can be compiled and built by target devices' compiler such as LLVM compiler or GCC
+- Covers all work to be done in kernel(operation) level
+- Provides our own language called Opto to support various and complex operation
+- Optimizes a kernel level optimization such as tiling, packing
+- Lowers all kernels into formats which can be compiled and built by target devices' compiler such as LLVM compiler or GCC
 
 ### Back-end
-- It compiles and builds all lowered kernel in middle-end
-- It provides all files which should be delivered into Optima Runtime to run AI model in target device(s)
+- Compiles and builds all lowered kernel in middle-end
+- Provides all files which should be delivered into Optima Runtime to run AI model in target device(s)
 
 ### Runtime
-- It dynamically loads results of Optima and runs AI model
-- It provides user C++/Python API(s) to run AI model only with a few lines of codes
+- Dynamically loads results of Optima and runs AI model
+- Provides user C++/Python API(s) to run AI model only with a few lines of codes
 
 ## Issue tracker
-If you have any issue and need an assistance, then please feel free to upload your requirement in http://192.168.0.80:8080/
+If you have any issue and need an assistance, then please feel free to upload your requirement in http://remote.enerzai.com:18080/
