@@ -310,7 +310,7 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
     ```
 
     !!! warning
-        It is known that there is memory leak due to circular reference when declare `rt.Context`, `rt.Model` and/or `rt.InferRequest` objects.
+        It is known that there is memory leak due to circular reference when declare `rt.Context`, `rt.Model` and/or `rt.InferRequest` objects in global scope and refer any of those in the callback.
         You should avoid declare these objects in global scope to prevent these problem.
 
 ## Get output tensors

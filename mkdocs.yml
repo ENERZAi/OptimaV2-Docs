@@ -11,10 +11,94 @@ nav:
   - "Opto Language":
     - "Builtin Functions": "kernel/builtin.md"
   - "Runtime API Reference":
-    - "C++": "runtime/cpp.md"
-    - "Python": "runtime/python.md"
+    - "C++":
+      - "runtime/cpp/index.md"
+      - "Classes":
+        - "runtime/cpp/classes/index.md"
+        - "BufferHolder": "runtime/cpp/classes/buffer_holder.md"
+        - "Context": "runtime/cpp/classes/context.md"
+        - "InferRequest": "runtime/cpp/classes/infer_request.md"
+        - "Model": "runtime/cpp/classes/model.md"
+        - "Shape": "runtime/cpp/classes/shape.md"
+        - "Tensor": "runtime/cpp/classes/tensor.md"
+      - "Enumerations":
+        - "runtime/cpp/enums/index.md"
+        - "DeviceKind": "runtime/cpp/enums/device_kind.md"
+        - "ElementType": "runtime/cpp/enums/element_type.md"
+        - "FrameworkKind": "runtime/cpp/enums/framework_kind.md"
+        - "LogLevel": "runtime/cpp/enums/log_level.md"
+        - "ProfileKind": "runtime/cpp/enums/profile_kind.md"
+      - "Exceptions":
+        - "runtime/cpp/exceptions/index.md"
+        - "Exception": "runtime/cpp/exceptions/exception.md"
+        - "BackendException": "runtime/cpp/exceptions/backend.md"
+        - "InferException": "runtime/cpp/exceptions/infer.md"
+        - "InitalizationFailedException": "runtime/cpp/exceptions/initialization_failed.md"
+        - "InvalidArgumentException": "runtime/cpp/exceptions/invalid_argument.md"
+        - "InvalidExtensionException": "runtime/cpp/exceptions/invalid_extension.md"
+        - "InvalidModelException": "runtime/cpp/exceptions/invalid_model.md"
+        - "InvalidOperationException": "runtime/cpp/exceptions/invalid_operation.md"
+        - "OutOfResourceException": "runtime/cpp/exceptions/out_of_resource.md"
+        - "UnsupportedModelException": "runtime/cpp/exceptions/unsupported_model.md"
+      - "Functions":
+        - "runtime/cpp/functions/index.md"
+        - "enumerate": "runtime/cpp/functions/enumerate.md"
+        - "getCause": "runtime/cpp/functions/get_cause.md"
+        - "getSizeOfElement": "runtime/cpp/functions/get_size_of_element.md"
+        - "isDeviceCPU": "runtime/cpp/functions/is_device_cpu.md"
+        - "isDeviceGPU": "runtime/cpp/functions/is_device_gpu.md"
+        - "isDeviceNPU": "runtime/cpp/functions/is_device_npu.md"
+        - "range": "runtime/cpp/functions/range.md"
+        - "throwFormat": "runtime/cpp/functions/throw_format.md"
+        - "toString": "runtime/cpp/functions/to_string.md"
+      - "Structures":
+        - "runtime/cpp/structs/index.md"
+        - "ContextOptions": "runtime/cpp/structs/context_options.md"
+        - "DeviceInfo": "runtime/cpp/structs/device_info.md"
+        - "ProfileData": "runtime/cpp/structs/profile_data.md"
+        - "TensorInfo": "runtime/cpp/structs/tensor_info.md"
+      - "Typedefs":
+        - "runtime/cpp/typedefs/index.md"
+        - "InferRequestCallback": "runtime/cpp/typedefs/infer_request_callback.md"
+        - "VersionTuple": "runtime/cpp/typedefs/version_tuple.md"
+    - "Python":
+      - "runtime/python/index.md"
+      - "Classes":
+        - "runtime/python/classes/index.md"
+        - "Context": "runtime/python/classes/context.md"
+        - "DeviceInfo": "runtime/python/classes/device_info.md"
+        - "InferRequest": "runtime/python/classes/infer_request.md"
+        - "Model": "runtime/python/classes/model.md"
+        - "ProfileData": "runtime/python/classes/profile_data.md"
+        - "Tensor": "runtime/python/classes/tensor.md"
+        - "TensorInfo": "runtime/python/classes/tensor_info.md"
+      - "Enumerations":
+        - "runtime/python/enums/index.md"
+        - "DeviceKind": "runtime/python/enums/device_kind.md"
+        - "ElementType": "runtime/python/enums/element_type.md"
+        - "FrameworkKind": "runtime/python/enums/framework_kind.md"
+        - "LogLevel": "runtime/python/enums/log_level.md"
+        - "ProfileKind": "runtime/python/enums/profile_kind.md"
+      - "Exceptions":
+        - "runtime/python/exceptions/index.md"
+        - "Exception": "runtime/python/exceptions/exception.md"
+        - "BackendException": "runtime/python/exceptions/backend.md"
+        - "InferException": "runtime/python/exceptions/infer.md"
+        - "InitalizationFailedException": "runtime/python/exceptions/initialization_failed.md"
+        - "InvalidArgumentException": "runtime/python/exceptions/invalid_argument.md"
+        - "InvalidExtensionException": "runtime/python/exceptions/invalid_extension.md"
+        - "InvalidModelException": "runtime/python/exceptions/invalid_model.md"
+        - "InvalidOperationException": "runtime/python/exceptions/invalid_operation.md"
+        - "OutOfResourceException": "runtime/python/exceptions/out_of_resource.md"
+        - "UnsupportedModelException": "runtime/python/exceptions/unsupported_model.md"
+      - "Functions":
+        - "runtime/python/functions/index.md"
+        - "get_element_size": "runtime/python/functions/get_element_size.md"
+        - "is_device_cpu": "runtime/python/functions/is_device_cpu.md"
+        - "is_device_gpu": "runtime/python/functions/is_device_gpu.md"
+        - "is_device_npu": "runtime/python/functions/is_device_npu.md"
   - Misc:
-    - "Cross Compile The Runtime": "runtime/cross-build.md"
+    - "Cross Compile The Runtime": "runtime/cross_build.md"
 theme:
   name: material
   features:
