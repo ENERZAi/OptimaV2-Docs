@@ -41,7 +41,7 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
 
 ## Create the context
 === "C++"
-    Declare a variable with type `rt::Context`. It manages resources like extensions, allocated during inferences, etc.
+    Declare a variable with type [`rt::Context`](../runtime/cpp/classes/context.md). It manages resources like extensions, allocated during inferences, etc.
 
     !!! note
         All codes are written in `main` function if not explicitly mentioned.
@@ -50,7 +50,7 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
     auto Context = rt::Context();
     ```
 
-    Additional options for initializing `rt::Context` can be given by `rt::ContextOptions` object. If you want to initialize the context with options, refer the code below.
+    Additional options for initializing [`rt::Context`](../runtime/cpp/classes/context.md) can be given by [`rt::ContextOptions`](../runtime/cpp/structs/context_options.md) object. If you want to initialize the context with options, refer the code below or [the reference](../runtime/cpp/structs/context_options.md).
 
     ```cpp
     auto Options = rt::ContextOptions();
@@ -68,13 +68,13 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
     ```
 
 === "Python"
-    Declare a variable with type `rt.Context`. It manages resources like extensions, allocated during inferences, etc.
+    Declare a variable with type [`rt.Context`](../runtime/python/classes/context.md). It manages resources like extensions, allocated during inferences, etc.
 
     ```python
     context = rt.Context()
     ```
 
-    Additional options for initializing `rt::Context` can be given by keyword arguments. `verbosity` argument set loglevel for internal logger and `log_path` argument set log path  If you want to initialize the context with options, refer the code below.
+    Additional options for initializing [`rt.Context`](../runtime/cpp/classes/context.md) can be given by keyword arguments. `verbosity` argument set loglevel for internal logger and `log_path` argument set log path  If you want to initialize the context with options, refer the code below or [the reference](../runtime/python/classes/context.md#initializer).
 
     ```python
     context = rt.Context(verbosity=rt.LogLevel.Verbose, log_path="runtime.log")
@@ -91,7 +91,7 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
     Loading a model is simple; just one line of code.
 
     ```cpp
-    auto Model = Context.loadModel("path/to/model");
+    auto Model = Context.loadModel("path/to/model", false);
     ```
 
     !!! note
@@ -145,7 +145,7 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
 
 ## Create the request
 === "C++"
-    Create a `rt::InferRequest` object. It represents single inference and indepenedent between objects. So multiple `rt::InferRequest` objects can be created on single model and run those asynchonously to achieve maximum throughput.
+    Create a [`rt::InferRequest`](../runtime/cpp/classes/infer_request.md) object. It represents single inference and indepenedent between objects. So multiple [`rt::InferRequest`](../runtime/cpp/classes/infer_request.md) objects can be created on single model and run those asynchonously to achieve maximum throughput.
 
     ```cpp
     auto Req = Model.createRequest();
@@ -157,7 +157,7 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
     ```
 
 === "Python"
-    Create a `rt.InferRequest` object. It represents single inference and indepenedent between objects. So multiple `rt.InferRequest` objects can be created on single model and run those asynchonously to achieve maximum throughput.
+    Create a [`rt.InferRequest`](../runtime/python/classes/infer_request.md) object. It represents single inference and indepenedent between objects. So multiple [`rt.InferRequest`](../runtime/python/classes/infer_request.md) objects can be created on single model and run those asynchonously to achieve maximum throughput.
 
     ```python
     req = model.create_request()
@@ -170,7 +170,7 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
 
 ## Set input tensors
 === "C++"
-    Because the device manages tensor memory, tensors cannot be created by user. So users should use `rt::Tensor` objects that are provided by `rt::InferRequest` and copy datas using methods in `rt::Tensor`.
+    Because the device manages tensor memory, tensors cannot be created by user. So users should use [`getInputTensor(...)`](../runtime/cpp/classes/infer_request.md#function-getinputtensor) or [`getOutputTensor(...)`](../runtime/cpp/classes/infer_request.md#function-getoutputtensor) functions that are provided by [`rt::InferRequest`](../runtime/cpp/classes/infer_request.md) and copy datas using methods in [`rt::Tensor`](../runtime/cpp/classes/tensor.md).
 
     To give input tensor data for the model, refer the code below:
 
@@ -197,15 +197,15 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
     ```
 
     !!! warning
-        a variable named `Buffer` is a RTTI object typed `rt::BufferHolder` which is acquire device memory when use it and release the memory when reaches out of its scope.
-        So it may cause undefined behavior copying or moving value of `rt::BufferHolder` class.
-        It is recommended that save `rt::Tensor` object and use `getBuffer()` method if you need to access device memory.
+        a variable named `Buffer` is a RTTI object typed [`rt::BufferHolder`](../runtime/cpp/classes/buffer_holder.md) which is acquire device memory when use it and release the memory when reaches out of its scope.
+        So it may cause undefined behavior copying or moving value of [`rt::BufferHolder`](../runtime/cpp/classes/buffer_holder.md) class.
+        It is recommended that save [`rt::Tensor`](../runtime/cpp/classes/tensor.md) object and use [`getBuffer()`](../runtime/cpp/classes/tensor.md#function-getbuffer) method if you need to access device memory.
     
     !!! warning
-        `rt::Tensor` in C++ API does not verify shape and/or type of input value. Use with caution.
+        [`rt::Tensor`](../runtime/cpp/classes/tensor.md) in C++ API does not verify shape and/or type of input value. Use with caution.
 
 === "Python"
-    Because the device manages tensor memory, tensors cannot be created by user. So users should use `rt.Tensor` objects that are provided by `rt.InferRequest` and copy datas using methods in `rt.Tensor`.
+    Because the device manages tensor memory, tensors cannot be created by user. So users should use [`rt.Tensor`](../runtime/python/classes/tensor.md) objects that are provided by [`rt.InferRequest`](../runtime/python/classes/infer_request.md) and copy datas using methods in [`rt.Tensor`](../runtime/python/classes/tensor.md).
 
     To give input tensor data for the model, refer the code below:
 
@@ -239,8 +239,8 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
 
 ## Run inference
 === "C++"
-    After you input datas for the model, you can run inference. All inferences are run asynchonously in the runtime. This means `infer()` method does not block the code.
-    You can use `wait()` method until the inference finish, but it is suggested that register the callback to improve throughput.
+    After you input datas for the model, you can run inference. All inferences are run asynchonously in the runtime. This means [`infer()`](../runtime/cpp/classes/infer_request.md#function-infer) method does not block the code.
+    You can use [`wait()`](../runtime/cpp/classes/infer_request.md#function-wait) method until the inference finish, but it is suggested that register the callback to improve throughput.
 
     Running inference synchronously:
 
@@ -274,8 +274,8 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
     ```
 
 === "Python"
-    After you input datas for the model, you can run inference. All inferences are run asynchonously in the runtime. This means `infer()` method does not block the code.
-    You can use `wait()` method until the inference finish, but it is suggested that register the callback to improve throughput.
+    After you input datas for the model, you can run inference. All inferences are run asynchonously in the runtime. This means [`infer()`](../runtime/python/classes/infer_request.md#method-infer) method does not block the code.
+    You can use [`wait()`](../runtime/python/classes/infer_request.md#method-wait) method until the inference finish, but it is suggested that register the callback to improve throughput.
 
     Running inference synchronously:
 
@@ -310,7 +310,7 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
     ```
 
     !!! warning
-        It is known that there is memory leak due to circular reference when declare `rt.Context`, `rt.Model` and/or `rt.InferRequest` objects in global scope and refer any of those in the callback.
+        It is known that there is memory leak due to circular reference when declare [`rt.Context`](../runtime/python/classes/context.md), [`rt.Model`](../runtime/cpp/classes/model.md) and/or [`rt.InferRequest`](../runtime/python/classes/infer_request.md) objects in global scope and refer any of those in the callback.
         You should avoid declare these objects in global scope to prevent these problem.
 
 ## Get output tensors
@@ -375,7 +375,7 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
 
     - `ModelInit`: Represents taken time during load the model.
     - `SubgraphInit`: Represents taken time during load the subgraph which is partal graph of the model.
-    - `RequestInit`: Represents taken time during create and initialize `rt::InferRequest` object.
+    - `RequestInit`: Represents taken time during create and initialize [`rt::InferRequest`](../runtime/cpp/classes/infer_request.md) object.
     - `TransferFromInput`: Represents taken time during transfer data from input tensor to device memory.
     - `TransferToOutput`: Represents taken time duing transfer data from device memory to output tensor.
     - `LayerExecute`: Represents taken time during execute single layer(kernel).
@@ -406,7 +406,7 @@ To install requirements for running OptimaV2 Runtime, please refer [here](instal
 
     - `ModelInit`: Represents taken time during load the model.
     - `SubgraphInit`: Represents taken time during load the subgraph which is partal graph of the model.
-    - `RequestInit`: Represents taken time during create and initialize `rt.InferRequest` object.
+    - `RequestInit`: Represents taken time during create and initialize [`rt.InferRequest`](../runtime/python/classes/infer_request.md) object.
     - `TransferFromInput`: Represents taken time during transfer data from input tensor to device memory.
     - `TransferToOutput`: Represents taken time duing transfer data from device memory to output tensor.
     - `LayerExecute`: Represents taken time during execute single layer(kernel).
