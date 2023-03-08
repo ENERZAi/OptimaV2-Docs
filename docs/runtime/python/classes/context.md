@@ -110,7 +110,7 @@ __Raises__
 - Any exceptions that inherit [`Exception`](../exceptions/exception.md) threw by the backend.
 - [`BackendException`](../exceptions/backend.md) : The backend threw an exception that was not handled.
 
-__See Also :__ [DeviceInfo](../structs/device_info.md)
+__See Also :__ [DeviceInfo](../classes/device_info.md)
 
 ### property `version`
 Get version of the runtime. 
@@ -123,5 +123,3 @@ __Signature__
 @property
 def version(cls) -> Tuple[int, int, int]: ...
 ```
-
-__See Also :__ [VersionTuple](../typedefs/version_tuple.md)
