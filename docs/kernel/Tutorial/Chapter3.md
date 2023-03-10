@@ -26,7 +26,7 @@ module function_example(){
 }
 ```
 
-This way, we can defined function 'foo' receiving a and b as a parameter and called function 'foo' with 3 and 4, where 3 is assigned to the parameter 'a' and 4 is assigned to the parameter 'b'.
+This way, we can define function 'foo' receiving a and b as a parameter and called function 'foo' with 3 and 4, where 3 is assigned to the parameter 'a' and 4 is assigned to the parameter 'b'.
 
 We can even generate a 'partial' function of function 'foo'.
 ```
@@ -138,5 +138,3 @@ import opto
 layer = opto.OptoLayerInstance("fibonacci", "fibonacci.opto", "fibonacci_rt.opto")
 layer.compile(1) # Writes result to fibonacci_rt.opto
 ```
-
-

@@ -37,7 +37,7 @@ Now, we can define opto instance as follows
 from optima_v2 import opto
 
 layer = opto.OptoLayerInstance("example", "<fill path to your opto code>", "<fill path to desired output directory")
-layer.add_param("name", opto.Number(3.14, opto.NumberType("f64")))
+layer.add_param("name", opto.Number(3.14, opto.NumberType.F64))
 layer.compile(3) # Lowers down to mlir llvm dialect
 ```
 
@@ -52,7 +52,5 @@ layer.compile(3) # Lowers down to mlir llvm dialect
 * **_compile(level)_**
   
     Compiles the opto kernel with given template arguments. Level parameter is integer in range [0, 3]. It determines lowering level of the kernel. If 0, it will output the original code itself. If 1, it will output runtime code. If 2, it will output mlir dialect with custom dialect defined in OptimaV2. If 3, it will be lowered to mlir llvm dialect.
+
 You can use this to see if your code is successfully converted by Opto compiler.
-
-
-

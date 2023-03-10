@@ -113,8 +113,8 @@ Let's check it out with calling opto api, and set 'selection' to '2' and 'valudT
 import opto
 
 layer = opto.OptoLayerInstance("tutorial", "tutorial.opto", "tutorial_rt.opto")
-layer.add_param("selection", opto.Number(2), opto.NumberType("idx"))
-layer.add_param("valueToAdd", opto.Number(4), opto.NumberType("i32"))
+layer.add_param("selection", opto.Number(2), opto.NumberType.IDX)
+layer.add_param("valueToAdd", opto.Number(4), opto.NumberType.I32)
 layer.compile(1) # outputs runtime code in tutorial_rt.opto
 ```
 
@@ -151,8 +151,8 @@ Let's see how it works
 ```python
 import opto
 layer = opto.OptoLayerInstance("tutorial", "tutorial.opto", "tutorial_rt.opto")
-layer.add_param("selection", opto.Number(2), opto.NumberType("idx"))
-layer.add_param("valueToAdd", opto.Number(3), opto.NumberType("i32"))
+layer.add_param("selection", opto.Number(2), opto.NumberType.IDX)
+layer.add_param("valueToAdd", opto.Number(3), opto.NumberType.I32)
 layer.compile(1) # outputs runtime code in tutorial_rt.opto
 ```
 

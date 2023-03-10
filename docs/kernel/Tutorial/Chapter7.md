@@ -186,7 +186,17 @@ That's it! we have created our layer that adds two tensors element-wise regardle
 Let's see how our add layer is converted to runtime code. Let's give these parameters, and run our code.
 (aType : tensor<(1,5,100), f32>, bType : tensor<(4,2,5,100), f32>, outputType : tensor<(4,2,5,100), f32>)
 
+```python
+import opto
 
+opto.OptoLayerInstance("add", "add.opto", "add_rt.opto")
+layer.add_param("aType", opto.RtTensorType([1, 5, 100], opto.NumberType.F32))
+layer.add_param("bType", opto.RtTensorType([4, 2, 5, 100], opto.NumberType.F32))
+layer.add_param("outputType", opto.RtTensorType([4, 2, 5, 100], opto.NumberType.F32))
+layer.compile(1)
+```
+
+Here is the output (add_rt.opto).
 ```
 module(a : tensor<(1, 5, 100), f32>, b : tensor<(4, 2, 5, 100), f32>, c : tensor<(4, 2, 5, 100), f32>){
 for(itr_0i from 0i to 4i step 1i)  [] {
@@ -213,8 +223,18 @@ Let's change shape of input 'a' like following
 * b : (4, 2, 5, 100)
 * c : (3, 4, 2, 5, 100)
 
-Following code is generated runtime code output from our Opto implementation.
+Let's run it with new shapes.
+```python
+import opto
 
+opto.OptoLayerInstance("add", "add.opto", "add_rt.opto")
+layer.add_param("aType", opto.RtTensorType([3, 1, 5, 100], opto.NumberType.F32))
+layer.add_param("bType", opto.RtTensorType([4, 2, 5, 100], opto.NumberType.F32))
+layer.add_param("outputType", opto.RtTensorType([3, 4, 2, 5, 100], opto.NumberType.F32))
+layer.compile(1)
+```
+
+Following code is generated runtime code output from our Opto implementation.
 ```
 module(a : tensor<(3, 1, 2, 5, 100), f32>, b : tensor<(4, 2, 5, 100), f32>, c : tensor<(3, 4, 2, 5, 100), f32>){
 for(itr_0i from 0i to 3i step 1i)  [] { // This loop has been added automatically by our Opto implementation
