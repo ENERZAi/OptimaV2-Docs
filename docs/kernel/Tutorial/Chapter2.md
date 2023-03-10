@@ -1,13 +1,13 @@
 # Chapter 2. Understanding compile-time language features
 
-The key for getting used to opto language is getting used to writing compile time code. Compile time code is executed in compile time, and it is used to generate runtime code that can run efficiently on the target.
+The key for getting used to opto language is getting used to writing compile time code. Compile time code is executed during compilation, and it is used to generate efficient runtime code for the target.
 
 Compile time code follows functional style. In functional programming, every expression can be treated as a function. Using this feature, functional programming is constructed by applying and composing functions. This makes modularizing and structuring programs easier than conventional iterative programs. Functional programming makes program easier to debug, and harder to make mistakes. If you are new to functional programming, this will guide you getting used to it and you will see true benefit that functional programming brings us.
 
 ### let binding (expression)
-'let' expression in opto language is used to bind a value to a symbol. Symbols defined using 'let' is immutable (which means the value cannot be changed). Therfore, all symbols in opto language is immutable. This might sound uncomfortable, but it prevents lots potential bugs that mutable variable can cause.
+'let' expression in opto language is used to bind a value to a symbol. Symbols defined using 'let' is immutable (which means the value cannot be changed). Therefore, all symbols in opto language is immutable. This might sound uncomfortable, but it prevents lots potential bugs that mutable variable can cause.
 
-Important thing to remember about 'let' is that we must provide some expression that returns some value after using 'let'. As I said before, everything is 'function' in functional programming. In mathematics (not in programming), deterministic function should always return some value. When its parameters are equal, function should always return a same value. That applies same in opto language. Since 'let' expression is also a function, we need some way to return a value. But, 'let' expression itself has no value to return. Therefore, we add some other expression at the end to return some value.
+Important thing to remember about 'let' is that we must provide some expression that returns some value after using 'let'. As I said before, everything is 'function' in functional programming. In mathematics (not in programming), deterministic function should always return some value. When its parameters are equal, function should always return a same value. That applies same in opto language. Since 'let' expression is also a function, we need some way to return a value. But the 'let' expression itself has no value to return. Therefore, we add some other expression at the end to return some value.
 
 Here is an example designed to help your understanding.
 ```
@@ -34,7 +34,7 @@ Moreover, for 'let b = 2', expression 'a + b' is responsible for returning. At t
 
 This is how code is structured in functional programming and Opto. Since let binding connects the declaration of the variable and expression following after it, it is an important building block in composing expressions.
 
-There are also some cases we want to execute the expression, but ignore its output. In such cases, we can give '_' instead of name.
+There are also some cases we want to execute the expression, but ignore its output. In such cases, we can use '_' instead of name.
 ```
 let _ = <init expression>
 <next expression>
@@ -42,19 +42,19 @@ let _ = <init expression>
 In this case, output of the init expression will be ignored, and let expression will not define any symbol.
 
 ### List and tuples
-Two frequently used data type in compile time code is list and tuple. These data types both store sequence of values. 
+Two frequently used data types in compile time code is list and tuple. These data types both store sequence of values. 
 ```
 let a, b = (2, 3)
 let listExample = [1, 2, 3, a + b] // list of int (list<int32>)
 let tupleExample = (3, !{2}, [2,3,4]) // tuple of (int32, runtime_expression, list list of intetgers) (tuple<int32, rt_expr, list<int32>>)
 ```
-They do look similar, but they are different in very important point, As you may have already noticed.
+They do look similar, but they differ in a very important point as you may have already noticed.
 
 __List__ is a sequence of values of the same time
 
 __tuple__ is a sequence of values of the same or possibily different types
 
-You can think of tuple as a list that can have multiple types per element. While list is more efficient and type safe, tuple provides better type flexibilty. if you need a container with only one type, tuple provides more generality.
+You can think of tuple as a list that can have multiple types per element. While list is more efficient and type safe, tuple provides better type flexibilty. If you need a container with only one type, list provides more generality.
 
 #### Using the list or tuple
 Accessing list or tuple is simple as below.

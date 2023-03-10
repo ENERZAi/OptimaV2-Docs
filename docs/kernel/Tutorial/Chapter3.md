@@ -1,7 +1,7 @@
 # Chapter 3. Functions (Closures)
 
 ### Defining Functions with parameters
-Since opto language is composed using functions (closures), defining function with parameters is very simple.
+Since Opto is composed using functions (closures), defining function with parameters is very simple.
 
 ```
 template<//>
@@ -11,7 +11,7 @@ module function_example(){
     foo <| 3 // Call the function with 3
 }
 ```
-This example shows process of defining very simple function, and calling it. It defines function named 'foo' with single parameter called 'a'. In the next line, we call our function 'foo' by assigning '3' to parameter 'a'. 
+This example shows process of defining very simple function, and calling it. It defines function named 'foo' with single parameter called 'a'. In the next line, we call our function 'foo' by assigning '3' to the parameter 'a'. 
 The '<|' symbol is called 'pipe operator', which is used to call function 'foo'. It will convey parameter value '3' to the function and invoke the function.
 
 
@@ -26,7 +26,7 @@ module function_example(){
 }
 ```
 
-This way, we can defined function 'foo' receiving a and b as a parameter and called function 'foo' with 3 and 4, where 3 is assigned to parameter 'a' and 4 is assigned to parameter 'b'.
+This way, we can defined function 'foo' receiving a and b as a parameter and called function 'foo' with 3 and 4, where 3 is assigned to the parameter 'a' and 4 is assigned to the parameter 'b'.
 
 We can even generate a 'partial' function of function 'foo'.
 ```
@@ -38,13 +38,13 @@ module function_example(){
     foo_partial <| 4
 }
 ```
-Here, we gave only one parameter to function 'foo' that should receive two parameters. In other languages like python or C++, this would cause error since number of parameters did not match number of given arguments. However, in Opto, this is valid code. Opto will generate a partial function of 'foo'. In above code, 'foo_partial' is equivalent to the following.
+Here, we gave only one parameter to function 'foo' that should receive two parameters. In other languages like python or C++, this would cause an error since the number of parameters did not match the number of given arguments. However, in Opto, this is valid code. Opto will generate a partial function of 'foo'. In the above code, 'foo_partial' is equivalent to the following.
 
 ```
 let foo_partial b = 3 + b + 2
 ```
-We now see how 'a' is converted into given parameter, and b is remaining undetermined. Now, foo_partial is a function that receives 'b' and returns 3 + b + 2.
-Therefore, we need to pass parameter 'b' to compute the result. Which was '4' in the above example.
+We now see how 'a' is converted into given parameter, and 'b' is remaining undetermined. Now, foo_partial is a function that receives 'b' and returns 3 + b + 2.
+Therefore, we need to pass parameter 'b' to compute the result which was '4' in the above example.
 
 This is possible because Opto defines function with multiple arguments as higher order functions.
 If we define function 'foo' with multiple arguments like we did before, foo is actually treated equivalent as following.
@@ -55,7 +55,6 @@ let foo = lambda (a) {
             a + b + 2
         }
     }
-}
 
 ```
 'foo' is actually a higher order function that returns another function inside with parameter, which is defined using first parameter 'a'. Therefore, when we call 'foo <| 3 <|4', we end up evaluating higher order function first with 'a = 3' and evaluate internal partial function with 'b = 4'.  
@@ -67,23 +66,25 @@ template<//>
 module function_example(){
     // Body expression
     let foo = lambda (a, b) { a + b + 2 }
-    foo <| 3 <| 4
+    let res = foo <| 3 <| 4
+    !{res}
 }
 ```
 This example does exactly same thing as above. The only difference is syntax.
 
 #### Closure
-Actually, accurate name of calling 'function' in Opto is 'closure'. It is called closure because our functions capture values automatically that were in the environment when it is defined.  See the following example.
+Actually, the accurate name of calling 'function' in Opto is 'closure'. It is called closure because our functions capture values automatically that were in the environment when it is defined.  See the following example.
 ```
 template<//>
 module closure_example(){
     // Body expression
     let c = 2
     let foo a b = a + b + c
-    foo <| 3 <| 4
+    let res = foo <| 3 <| 4
+    !{res}
 }
 ```
-In this code we define 'c' outside as 2 and we are using 'c' inside foo. Our function (closure) 'foo' captures value c in its own environment, and uses it to compute its output. Since 'c' is 'captured' inside closure foo's local environment, it is independent from the 'c' variable ouside function after it is captured. In other words, closures capture by value.
+In this code we define 'c' outside as 2 and we are using 'c' inside foo. Our function (closure) 'foo' captures value c in its own environment, and uses it to compute its output. Since 'c' is 'captured' inside closure foo's local environment, it is independent from the 'c' variable ouside function after it is captured.
 
 ```
 template</a : bool/>
@@ -99,11 +100,12 @@ module closure_example(){
         foo
     }
 
-    foo <| 3 <| 4 // result : 9 if a was true, 8 otherwise
+    let res = foo <| 3 <| 4 // result : 9 if a was true, 8 otherwise
+    !{res}
 }
 
 ```
-While c is defined inside scope of if/else statement, we can still compute the 'foo' because c = <value> is already stored inside the closure 'foo'.
+While c is defined inside scope of if/else statement, we can still compute the 'foo' because value of c is already stored inside the closure 'foo'.
 
 ### Recursions
 Recursions are very important feature in Opto. Many critical functionalities are built with recursions in Opto. It is used when generating nested for loops, variable indices, and lots more.
@@ -122,8 +124,19 @@ module recursion_example(){
             }
         }
 
-    fibonacci <| 10 // result : 55
+    let res = fibonacci <| 10 // result : 55
+    !{res}
 }
 ```
-This code computes fibonacci sequence. Recursive functions defines its name in its captured environment. This is accomplished by fixed point combinator, used to define recursive functions without using mutable values.
+This code computes fibonacci sequence. Recursive functions defines its name in its captured environment. This is accomplished by fixed-point combinator, used to define recursive functions without using mutable values.
+
+As always, we can check the result of above code with opto api
+
+```python
+import opto
+
+layer = opto.OptoLayerInstance("fibonacci", "fibonacci.opto", "fibonacci_rt.opto")
+layer.compile(1) # Writes result to fibonacci_rt.opto
+```
+
 

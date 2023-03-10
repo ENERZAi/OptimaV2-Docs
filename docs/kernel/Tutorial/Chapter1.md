@@ -40,6 +40,8 @@ What you can observe here can be divided into three parts.
 Hmm.. Compile time, runtime, expresssions.. what?? 
 Hold it for a second. Let me explain what they are.
 
+### What are expressions?
+
 __Expression__ is how we 'express' the behavior of the program. Every code we write is an 'expression'. Expression is basic building block of the program. We can do arithmetics, save or load values, or write functions by composing expressions, which builds up to another expression. When we 'evaluate' an expression, we end up executing the program.
 For example, Here is a simple expression that adds two values in opto.
 ```
@@ -80,20 +82,43 @@ module tutorial(){
 
 We can see that 3rd argument (which is 2 in index) is the output of the code.
 
+You can check this by invoking Opto api
+```python
+import opto
+
+layer = opto.OptoLayerInstance("tutorial", "tutorial.opto", "tutorial_rt.opto")
+layer.compile(1) # outputs runtime code in tutorial_rt.opto
+```
+
 ### Embedding compile time expressions in compile time
 Sometimes, we might want to use value evaluated in compile time in runtime. To provide solution for this, opto language provides compile time code block. It is pretty much similar with runtime code block in compile time code. However, we start '$' sign instead of '!'. In other words, we can use ${} to express compile time code block in runtime. We can put any compile time code inside ${}. Despite ${} block is embedded in runtime code, it will be evaluated in compile time.
 
 ```
-template</selection : idx, valueToAdd : int32/>
+template</selection : idx, valueToAdd : i32/>
 module tutorial(){
     // Body expression
-    let runtimeCodes = [!{0}, !{1}, !{let a = 2 \n a + ${valueToAdd}}]
+    let runtimeCodes = [!{0}, !{1}, 
+            !{
+                let a = 2
+                a + ${valueToAdd}
+            }
+        ]
     runtimeCodes[selection]
 }
 ```
 Here is the use case of compile time code block in runtime code. We want to use 'valueToAdd' variable in runtime, which is given as compile time parameter (which is static in runtime). we can simply use ${} and put 'valueToAdd' inside. Then, 'valueToAdd' variable will be evaluated, and embedded as runtime code output.
-The following is result of the above code when 'selection' was '2', and 'valueToAdd' was '4'
 
+Let's check it out with calling opto api, and set 'selection' to '2' and 'valudToAdd' to '4'
+```python
+import opto
+
+layer = opto.OptoLayerInstance("tutorial", "tutorial.opto", "tutorial_rt.opto")
+layer.add_param("selection", opto.Number(2), opto.NumberType("idx"))
+layer.add_param("valueToAdd", opto.Number(4), opto.NumberType("i32"))
+layer.compile(1) # outputs runtime code in tutorial_rt.opto
+```
+
+You should see the following output
 ```
 module tutorial(){
     let a = 2
@@ -110,7 +135,8 @@ module tutorial(){
     // Body expression
     let runtimeCodes = [!{0}, !{1}, !{
         // runtime code block
-        let a = 2 \n a + ${
+        let a = 2 
+        a + ${
             // Compile time code block
             let multiplied = valueToAdd*4
             multiplied % 3 
@@ -119,13 +145,24 @@ module tutorial(){
 }
 ```
 
-Now we multiplied 'valueToAdd' with 4, and returned remainder after dividing by '3'. if 'valueToAdd' was for, this code will add '0', since evaluated value of (4*3)%3 is '0'
+Now we multiplied 'valueToAdd' with 4, and returned remainder after dividing by '3'. if 'valueToAdd' was '3'', this code will add '0', since evaluated value of (3*4)%3 is '0'
 
+Let's see how it works
+```python
+import opto
+layer = opto.OptoLayerInstance("tutorial", "tutorial.opto", "tutorial_rt.opto")
+layer.add_param("selection", opto.Number(2), opto.NumberType("idx"))
+layer.add_param("valueToAdd", opto.Number(3), opto.NumberType("i32"))
+layer.compile(1) # outputs runtime code in tutorial_rt.opto
+```
+
+This will give following output
 ```
 module tutorial(){
     let a = 2
     a + 0
 }
 ```
+We can see compile time code block has evaluated to '0'.
 
 Therefore, compile time code block, and runtime code block can be recursively nested. This extends capability of opto. You can maximize your creativity to write new layer!

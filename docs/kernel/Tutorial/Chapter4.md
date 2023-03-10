@@ -1,7 +1,7 @@
 # Chapter 4. Managing control flow
 
 Control flow is one of the critical feature of the all programming languages. This determines execution order of the blocks in the program.
-In this page, we introduce if/else statement, exception and print statement
+In this page, we introduce if/else statement, exception and print statement.
 
 ### If/Else 
 If/Else statement is written as following.
@@ -26,12 +26,12 @@ module ifElseExample(){
     }
 }
 ```
-The omitted 'else' block returns 'None' as default. Since None type is compatible with any type, (None type is parent type of any other type in Opto) There is no restriction in return type of if clause.
+The omitted 'else' block returns 'None' as default. Since None type is compatible with any type, (None type is parent type of any other type in Opto) there is no restriction in return type of if clause.
 
 ### Exceptions
-We can throw exceptions in opto like following. Note that when exception is thrown, program always terminates intermediately. There is not 'catch' functionality in Opto. Therefore, you should use it for checking conditions where program must fail before it does any unwanted behaviors. We can throw exception with 'except' clause.
+We can throw exceptions in opto like following. Note that when exception is thrown, program always terminates intermediately. There is no 'catch' functionality in Opto. Therefore, you should use it for checking conditions where program must fail before it does any unwanted behaviors. We can throw exception with 'except' clause.
 
-Since 'except' always terminates program, we don't have to think about type compatibility. Opto language does not type-check return value of except because it will be never returned.
+Since 'except' always terminates program, we don't have to think about type compatibility. Opto language does not type-check return value of except because it will never be returned.
 
 ```
 template</input : idx/>
@@ -46,6 +46,6 @@ module ifElseExample(){
 ### Print
 We can print compile-time values on the console. This is helpful in debugging, or examining the output.
 ```
-print(<expression>))
+print(<expression>)
 ```
-We can print any value in opto language using print statement including non values, or runtime expressions and runtime type.
+We can print any value in opto language using print statement including non-values, or runtime expressions and runtime type.

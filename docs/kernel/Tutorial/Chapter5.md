@@ -10,7 +10,7 @@ let rtExpr = !{<some runtime expression>}
 ```
 As we see, runtime expression is embedded in compile time expression as a value. Moreover, we can nest compile time expression and runtime expression for generating runtime expression (runtime code in otherwords). This concept is a key to understanding how Opto works.
 
-In runtime, everything is similar to compile time, except the following
+In runtime, everything is similar to compile time, except the following:
 
 1. It does not have closure or recursion
       *  We use for loops instead!
@@ -25,7 +25,7 @@ In runtime, everything is similar to compile time, except the following
    * Just like compile time code, definitions with 'let' bindings are immutable. However, only runtime tensors can be modified by 'store' function.
 
 Let me explain these with examples.
-Runtime code is closely related to hardware. Therefore, we can explicitly allocate, load and store to the memory. Following example allocates a tensor, and stores data from given tensor called 'data' after multiplying by 2
+Runtime code is closely related to hardware. Therefore, we can explicitly allocate, load and store to the memory. Following example allocates a tensor, and stores data from given tensor called 'data' after multiplying by 2.
 
 ```c++
 // Allocates tensor
@@ -44,7 +44,7 @@ for(i from 0i to 10i step 1i){
 
 1. __Allocating a tensor__
    
-    Tensor allocation can be done with alloc</(runtime_type), alignment/>(). runtime_type is tensor runtime type defined in compile time. In the above example, we used compile time block ${} to express runtime tensor type. alignment means memory alignment of the tensor. For amd64 architectures, it is best to align it on 64bit boundary, because most of its vector instructions requires value to be aligned in 64bit boundary
+    Tensor allocation can be done with alloc</(runtime_type), alignment/>(). runtime_type is tensor runtime type defined in compile time. In the above example, we used compile time block ${} to express runtime tensor type. alignment means memory alignment of the tensor. For amd64 architectures, it is best to align it on 64-bit boundary, because most of its vector instructions requires value to be aligned in 64-bit boundary.
 
         alloc</runtime tensor type, alignment/>() -> returns runtime tensor
 
@@ -75,10 +75,10 @@ for(iterator_variable from begin_idx to end_idx step step_size) [iterator_variab
 
 In the for loop, we cannot have conditions other than range. Moreover, this range must be fixed in compile time. This is due to optimitization issues. We need to know the range and step of the for loop before optimization so we can decide how to optimize the for loop.
 
-Something that might be new to you is concept called _iterator_vairable_. This is used when we have to use 'destructive update;'. As we all know, let bindings in Opto is immutable unless it's tensor. However, in the for loop, we might want to update some value we have already defined. 
+Something that might be new to you is concept called _iterator_vairable_. This is used when we have to use destructive update. As we all know, let bindings in Opto is immutable unless it's tensor. However, in the for loop, we might want to update some value we have already defined. 
 Suppose we want to add up all values in the tensor. In this case, it is necessary to define a value and keep adding to that value.
 
-To support this without violating the immutability, This is where _iterator_variable_ comes into play.
+To support this without violating the immutability, this is where _iterator_variable_ comes into play.
 
 This code calculates sum of all values in the tensor called 'data' and stores it in 'result'. 
 ```
@@ -94,13 +94,13 @@ result
 The initial value of the sum is stored in 'initialSum' with zero. When for loops starts its iteration, initialSum is captured in value called 'sumOnUpdate'. In the body of for loop, the returned value from the last expression is stored in 'sumOnUpdate' for the next iteration. Since we are adding value loaded from 'data' and passing it to 'sumOnUpdate', 'sumOnUpdate' in the next iteration will equal ('sumOnUpdate' in current iteration + loaded value from 'data).  When this procedure continues, we end up adding all elements in 'data'.
 The return value of the for loop is the value of the 'sumOnUpdate' updated from the last iteration. Therefore, 'result' becomes the result we want.
 
-We can use iterator variables when we need to use the result of the body expression of for, but please note that number of return values and number of iterator variables should match unless there are no iterator variables
+We can use iterator variables when we need to use the result of the body expression of for, but please note that number of return values and number of iterator variables should match unless there are no iterator variables.
 
 If we don't require any iterator variables, we can omit bracket '[]', and for loop won't return any values.
 
 #### Automatically generating nested for loops
     
-In some cases, we might not know number of required nested for loops. This case frequently happens if we don't know the dimension of the given tensor. Supppose we have to add two tensors one by one, and we need to broadcast between them. We will have to make nested for loops to do so, but number of loops depends on the dimension of input tensors. In Opto, answer to this problem is 'rt_for', which is compile time expression that will generated nested runtime for loops.
+In some cases, we might not know the number of required nested for loops. This case frequently happens if we don't know the dimension of the given tensor. Supppose we have to add two tensors one by one, and we need to broadcast between them. We will have to make nested for loops to do so, but number of loops depends on the dimension of input tensors. In Opto, answer to this problem is 'rt_for', which is compile time expression that will generated nested runtime for loops.
 Here is the simple use case.
 
 ```
@@ -117,12 +117,12 @@ let initialValue = 0.0f
                 updateValue + load(data, iteratorNames)
             }
         }
-    }
     returnedValue
 }
+
 ```
 
-Now this will be converted to following runtime code
+Now this will be converted to following runtime code.
 
 ```
 let returnedValue = for(itr0 from 0i to 3i step 1i) [updateValue_0 : 0.000000f] {
@@ -152,23 +152,23 @@ rt_for(iteratorNames : loops)} {
 
 Just be careful that rt_for is compile time expression. Thats why we had to give the name 'updateValue' as a string in compile time, so its converted into identifier in runtime. Also, we have to put compile time expression inside the body of rt_for.
 
-Here is the description of each section in rt_for expression
+Here is the description of each section in rt_for expression.
 
-    rt_for(itr variable list: itr range list) [update_value : initial_value, ...]{
+    rt_for(itr_variable_list: itr_range_list) [update_value : initial_value, ...]{
         // Body of the expresion
     }
 
-* itr variable list : list of iteration variables to be used in runtime. Given as list of string. beginning of the list indicates outermost loop.
-* itr range list : list of iteration variables used for each loop level. beginning  of the list indicates outermost loop. Given as list of list with 3 values indicating [begin index, end index, step size]
-* update_value : name of the value to be updated
-* initial_value : value to initialize update_value in the first loop
+* itr_variable_list : list of iteration variables to be used in runtime. Given as list of string. Beginning of the list indicates outermost loop.
+* itr_range_list : list of iteration variables used for each loop level. beginning  of the list indicates outermost loop. Given as list of list with 3 values indicating [begin index, end index, step size].
+* update_value : name of the value to be updated.
+* initial_value : value to initialize update_value in the first loop.
 
 
 ### Runtime if statements
 
 We can use if statement in runtime just like what we did in copmile time. However, it is important to note some differences between these two cases.
 
-The key differences are
+The key differences are:
 
 1. Since there is no 'none' type in runtime, we must return same type in both if and else block or return nothing from neither of the blocks
 2. Return type must be number type

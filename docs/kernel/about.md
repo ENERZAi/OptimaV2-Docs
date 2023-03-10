@@ -31,6 +31,9 @@ Opto achieves these with concept called 'functional programming'. Which means, p
 
 If you are new to functional programming, this concept might not familiar to you. But once you start writing in functional language such as Opto, You will feel its true horsepower.
 
+### General flow of Opto
+Opto uses concept of metaprogramming to generate runtime code (Runtime code is executed on device when model is inferenced). Compile time code in opto defines process of generating runtime code. We can write compile time code block to generate appropriate runtime code with our own algorithms. Genrated runtime code will be further converted internally in OptimaV2, and will be coverted to executable binary that can be used in inference.
+
 ### Current status & Support
 
 Until now, Opto language has come far way. However, Opto is still in development phase. Therefore, there can be potential bugs or imcomplete features. Here are some features and enhanvements that is yet to come, but is under its way.

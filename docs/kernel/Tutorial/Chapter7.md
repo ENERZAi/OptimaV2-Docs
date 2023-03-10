@@ -2,7 +2,7 @@
 
 We can now bring everything together and implement actual layer that can be used in OptimaV2. We will interpret 'add' kernel that will add two tensors(a and b) together and writes it to the output (c), while given shape inputs can be arbitrary.
 
-Let's start off by defining a module
+Let's start off by defining a module.
 ```
 template</aType : rt_type, bType : rt_type, outputType : rt_type/>
 module add(a : aType, b : bType, c : outputType) {
@@ -12,7 +12,7 @@ module add(a : aType, b : bType, c : outputType) {
 ```
 We have defined type of the inputs a, b and c as an template argument. These are runtime types that will be translated into type expression in runtime code. Recall that runtime expressions and types are treated as value in compile time. Therefore, we can receive them as template argument and define type of a, b and c which are runtime arguments.
 
-First, since shape of a,b and c are arbitrary, let's get their shapes and calculate broadcasted shape which should match the shape of the output 'c'
+First, since shape of a,b and c are arbitrary, let's get their shapes and calculate broadcasted shape which should match the shape of the output 'c'.
 
 ```
 template</aType : rt_type, bType : rt_type, outputType : rt_type/>
@@ -36,11 +36,11 @@ Now we have calculated broadcated shape using builtin broadcast function. After 
 
 Since shape is arbitrary, we cannot determine exactly how many for loops are required to iterate through the tensors. Therefore, we have to use 'rt_for' to generate arbitrary number of nested runtime loops. To do so, we need appropriate iterator names, and range lists.
 
-Following function generates iterator name lists. With the prifix saved in 'itrName' value, this function will generate list of string, each element representing iterator name for each loop. If 'itrName' is "itr", return value of this function would look like ["itr_0", "itr_1", ..., "itr_n"] where n equals (length of broadcastedShape - 1)
+Following function generates iterator name lists. With the prefix saved in 'itrName' value, this function will generate list of string, each element representing iterator name for each loop. If 'itrName' is "itr", return value of this function would look like ["itr_0", "itr_1", ..., "itr_n"] where n equals (length of broadcastedShape - 1).
 
 ```
 let rec genItrNames itrName index = 
-    if(index == len(broadcastedShape)){
+    if(index >= len(broadcastedShape)){
         []
     } else {
         (itrName + "_" + toStr(index)) :> genItrNames <| itrName <| (index + 1)
@@ -54,7 +54,7 @@ Following function will generate appropriate access list, we define 'filter' fun
 
 ```
 let rec filter index tensorShape itrNames = 
-    if(index == len(tensorShape)) {
+    if(index >= len(tensorShape)) {
         []
     } else {
         if(tensorShape[index] == 1) {
@@ -75,24 +75,28 @@ module add(a : aType, b : bType, c : outputType) {
     let shapeB = shapeof(bType)
 
     // Get broadcasted shape with builtin broadcast function
+    // We use builtin broadcast function here. This builtin function will automatically broadcast two shapes if they are broadcastable.
+    // Refer to Chapter 6 for more information
     let broadcastedShape = broadcast <| shapeA <| shapeB
 
     // Throw an exception if broadcasted shape does not match output shape
     let _ = if(broadcastedShape != shapeC){
+        // 'except' keyword throws exception with given messages below 
         except("Shape mismatch between broadcasted shape : (" + toStr(broadcastedShape) + ") and output shape! : (" + toStr(shapeC) + ")")
     }
 
     // This function will generate iterator names
     let rec genItrNames itrName index = 
-        if(index == len(broadcastedShape)){
+        if(index >= len(broadcastedShape)){
             []
         } else {
             (itrName + "_" + toStr(index)) :> genItrNames <| itrName <| (index + 1)
         }
 
     // This function generates iterator list
+    // Note how filter function generates filtered outputs
     let rec filter index tensorShape itrNames = 
-        if(index == len(tensorShape)) {
+        if(index >= len(tensorShape)) {
             []
         } else {
             if(tensorShape[index] == 1) {
@@ -103,6 +107,8 @@ module add(a : aType, b : bType, c : outputType) {
         }
 
     // Create list of iterator range list which is list<list<idx>>
+    // We use 'fold' builtin function to achieve this. This will gather all iterator range and put them into the list.
+    // For more information about 'fold', go back to Chapter 6.
     let indices = fold <| [] <| broadcastedShape <| lambda (s, t) { s<: [0i, t, 1i] }
     // Create list of iterator names
     let itrNames = genItrNames <| "itr" <| 0i
@@ -134,15 +140,15 @@ module add(a : aType, b : bType, c : outputType) {
 
     // This function will generate iterator names
     let rec genItrNames itrName index = 
-        if(index == len(broadcastedShape)){
+        if(index >= len(broadcastedShape)){
             []
         } else {
-            (itrName + "_" + toStr(index)) :> genItrNames <| itrName <| (index + 1)
+            (itrName + "_" + toStr(index)) :> genItrNames <| itrName <| (index + 1i)
         }
 
     // This function generates iterator list
     let rec filter index tensorShape itrNames = 
-        if(index == len(tensorShape)) {
+        if(index >= len(tensorShape)) {
             []
         } else {
             if(tensorShape[index] == 1) {
@@ -184,12 +190,12 @@ Let's see how our add layer is converted to runtime code. Let's give these param
 ```
 module(a : tensor<(1, 5, 100), f32>, b : tensor<(4, 2, 5, 100), f32>, c : tensor<(4, 2, 5, 100), f32>){
 for(itr_0i from 0i to 4i step 1i)  [] {
-    for(itr_1 from 0i to 2i step 1i)  [] {
-      for(itr_2 from 0i to 5i step 1i)  [] {
-        for(itr_3 from 0i to 100i step 1i)  [] {
-          let aV = load(a, [0i, itr_1, itr_2])
-          let bV = load(b, [itr_0i, itr_1, itr_2, itr_3])
-          store(c, [itr_0i, itr_1, itr_2, itr_3], (aV) + (bV))
+    for(itr_1i from 0i to 2i step 1i)  [] {
+      for(itr_2i from 0i to 5i step 1i)  [] {
+        for(itr_3i from 0i to 100i step 1i)  [] {
+          let aV = load(a, [0i, itr_1i, itr_2i])
+          let bV = load(b, [itr_0i, itr_1i, itr_2i, itr_3i])
+          store(c, [itr_0i, itr_1i, itr_2i, itr_3i], (aV) + (bV))
         }
       }
     }
@@ -198,5 +204,34 @@ for(itr_0i from 0i to 4i step 1i)  [] {
 ```
 
 How cool is that? Our compile time code has generated runtime code that has successfully calculated broadcasted shape (4, 2, 5, 100) and coverted it into nested loop. Note how access list was generated. They are correctly indexing our tensors, despite they are broadcasted. Now our runtime code will be further lowered down to binary by OptimaV2 tranlation units, and become executable binary that computer can run.
+
+What if dimension(or shape) of inputs change? Without power of Opto, we would have to rewrite the whole code, with modified number of loops and indices. If we have to do this every time, It will be very inefficient and time consuming. However, with opto this kind of task is piece of cake. We can simply give different inputs as template arguments, and our Opto code will generate appropriate code.
+
+Let's change shape of input 'a' like following
+
+* a : (3, 1, 2, 5, 100)
+* b : (4, 2, 5, 100)
+* c : (3, 4, 2, 5, 100)
+
+Following code is generated runtime code output from our Opto implementation.
+
+```
+module(a : tensor<(3, 1, 2, 5, 100), f32>, b : tensor<(4, 2, 5, 100), f32>, c : tensor<(3, 4, 2, 5, 100), f32>){
+for(itr_0i from 0i to 3i step 1i)  [] { // This loop has been added automatically by our Opto implementation
+    for(itr_1 from 0i to 4i step 1i)  [] {
+      for(itr_2 from 0i to 2i step 1i)  [] {
+        for(itr_3 from 0i to 5i step 1i)  [] {
+          for(itr_4 from 0i to 100i step 1i)  [] {
+            let aV = load(a, [itr_0i, 0i, itr_2, itr_3, itr_4]) // Observe how iterator indices has changed to follow the new shape
+            let bV = load(b, [itr_0i, itr_1, itr_2, itr_3])
+            store(c, [itr_0i, itr_1, itr_2, itr_3, itr_4], (aV) + (bV))
+          }
+        }
+      }
+    }
+  }
+}
+```
+We can observe our opto copmiler has successfully generated one more loop for added dimension.
 
 Now, you have gone through all tutorials I have prepared. I hope you enjoy programming in Opto. If you need more information, you can refer to our reference page in notion (This will be moved to another document in the near future), or contact me directly! (email : <jaewoo.kim@enerzai.com>).
