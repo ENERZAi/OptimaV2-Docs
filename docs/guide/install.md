@@ -23,7 +23,8 @@ Since OptimaV2 is on alpha testing phase, it is not yet open to public network y
         !!! note 
             arm64 is supposed to work, but we did not finish our tests on it
     * Operating system : Ubuntu linux 22.04
-        * Apple macos is also supposed to work, but we did not finish our tests on it
+    !!! note 
+        Apple macos is also supposed to work, but we did not finish our tests on it
     * At least 8GB or more ram is recommended
     
 === "OptimaV2 Runtime"
@@ -376,6 +377,7 @@ You can skip these if you only compile the model. But if you intend to run model
     ```
     OptimaV2 Runtime uses its own dependency management script called `install` and requirements may differ depends on what features you enabled.
     To install requirements properly, please refer table below.
+    
     | feature          | `install` packages     | `cmake` argument      | note                                                          |
     |------------------|------------------------|-----------------------|---------------------------------------------------------------|
     | Base requirement | `protobuf fmt`         | -                     |                                                               |
@@ -392,36 +394,44 @@ You can skip these if you only compile the model. But if you intend to run model
     # for more detail: python -m Scripts.install --help
     python -m Scripts.install <packages>
     ```
-    The `install` script will auto-detect compiler and build dependencies for OptimaV2 Runtime. If you want to force `install` script to use specific compiler, flags in below list can be used.
-    - `--ignore-clang` : Make `install` ignore Clang. This forces `install` to use GCC.
-    - `--use-clang=VERSION` : Use specific version of Clang. If not found, `install` will be failed.
-    - `--ignore-gcc` : Make `install` ignore GCC. This forces `install` to use Clang.
-    - `--use-gcc=VERSION` : Use specific version of GCC. If not found, `install` will be failed.
-    After run command above, the folder named `third_party` will be created.
-    Please check name of folder inside `third_party/installed` folder. Its name is your `triplet` that required below.
-    If you have problems running `install` script, please let us know. We`ll support you.
-    __Step 5.__ Configure cmake
-    ```bash
-    # example: cmake -DTHIRD_PARTY_ROOT="$(pwd)/third_party/installed/x64-linux" -DENABLE_NATIVE=ON -B build -S . -G Ninja
-    # default install path is: "${CMAKE_BUILD_DIR}/install". To override this, use "-DCMAKE_INSTALL_PREFIX=<install>".
-    cmake -DTHIRD_PARTY_ROOT="$(pwd)/third_party/installed/<triplet>" <cmake flags> -B build -S . -G Ninja
-    ```
-    If you want to force CMake using Clang, add this flag: `-DCMAKE_TOOLCHAIN_FILE=CMake/UseClang.cmake`. You also can force CMake using GCC via this flag: `-DCMAKE_TOOLCHAIN_FILE=CMake/UseGCC.cmake`.
-    These CMake script will auto-detect compiler and use it. If you want to use specific compiler version, use this flag for Clang: `-DTARGET_LLVM_VERSION=VERSION` and this flag for GCC: `-DTARGET_GCC_VERSION=VERSION`.
-    __Step 6.__ Build the runtime
-    ```bash
-    cmake --build build --target install
-    ```
-    __Step 7.__ Generate python wheel
-    This is extra step for who want to build python wheels.
-    To generate wheel, you should enable python binding feature(`-DENABLE_PYTHON=ON`) and build with target `install`.
-    !!! note
-        To generate python wheel, it is not allowed to change install prefix to usual install path like `/usr` or `/usr/local`. `setup.py` copies built libraries in install path during build wheel and does not check files whether are part of the runtime or not. It may cause undesired behavior. To prevent this problem, use other paths or do not change install path.
-    `setup.py` in OptimaV2 Runtime re-uses built libraries rather than re-build entire runtime again. To inform `setup.py` to where is library located, enviroment variables are used.
-    ``` bash
-    INSTALL_PATH=<install_path> pip wheel --wheel-dir wheel-out Bindings/Python
-    ```
-    You can see built wheel file located in `wheel-out` folder.
+
+The `install` script will auto-detect compiler and build dependencies for OptimaV2 Runtime. If you want to force `install` script to use specific compiler, flags in below list can be used.
+
+- `--ignore-clang` : Make `install` ignore Clang. This forces `install` to use GCC.
+- `--use-clang=VERSION` : Use specific version of Clang. If not found, `install` will be failed.
+- `--ignore-gcc` : Make `install` ignore GCC. This forces `install` to use Clang.
+- `--use-gcc=VERSION` : Use specific version of GCC. If not found, `install` will be failed.
+  
+After run command above, the folder named `third_party` will be created.
+Please check name of folder inside `third_party/installed` folder. Its name is your `triplet` that required below.
+If you have problems running `install` script, please let us know. We`ll support you.
+
+__Step 5.__ Configure cmake
+
+```bash
+# example: cmake -DTHIRD_PARTY_ROOT="$(pwd)/third_party/installed/x64-linux" -DENABLE_NATIVE=ON -B build -S . -G Ninja
+# default install path is: "${CMAKE_BUILD_DIR}/install". To override this, use "-DCMAKE_INSTALL_PREFIX=<install>".
+cmake -DTHIRD_PARTY_ROOT="$(pwd)/third_party/installed/<triplet>" <cmake flags> -B build -S . -G Ninja
+```
+If you want to force CMake using Clang, add this flag: `-DCMAKE_TOOLCHAIN_FILE=CMake/UseClang.cmake`. You also can force CMake using GCC via this flag: `-DCMAKE_TOOLCHAIN_FILE=CMake/UseGCC.cmake`.
+These CMake script will auto-detect compiler and use it. If you want to use specific compiler version, use this flag for Clang: `-DTARGET_LLVM_VERSION=VERSION` and this flag for GCC: `-DTARGET_GCC_VERSION=VERSION`.
+
+__Step 6.__ Build the runtime
+
+```bash
+cmake --build build --target install
+```
+__Step 7.__ Generate python wheel
+
+This is extra step for who want to build python wheels.
+To generate wheel, you should enable python binding feature(`-DENABLE_PYTHON=ON`) and build with target `install`.
+!!! note
+    To generate python wheel, it is not allowed to change install prefix to usual install path like `/usr` or `/usr/local`. `setup.py` copies built libraries in install path during build wheel and does not check files whether are part of the runtime or not. It may cause undesired behavior. To prevent this problem, use other paths or do not change install path.
+`setup.py` in OptimaV2 Runtime re-uses built libraries rather than re-build entire runtime again. To inform `setup.py` to where is library located, enviroment variables are used.
+``` bash
+INSTALL_PATH=<install_path> pip wheel --wheel-dir wheel-out Bindings/Python
+```
+You can see built wheel file located in `wheel-out` folder.
 
 ## Troubleshooting
 1. Building MLIR fails with compiler or linker errors
