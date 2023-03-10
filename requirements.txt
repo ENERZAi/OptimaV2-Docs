@@ -1,3 +1,4 @@
+sphinx
 mkdocs
 mkdocs-section-index
 pymdown-extensions
