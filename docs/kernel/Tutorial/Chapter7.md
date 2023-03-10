@@ -254,4 +254,17 @@ for(itr_0i from 0i to 3i step 1i)  [] { // This loop has been added automaticall
 ```
 We can observe our opto copmiler has successfully generated one more loop for added dimension.
 
+In the below figure, you can observe which part of our compile-time code is generating specific part of runtime output. This will help you to recap how compile time code generates runtime code. 
+
+__Compile time add__
+![add_example](../../img/add_example_highlighted.png)
+
+
+__Generated runtime output__
+![add_example_rt](../../img/add_example_rt_highlighted.png)
+
+Code blocks highlighted in yellow generates indices used to load and store from tensors while code blocks highlighted in blue generates for loops.
+Lastly, code blocks highlighted in green indicates runtime types given as static template arguments.
+It is best to follow the code again and see how each part of compile time code generates runtime code.
+
 Now, you have gone through all tutorials I have prepared. I hope you enjoy programming in Opto. If you need more information, you can refer to our reference page in notion (This will be moved to another document in the near future), or contact me directly! (email : <jaewoo.kim@enerzai.com>).

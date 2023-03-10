@@ -230,7 +230,7 @@ After invoking this function,
 ### Notes on Representative Data
 The format of representative dataset is as follows
 ```
-List[Tuple[torch.Tensor]]]
+List[Tuple[torch.Tensor]]
 ```
 The outermost list represents the batch, and the inner tuple represents each input for the model.
 

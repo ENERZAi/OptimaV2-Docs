@@ -138,3 +138,11 @@ import opto
 layer = opto.OptoLayerInstance("fibonacci", "fibonacci.opto", "fibonacci_rt.opto")
 layer.compile(1) # Writes result to fibonacci_rt.opto
 ```
+ 
+ You will see following output on fibonacci_rt.opto
+
+```
+module recursion_example(){
+    55
+}
+```
