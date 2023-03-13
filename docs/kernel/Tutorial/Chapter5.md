@@ -140,7 +140,7 @@ Just like normal runtime for loops we can omit '[]' bracket or leave it empty if
 
 ```
 // rt_for without iterator variables
-rt_for(iteratorNames : loops)} {
+rt_for(iteratorNames : loops) {
         // Body function
         // Note rt_for is the compile time expression. Therefore, body has to be compile time expression
         !{
@@ -159,7 +159,7 @@ Here is the description of each section in rt_for expression.
     }
 
 * itr_variable_list : list of iteration variables to be used in runtime. Given as list of string. Beginning of the list indicates outermost loop.
-* itr_range_list : list of iteration variables used for each loop level. beginning  of the list indicates outermost loop. Given as list of list with 3 values indicating [begin index, end index, step size].
+* itr_range_list : list of iteration variables used for each loop level. Given as list of list with 3 values indicating [begin index, end index, step size]. Beginning  of the list indicates outermost loop.
 * update_value : name of the value to be updated.
 * initial_value : value to initialize update_value in the first loop.
 
@@ -170,10 +170,10 @@ We can use if statement in runtime just like what we did in copmile time. Howeve
 
 The key differences are:
 
-1. Since there is no 'none' type in runtime, we must return same type in both if and else block or return nothing from neither of the blocks
-2. Return type must be number type
-        * Note : this restriction will be removed after
-3. 'else' block is omittable only if 'if' block returns nothing
+1. Since there is no 'none' type in runtime, we must return same type in both if and else block or return nothing from neither of the blocks.
+2. Return type must be number type.
+    * Note : this restriction will be removed later on.
+3. 'else' block is omittable only if 'if' block returns nothing.
 
 ```
     let returnVal  = if(cast</f32/>(${t[0]}) + 1.0f > cast</f32/>(${t[1]} - 1i)){
