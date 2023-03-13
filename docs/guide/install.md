@@ -1,6 +1,6 @@
 # Installation guide
 
-version : 0.1.0 alpha
+__version__ : 0.1.0 alpha
 
 This document will guide you for installing the OptimaV2 in your systemm and OptimaV2 runtime on your target.
 
@@ -135,8 +135,12 @@ Since OptimaV2 is on alpha testing phase, it is not yet open to public network y
 
     **Step 5:** Install OptimaV2 runtime (Recommended)
     
-    Refer to **Installing OptimaV2 Runtime** in the next section for more details
+    Refer to **Installing OptimaV2 Runtime** in the next section for more detail
 
+    !!! warning
+        If you install with pip, some layers working with torch-mlir would not work. As torch-mlir will be deprecated and replaced with Opto based kernels, This issue will be fixed as soon as possible.
+
+        __Currently supported kernels with Opto :__ add, maxpool2d, conv2d (or depthwise conv2d), interpolate, relu, prelu
 
 === "Building from source (Full)"
 
@@ -324,6 +328,7 @@ You can skip these if you only compile the model. But if you intend to run model
 === "Build from source (full)"
     You can build your own version of OptimaV2 Runtime from source.
     First, you needs to install requirements for OptimaV2 Runtime. Requirements are listed below:
+    
     - Ubuntu 18.04 or later. (Ubuntu 20.04 recommended)
     - Python 3.6 or above. (Python 3.10 recommended)
     - Compiler toolchain which can compile C++ 17 sources

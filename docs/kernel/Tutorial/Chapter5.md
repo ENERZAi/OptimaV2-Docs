@@ -2,7 +2,7 @@
 
 We have now come through series of features that compile time expression has. But as I mentioned earlier, the primary purpose of compile time expression is generating runtime expressions. Runtime expressions will be translated into executable binary after lowering and applying some optimizations. To do so, compile time expression can treat runtime expression as a 'value'. In this chapter, I will show you how you can write runtime expression, and use it in compile time to generate appropriate output expression.
 
-### Defining runtime expression
+## Defining runtime expression
 In compile time expression, we have seen runtime expression can be described as follows. (If you don't remember, go back to Chapter 1)
 ```
 let rtExpr = !{<some runtime expression>}
@@ -40,7 +40,7 @@ for(i from 0i to 10i step 1i){
 }
 ```
 
-#### Runtime tensor
+## Runtime tensor
 
 1. __Allocating a tensor__
    
@@ -62,7 +62,7 @@ for(i from 0i to 10i step 1i){
     Index list is list of indices used to access a value in the tensor.
 
 
-#### For loop
+## For loop
    
 We can use for loops in runtime code. However its form is little different with what we saw in python or C.
 
@@ -98,7 +98,7 @@ We can use iterator variables when we need to use the result of the body express
 
 If we don't require any iterator variables, we can omit bracket '[]', and for loop won't return any values.
 
-#### Automatically generating nested for loops
+## Automatically generating nested for loops
     
 In some cases, we might not know the number of required nested for loops. This case frequently happens if we don't know the dimension of the given tensor. Supppose we have to add two tensors one by one, and we need to broadcast between them. We will have to make nested for loops to do so, but number of loops depends on the dimension of input tensors. In Opto, answer to this problem is 'rt_for', which is compile time expression that will generated nested runtime for loops.
 Here is the simple use case.
@@ -164,7 +164,7 @@ Here is the description of each section in rt_for expression.
 * initial_value : value to initialize update_value in the first loop.
 
 
-### Runtime if statements
+## Runtime if statements
 
 We can use if statement in runtime just like what we did in copmile time. However, it is important to note some differences between these two cases.
 

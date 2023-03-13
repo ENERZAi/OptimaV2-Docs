@@ -2,7 +2,7 @@
 
 In Opto, we provide some helper functions that can be useful for writing kernels. Some of them are builtin inside the language itself, and some of them are interpreted as library function (which means it is imported from another opto implementation file). Language builtin functions are called using () bracket. Such as 'func(args..)' and library functions are called using '<|' operator just like other opto functions. We can use these to enhance readability and reduce boilerplate codes.
 
-### Language builtin helper functions 
+## Language builtin helper functions 
 
 * **print** (expression)
     * Prints expression to the console output
@@ -34,7 +34,7 @@ In Opto, we provide some helper functions that can be useful for writing kernels
     * Gets shape of the runtime tensor type
     * Returns idx type
 
-### Language builtin helper functions (Compile time only)
+## Language builtin helper functions (Compile time only)
 * **fold** (state : `T`, iterator : `list<U>`, function : `T -> U -> T` ) 
     * type : `T -> list<'U'> -> (T -> U -> T) -> T`
     * Applies a function to each element of the collection, threading an accumulator argument through the computation. function will be applied from the beginning of the list, and keep updating the state value. Final state will be returned as output.
