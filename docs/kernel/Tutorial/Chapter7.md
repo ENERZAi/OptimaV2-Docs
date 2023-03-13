@@ -217,7 +217,7 @@ How cool is that? Our compile time code has generated runtime code that has succ
 
 What if dimension(or shape) of inputs change? Without power of Opto, we would have to rewrite the whole code, with modified number of loops and indices. If we have to do this every time, It will be very inefficient and time consuming. However, with opto this kind of task is piece of cake. We can simply give different inputs as template arguments, and our Opto code will generate appropriate code.
 
-Let's change shape of input 'a' like following
+Let's change shape of input 'a' like following:
 
 * a : (3, 1, 2, 5, 100)
 * b : (4, 2, 5, 100)
