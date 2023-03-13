@@ -2,13 +2,21 @@ site_name: OptimaV2 Document
 site_url: "https://example.enerzai.com/optimav2"
 repo_url: "https://github.com/ENERZAi/OptimaV2-Docs"
 nav:
-  - About: about.md
+  - Home: index.md
   - "User Guide":
     - "Install": "guide/install.md"
     - "Convert": "guide/convert.md"
     - "Inference": "guide/inference.md"
   - "Opto Language":
-    - "Builtin Functions": "kernel/builtin.md"
+    - "Tutorial" : 
+      - "How to read this tutorial" : "kernel/Tutorial/HowToRead.md"
+      - "Chapter1" : "kernel/Tutorial/Chapter1.md"
+      - "Chapter2" : "kernel/Tutorial/Chapter2.md"
+      - "Chapter3" : "kernel/Tutorial/Chapter3.md"
+      - "Chapter4" : "kernel/Tutorial/Chapter4.md"
+      - "Chapter5" : "kernel/Tutorial/Chapter5.md"
+      - "Chapter6" : "kernel/Tutorial/Chapter6.md"
+      - "Chapter7" : "kernel/Tutorial/Chapter7.md"
   - "Runtime API Reference":
     - "C++":
       - "runtime/cpp/index.md"
