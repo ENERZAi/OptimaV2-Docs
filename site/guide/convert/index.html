@@ -1,0 +1,2339 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://example.enerzai.com/optimav2/guide/convert/">
+      
+      
+        <link rel="prev" href="../install/">
+      
+      
+        <link rel="next" href="../inference/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
+    
+    
+      
+        <title>Convert - OptimaV2 Document</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.402914a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-to-convert-your-ml-model-and-compile-it" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="OptimaV2 Document" class="md-header__button md-logo" aria-label="OptimaV2 Document" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OptimaV2 Document
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Convert
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ENERZAi/OptimaV2-Docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OptimaV2 Document" class="md-nav__button md-logo" aria-label="OptimaV2 Document" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    OptimaV2 Document
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ENERZAi/OptimaV2-Docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          User Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/" class="md-nav__link">
+        Install
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Convert
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Convert
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#convert-ml-model-to-networkx-model" class="md-nav__link">
+    Convert ML model to networkx model
+  </a>
+  
+    <nav class="md-nav" aria-label="Convert ML model to networkx model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-gpickle-file-for-networkx-model" class="md-nav__link">
+    Create gpickle file for networkx model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-json-file-that-maps-operations-to-specific-devices" class="md-nav__link">
+    Create json file that maps operations to specific devices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graph-visualization" class="md-nav__link">
+    Graph visualization
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compiling-into-binary" class="md-nav__link">
+    Compiling into binary
+  </a>
+  
+    <nav class="md-nav" aria-label="Compiling into binary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notes-on-representative-data" class="md-nav__link">
+    Notes on Representative Data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inference/" class="md-nav__link">
+        Inference
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Opto Language
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Opto Language
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+          Tutorial
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorial
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kernel/Tutorial/HowToRead/" class="md-nav__link">
+        How to read this tutorial
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kernel/Tutorial/Chapter1/" class="md-nav__link">
+        Chapter1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kernel/Tutorial/Chapter2/" class="md-nav__link">
+        Chapter2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kernel/Tutorial/Chapter3/" class="md-nav__link">
+        Chapter3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kernel/Tutorial/Chapter4/" class="md-nav__link">
+        Chapter4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kernel/Tutorial/Chapter5/" class="md-nav__link">
+        Chapter5
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kernel/Tutorial/Chapter6/" class="md-nav__link">
+        Chapter6
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../kernel/Tutorial/Chapter7/" class="md-nav__link">
+        Chapter7
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Runtime API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Runtime API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../runtime/cpp/">C++</a>
+          
+            <label for="__nav_4_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          C++
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_1" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../runtime/cpp/classes/">Classes</a>
+          
+            <label for="__nav_4_1_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Classes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/classes/buffer_holder/" class="md-nav__link">
+        BufferHolder
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/classes/context/" class="md-nav__link">
+        Context
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/classes/infer_request/" class="md-nav__link">
+        InferRequest
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/classes/model/" class="md-nav__link">
+        Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/classes/shape/" class="md-nav__link">
+        Shape
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/classes/tensor/" class="md-nav__link">
+        Tensor
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_2" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../runtime/cpp/enums/">Enumerations</a>
+          
+            <label for="__nav_4_1_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Enumerations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/enums/device_kind/" class="md-nav__link">
+        DeviceKind
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/enums/element_type/" class="md-nav__link">
+        ElementType
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/enums/framework_kind/" class="md-nav__link">
+        FrameworkKind
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/enums/log_level/" class="md-nav__link">
+        LogLevel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/enums/profile_kind/" class="md-nav__link">
+        ProfileKind
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_3" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../runtime/cpp/exceptions/">Exceptions</a>
+          
+            <label for="__nav_4_1_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Exceptions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/exceptions/exception/" class="md-nav__link">
+        Exception
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/exceptions/backend/" class="md-nav__link">
+        BackendException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/exceptions/infer/" class="md-nav__link">
+        InferException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/exceptions/initialization_failed/" class="md-nav__link">
+        InitalizationFailedException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/exceptions/invalid_argument/" class="md-nav__link">
+        InvalidArgumentException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/exceptions/invalid_extension/" class="md-nav__link">
+        InvalidExtensionException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/exceptions/invalid_model/" class="md-nav__link">
+        InvalidModelException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/exceptions/invalid_operation/" class="md-nav__link">
+        InvalidOperationException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/exceptions/out_of_resource/" class="md-nav__link">
+        OutOfResourceException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/exceptions/unsupported_model/" class="md-nav__link">
+        UnsupportedModelException
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_4" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../runtime/cpp/functions/">Functions</a>
+          
+            <label for="__nav_4_1_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          Functions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/functions/enumerate/" class="md-nav__link">
+        enumerate
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/functions/get_cause/" class="md-nav__link">
+        getCause
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/functions/get_size_of_element/" class="md-nav__link">
+        getSizeOfElement
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/functions/is_device_cpu/" class="md-nav__link">
+        isDeviceCPU
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/functions/is_device_gpu/" class="md-nav__link">
+        isDeviceGPU
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/functions/is_device_npu/" class="md-nav__link">
+        isDeviceNPU
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/functions/range/" class="md-nav__link">
+        range
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/functions/throw_format/" class="md-nav__link">
+        throwFormat
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/functions/to_string/" class="md-nav__link">
+        toString
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_5" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../runtime/cpp/structs/">Structures</a>
+          
+            <label for="__nav_4_1_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_5">
+          <span class="md-nav__icon md-icon"></span>
+          Structures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/structs/context_options/" class="md-nav__link">
+        ContextOptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/structs/device_info/" class="md-nav__link">
+        DeviceInfo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/structs/profile_data/" class="md-nav__link">
+        ProfileData
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/structs/tensor_info/" class="md-nav__link">
+        TensorInfo
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_6" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../runtime/cpp/typedefs/">Typedefs</a>
+          
+            <label for="__nav_4_1_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_6">
+          <span class="md-nav__icon md-icon"></span>
+          Typedefs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/typedefs/infer_request_callback/" class="md-nav__link">
+        InferRequestCallback
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cpp/typedefs/version_tuple/" class="md-nav__link">
+        VersionTuple
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../runtime/python/">Python</a>
+          
+            <label for="__nav_4_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../runtime/python/classes/">Classes</a>
+          
+            <label for="__nav_4_2_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Classes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/classes/context/" class="md-nav__link">
+        Context
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/classes/device_info/" class="md-nav__link">
+        DeviceInfo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/classes/infer_request/" class="md-nav__link">
+        InferRequest
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/classes/model/" class="md-nav__link">
+        Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/classes/profile_data/" class="md-nav__link">
+        ProfileData
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/classes/tensor/" class="md-nav__link">
+        Tensor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/classes/tensor_info/" class="md-nav__link">
+        TensorInfo
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../runtime/python/enums/">Enumerations</a>
+          
+            <label for="__nav_4_2_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Enumerations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/enums/device_kind/" class="md-nav__link">
+        DeviceKind
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/enums/element_type/" class="md-nav__link">
+        ElementType
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/enums/framework_kind/" class="md-nav__link">
+        FrameworkKind
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/enums/log_level/" class="md-nav__link">
+        LogLevel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/enums/profile_kind/" class="md-nav__link">
+        ProfileKind
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../runtime/python/exceptions/">Exceptions</a>
+          
+            <label for="__nav_4_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Exceptions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/exceptions/exception/" class="md-nav__link">
+        Exception
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/exceptions/backend/" class="md-nav__link">
+        BackendException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/exceptions/infer/" class="md-nav__link">
+        InferException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/exceptions/initialization_failed/" class="md-nav__link">
+        InitalizationFailedException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/exceptions/invalid_argument/" class="md-nav__link">
+        InvalidArgumentException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/exceptions/invalid_extension/" class="md-nav__link">
+        InvalidExtensionException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/exceptions/invalid_model/" class="md-nav__link">
+        InvalidModelException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/exceptions/invalid_operation/" class="md-nav__link">
+        InvalidOperationException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/exceptions/out_of_resource/" class="md-nav__link">
+        OutOfResourceException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/exceptions/unsupported_model/" class="md-nav__link">
+        UnsupportedModelException
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_4" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../runtime/python/functions/">Functions</a>
+          
+            <label for="__nav_4_2_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Functions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/functions/get_element_size/" class="md-nav__link">
+        get_element_size
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/functions/is_device_cpu/" class="md-nav__link">
+        is_device_cpu
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/functions/is_device_gpu/" class="md-nav__link">
+        is_device_gpu
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/python/functions/is_device_npu/" class="md-nav__link">
+        is_device_npu
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../runtime/cross_build/" class="md-nav__link">
+        Cross Compile The Runtime
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#convert-ml-model-to-networkx-model" class="md-nav__link">
+    Convert ML model to networkx model
+  </a>
+  
+    <nav class="md-nav" aria-label="Convert ML model to networkx model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-gpickle-file-for-networkx-model" class="md-nav__link">
+    Create gpickle file for networkx model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-json-file-that-maps-operations-to-specific-devices" class="md-nav__link">
+    Create json file that maps operations to specific devices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graph-visualization" class="md-nav__link">
+    Graph visualization
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compiling-into-binary" class="md-nav__link">
+    Compiling into binary
+  </a>
+  
+    <nav class="md-nav" aria-label="Compiling into binary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notes-on-representative-data" class="md-nav__link">
+    Notes on Representative Data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="how-to-convert-your-ml-model-and-compile-it">How to convert your ML model and compile it<a class="headerlink" href="#how-to-convert-your-ml-model-and-compile-it" title="Permanent link">&para;</a></h1>
+<p>The document describes the steps to convert a machine learning (ML) model into a dynamic library that can be used for deployment on a target device. The process involves two steps:</p>
+<ol>
+<li>
+<p>Converting the ML model (Pytorch, for now) into a networkx model and allocating each operation into one or multiple devices</p>
+<ol>
+<li>
+<p>Provides a machine learning model (implemented using the PyTorch framework) to convert into a graph representation using the <em>torch2nx</em> library. The output is then saved in the "gpickle" format.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> </p>
+</li>
+<li>
+<p>Creates a "json file" that maps operations within the graph representation of the model to specific devices, such as GPUs or CPUs. This information can be used to optimize the execution of the model on different devices.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Compiling into binary</p>
+<ol>
+<li>initialize graph module</li>
+<li>allocate kernel</li>
+<li>kernel compile</li>
+<li>graph split</li>
+<li>extract representative dataset</li>
+<li>export to runtime</li>
+<li>convert onnx</li>
+</ol>
+</li>
+</ol>
+<h2 id="convert-ml-model-to-networkx-model">Convert ML model to networkx model<a class="headerlink" href="#convert-ml-model-to-networkx-model" title="Permanent link">&para;</a></h2>
+<p>You can put togehter following code snippets to run it. In below, each part of the code is explained in detail.</p>
+<h3 id="create-gpickle-file-for-networkx-model">Create gpickle file for networkx model<a class="headerlink" href="#create-gpickle-file-for-networkx-model" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">zaiConverter</span>
+<span class="kn">from</span> <span class="nn">zaiConverter.pytorch_module</span> <span class="kn">import</span> <span class="n">converter</span>
+
+<span class="k">class</span> <span class="nc">SampleModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SampleModel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">out1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">out2</span> <span class="o">=</span> <span class="n">out1</span> <span class="o">+</span> <span class="n">y</span>
+        <span class="k">return</span> <span class="n">out2</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">SampleModel</span><span class="p">()</span>
+<span class="n">sample_input_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">)]</span> <span class="c1"># shape of each arguments matches with that of tensor x and tensor y</span>
+<span class="n">need_gpu</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># or False</span>
+<span class="n">gpickle_save_filename</span> <span class="o">=</span> <span class="s2">&quot;&lt;SOME PATH WHERE GPICKLE WILL BE SAVED&gt;&quot;</span>
+
+<span class="c1"># Convert model to Networkx specification</span>
+<span class="n">graph_converter</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">Torch2GraphConverter</span><span class="p">(</span><span class="n">tf_flip</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">torch_flip</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">nx_graph</span> <span class="o">=</span> <span class="n">graph_converter</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">fake_torch_data</span><span class="o">=</span><span class="n">sample_input_list</span><span class="p">,</span> <span class="n">gpu</span><span class="o">=</span><span class="n">need_gpu</span>
+<span class="p">)</span>
+<span class="n">graph_converter</span><span class="o">.</span><span class="n">reset_module</span><span class="p">()</span>
+<span class="n">graph_converter</span><span class="o">.</span><span class="n">export_to_gpickle</span><span class="p">(</span><span class="n">gpickle_save_filename</span><span class="p">,</span> <span class="n">nx_graph</span><span class="p">)</span>
+</code></pre></div>
+<p>User should provide three inputs</p>
+<p><code>model</code> : a torch.nn.Module instance</p>
+<p><code>fake_torch_data</code> : list of torch tensor(s) of which the order must match the order of arguments in the forward method of the provided model.</p>
+<p><code>gpu</code> : boolean to indicate if you use gpu or not</p>
+<p>Then, you get graph gpickle file saved in "gpickle_save_filename"</p>
+<h3 id="create-json-file-that-maps-operations-to-specific-devices">Create json file that maps operations to specific devices<a class="headerlink" href="#create-json-file-that-maps-operations-to-specific-devices" title="Permanent link">&para;</a></h3>
+<p>The device allocation JSON file indicates which device (processor) is assigned to each operation in the graph. </p>
+<p>For example, the above "SampleModel" may assign "add" into CPU and "convolution" into GPU.</p>
+<p>The required JSON file has key-value pairs, where the key is the operation name and the value is the allocated device. The supported devices are <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>:</p>
+<ul>
+<li><code>X86</code> </li>
+<li><code>X64</code> (Tested)</li>
+<li><code>ARM</code></li>
+<li><code>ARM64</code> (Tested)</li>
+<li><code>NVIDIA</code></li>
+<li><code>AMDGPU</code></li>
+<li><code>INTELGPU</code></li>
+<li><code>MALI</code></li>
+<li><code>ADRENO</code></li>
+<li><code>HEXAGON</code> (Tested)</li>
+<li><code>MYRIAD</code></li>
+<li><code>ARA1</code></li>
+<li><code>TPU</code></li>
+<li><code>CV22</code></li>
+</ul>
+<p>Torch2nx provides user to create a template JSON with a given device.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="c1"># Create json file #</span>
+<span class="n">model_json_filename</span><span class="o">=</span><span class="s2">&quot;&lt;SOME PATH WHERE JSON WILL BE SAVED&gt;&quot;</span>
+<span class="n">default_device</span><span class="o">=</span><span class="s2">&quot;&lt;SOME DEVICE&gt;&quot;</span> <span class="c1"># You must select among above candidates</span>
+
+<span class="n">converter</span><span class="o">.</span><span class="n">Torch2GraphConverter</span><span class="o">.</span><span class="n">get_onedevice_allocator</span><span class="p">(</span><span class="n">model_json_filename</span><span class="p">,</span> <span class="n">default_device</span><span class="p">,</span> <span class="n">gpickle_save_filename</span><span class="p">)</span>
+</code></pre></div>
+<p>Then, you will get a JSON file like this:
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;conv2d_2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;X64:0&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;add_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;X64:0&quot;</span><span class="p">}</span>
+</code></pre></div></p>
+<p>You can customize this JSON file as you wish, for example, the following JSON file indicates that the convolution operation runs on hexagon and then adds tensors on an x86-64 architecture processor:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;conv2d_2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HEXAGON:0&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;add_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;X64:1&quot;</span><span class="p">}</span>
+</code></pre></div>
+<h3 id="graph-visualization">Graph visualization<a class="headerlink" href="#graph-visualization" title="Permanent link">&para;</a></h3>
+<p>Device allocation becomes much easier with a visual representation of the graph. To visualize the graph, you need to install pygraphviz.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># (Linux)</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>graphviz<span class="w"> </span>graphviz-dev
+pip<span class="w"> </span>install<span class="w"> </span>pygraphviz
+<span class="c1"># (For other OS, please refer to https://pygraphviz.github.io/documentation/stable/install.html)</span>
+</code></pre></div>
+<p>The following code provides user an image that illustrates the graph with nodes of the same color representing the same device.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">visual_graph_filename</span> <span class="o">=</span> <span class="s2">&quot;&lt;VISUALIZED GRAPH FILENAME&gt;&quot;</span>
+
+<span class="n">converter</span><span class="o">.</span><span class="n">Torch2GraphConverter</span><span class="o">.</span><span class="n">plot_network</span><span class="p">(</span><span class="n">visual_graph_filename</span><span class="p">,</span> <span class="n">gpickle_save_filename</span><span class="p">,</span> <span class="n">model_json_filename</span><span class="p">,</span> <span class="n">figsizenum</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+<p>By controlling the <code>figsizenum</code>, you can adjust the size of the image.</p>
+<p><img alt="Visualized Graph" src="../../img/samplemodel.png" /></p>
+<h2 id="compiling-into-binary">Compiling into binary<a class="headerlink" href="#compiling-into-binary" title="Permanent link">&para;</a></h2>
+<hr />
+<p>The OptimaV2 Manager is an entrypoint class to the entire OptimaV2 optimization and compilation process.
+The user only needs to provide the following information.</p>
+<ol>
+<li>The name of the model.</li>
+<li>List of devices to use. Provide as list of optimav2.devices.DeviceEnum enumeration.</li>
+<li>Gpickle file extracted from torch2nx. Explained above.</li>
+<li>Directory of where to dump compilation outputs.</li>
+<li>JSON file that denotes where each kernel is allocated to each device. Explained above.</li>
+<li>(Optional) Representative Dataset if SNPE is used.</li>
+</ol>
+<p>Invoking the optimize method of the manager class will run the entire OptimaV2 optimization process. Parameters are to be given like below.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">module_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="c1"># Name of module</span>
+    <span class="n">device_info</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">devices</span><span class="o">.</span><span class="n">DeviceEnum</span><span class="p">],</span> <span class="c1"># List of all devices to be considered.</span>
+    <span class="n">model_graph_or_gpickle</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">DiGraph</span><span class="p">],</span> <span class="c1"># Path of model gpickle extracted from torch2nx.</span>
+    <span class="n">output_folder_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="c1"># Path of output directory compilation resutls will be exported to.</span>
+    <span class="n">device_alloc_per_kernel_json_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>  <span class="c1"># JSON file containing operation to device mapping.</span>
+    <span class="n">sample_inputs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="c1"># Optional Representative Dataset</span>
+    <span class="n">need_gpu</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="c1"># (Float16 only) Pass &quot;True&quot; when float16 models are converted.</span>
+<span class="p">):</span>
+</code></pre></div>
+<p>Sample Usage of Manager class
+<div class="highlight"><pre><span></span><code><span class="c1"># Import Manager from optima_v2</span>
+<span class="kn">from</span> <span class="nn">optima_v2.manager</span> <span class="kn">import</span> <span class="n">manager</span>
+<span class="kn">from</span> <span class="nn">optima_v2.devices</span> <span class="kn">import</span> <span class="n">DeviceEnum</span>
+
+<span class="c1"># ... </span>
+<span class="n">manager_instance</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">Manager</span><span class="p">()</span>
+<span class="n">manager_instance</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span>
+    <span class="s2">&quot;MediapipeNet&quot;</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="n">DeviceEnum</span><span class="o">.</span><span class="n">DEVICE_KIND_HEXAGON</span><span class="p">,</span>
+        <span class="n">DeviceEnum</span><span class="o">.</span><span class="n">DEVICE_KIND_X64</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;~/models/mediapipe/mediapipe.gpickle&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;~/outputs/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;~/models/mediapipe/mediapipe_allocation.json&quot;</span><span class="p">,</span>
+    <span class="n">representative_data</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></p>
+<p>After invoking this function,</p>
+<p><strong>Expected Output Tree</strong>
+<div class="highlight"><pre><span></span><code>~/outputs/MediapipeNet/
+    |- model.meta (metadata)
+    |- Subgraph_0\
+    |- Subgraph_1\
+    |- ...
+    |- Subgraph_i(OpenVino)\
+    |       |- subgraph_i.blob
+    |
+    |- Subgraph_j(SNPE)\
+    |       |- subgraph_j.dlc  
+    |
+    |- Subgraph_k(LLVM)\
+    |       |- &lt;subgraph_name&gt;.meta
+    |       |- &lt;kernel_1_name&gt;.so
+    |       |- &lt;kernel_2_name&gt;.so
+    |       |- ......
+    |
+    |- Subgraph_o(SPIRV)\
+            |- &lt;subgraph_name&gt;.meta
+            |- &lt;kernel_1_name&gt;.spv
+            |- &lt;kernel_2_name&gt;.spv
+            |- ......
+</code></pre></div></p>
+<h3 id="notes-on-representative-data">Notes on Representative Data<a class="headerlink" href="#notes-on-representative-data" title="Permanent link">&para;</a></h3>
+<p>The format of representative dataset is as follows
+<div class="highlight"><pre><span></span><code>List[Tuple[torch.Tensor]]
+</code></pre></div>
+The outermost list represents the batch, and the inner tuple represents each input for the model.</p>
+<p>The example below illustrates how representative data is collected.</p>
+<div class="highlight"><pre><span></span><code>    <span class="n">repr_data</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">input_tuple</span> <span class="ow">in</span> <span class="n">some_dataset_iterator</span><span class="p">:</span>
+        <span class="c1"># get input_tuple</span>
+
+        <span class="n">repr_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">input_tuple</span><span class="p">)</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">*</span><span class="n">input_tuple</span><span class="p">)</span>
+
+        <span class="c1"># Sample of how this input will </span>
+
+    <span class="c1"># ...</span>
+
+    <span class="n">manager_instance</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">Manager</span><span class="p">()</span>
+    <span class="n">manager_instance</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span>
+        <span class="s2">&quot;MediapipeNet&quot;</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="n">devices</span><span class="o">.</span><span class="n">DeviceEnum</span><span class="o">.</span><span class="n">DEVICE_KIND_HEXAGON</span><span class="p">,</span>
+            <span class="n">devices</span><span class="o">.</span><span class="n">DeviceEnum</span><span class="o">.</span><span class="n">DEVICE_KIND_X64</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;~/models/mediapipe/mediapipe.gpickle&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;~/outputs/&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;~/models/mediapipe/mediapipe_allocation.json&quot;</span><span class="p">,</span>
+        <span class="n">repr_data</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>The "gpickle" format is a serialization format that is commonly used in Python to store networkx graphs.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>It depends on a runtime specification&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.tabs.link"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b78d2936.min.js"></script>
+      
+    
+  </body>
+</html>
