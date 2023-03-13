@@ -1,0 +1,2239 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://example.enerzai.com/optimav2/kernel/Tutorial/Chapter5/">
+      
+      
+        <link rel="prev" href="../Chapter4/">
+      
+      
+        <link rel="next" href="../Chapter6/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
+    
+    
+      
+        <title>Chapter5 - OptimaV2 Document</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.402914a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-5-runtime-expressions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="OptimaV2 Document" class="md-header__button md-logo" aria-label="OptimaV2 Document" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OptimaV2 Document
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter5
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ENERZAi/OptimaV2-Docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="OptimaV2 Document" class="md-nav__button md-logo" aria-label="OptimaV2 Document" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    OptimaV2 Document
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ENERZAi/OptimaV2-Docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          User Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guide/install/" class="md-nav__link">
+        Install
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guide/convert/" class="md-nav__link">
+        Convert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guide/inference/" class="md-nav__link">
+        Inference
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Opto Language
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Opto Language
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+          Tutorial
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorial
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HowToRead/" class="md-nav__link">
+        How to read this tutorial
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapter1/" class="md-nav__link">
+        Chapter1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapter2/" class="md-nav__link">
+        Chapter2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapter3/" class="md-nav__link">
+        Chapter3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapter4/" class="md-nav__link">
+        Chapter4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Chapter5
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Chapter5
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#defining-runtime-expression" class="md-nav__link">
+    Defining runtime expression
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runtime-tensor" class="md-nav__link">
+    Runtime tensor
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for-loop" class="md-nav__link">
+    For loop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automatically-generating-nested-for-loops" class="md-nav__link">
+    Automatically generating nested for loops
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runtime-if-statements" class="md-nav__link">
+    Runtime if statements
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapter6/" class="md-nav__link">
+        Chapter6
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapter7/" class="md-nav__link">
+        Chapter7
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Runtime API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Runtime API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/cpp/">C++</a>
+          
+            <label for="__nav_4_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          C++
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_1" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/cpp/classes/">Classes</a>
+          
+            <label for="__nav_4_1_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Classes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/classes/buffer_holder/" class="md-nav__link">
+        BufferHolder
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/classes/context/" class="md-nav__link">
+        Context
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/classes/infer_request/" class="md-nav__link">
+        InferRequest
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/classes/model/" class="md-nav__link">
+        Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/classes/shape/" class="md-nav__link">
+        Shape
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/classes/tensor/" class="md-nav__link">
+        Tensor
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_2" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/cpp/enums/">Enumerations</a>
+          
+            <label for="__nav_4_1_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Enumerations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/enums/device_kind/" class="md-nav__link">
+        DeviceKind
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/enums/element_type/" class="md-nav__link">
+        ElementType
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/enums/framework_kind/" class="md-nav__link">
+        FrameworkKind
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/enums/log_level/" class="md-nav__link">
+        LogLevel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/enums/profile_kind/" class="md-nav__link">
+        ProfileKind
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_3" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/cpp/exceptions/">Exceptions</a>
+          
+            <label for="__nav_4_1_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Exceptions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/exception/" class="md-nav__link">
+        Exception
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/backend/" class="md-nav__link">
+        BackendException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/infer/" class="md-nav__link">
+        InferException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/initialization_failed/" class="md-nav__link">
+        InitalizationFailedException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/invalid_argument/" class="md-nav__link">
+        InvalidArgumentException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/invalid_extension/" class="md-nav__link">
+        InvalidExtensionException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/invalid_model/" class="md-nav__link">
+        InvalidModelException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/invalid_operation/" class="md-nav__link">
+        InvalidOperationException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/out_of_resource/" class="md-nav__link">
+        OutOfResourceException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/unsupported_model/" class="md-nav__link">
+        UnsupportedModelException
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_4" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/cpp/functions/">Functions</a>
+          
+            <label for="__nav_4_1_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          Functions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/enumerate/" class="md-nav__link">
+        enumerate
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/get_cause/" class="md-nav__link">
+        getCause
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/get_size_of_element/" class="md-nav__link">
+        getSizeOfElement
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/is_device_cpu/" class="md-nav__link">
+        isDeviceCPU
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/is_device_gpu/" class="md-nav__link">
+        isDeviceGPU
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/is_device_npu/" class="md-nav__link">
+        isDeviceNPU
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/range/" class="md-nav__link">
+        range
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/throw_format/" class="md-nav__link">
+        throwFormat
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/to_string/" class="md-nav__link">
+        toString
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_5" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/cpp/structs/">Structures</a>
+          
+            <label for="__nav_4_1_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_5">
+          <span class="md-nav__icon md-icon"></span>
+          Structures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/structs/context_options/" class="md-nav__link">
+        ContextOptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/structs/device_info/" class="md-nav__link">
+        DeviceInfo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/structs/profile_data/" class="md-nav__link">
+        ProfileData
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/structs/tensor_info/" class="md-nav__link">
+        TensorInfo
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_6" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/cpp/typedefs/">Typedefs</a>
+          
+            <label for="__nav_4_1_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_6">
+          <span class="md-nav__icon md-icon"></span>
+          Typedefs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/typedefs/infer_request_callback/" class="md-nav__link">
+        InferRequestCallback
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/typedefs/version_tuple/" class="md-nav__link">
+        VersionTuple
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/python/">Python</a>
+          
+            <label for="__nav_4_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/python/classes/">Classes</a>
+          
+            <label for="__nav_4_2_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Classes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/classes/context/" class="md-nav__link">
+        Context
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/classes/device_info/" class="md-nav__link">
+        DeviceInfo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/classes/infer_request/" class="md-nav__link">
+        InferRequest
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/classes/model/" class="md-nav__link">
+        Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/classes/profile_data/" class="md-nav__link">
+        ProfileData
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/classes/tensor/" class="md-nav__link">
+        Tensor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/classes/tensor_info/" class="md-nav__link">
+        TensorInfo
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/python/enums/">Enumerations</a>
+          
+            <label for="__nav_4_2_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Enumerations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/enums/device_kind/" class="md-nav__link">
+        DeviceKind
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/enums/element_type/" class="md-nav__link">
+        ElementType
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/enums/framework_kind/" class="md-nav__link">
+        FrameworkKind
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/enums/log_level/" class="md-nav__link">
+        LogLevel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/enums/profile_kind/" class="md-nav__link">
+        ProfileKind
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/python/exceptions/">Exceptions</a>
+          
+            <label for="__nav_4_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Exceptions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/exception/" class="md-nav__link">
+        Exception
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/backend/" class="md-nav__link">
+        BackendException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/infer/" class="md-nav__link">
+        InferException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/initialization_failed/" class="md-nav__link">
+        InitalizationFailedException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/invalid_argument/" class="md-nav__link">
+        InvalidArgumentException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/invalid_extension/" class="md-nav__link">
+        InvalidExtensionException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/invalid_model/" class="md-nav__link">
+        InvalidModelException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/invalid_operation/" class="md-nav__link">
+        InvalidOperationException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/out_of_resource/" class="md-nav__link">
+        OutOfResourceException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/unsupported_model/" class="md-nav__link">
+        UnsupportedModelException
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_4" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/python/functions/">Functions</a>
+          
+            <label for="__nav_4_2_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Functions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/functions/get_element_size/" class="md-nav__link">
+        get_element_size
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/functions/is_device_cpu/" class="md-nav__link">
+        is_device_cpu
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/functions/is_device_gpu/" class="md-nav__link">
+        is_device_gpu
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/functions/is_device_npu/" class="md-nav__link">
+        is_device_npu
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cross_build/" class="md-nav__link">
+        Cross Compile The Runtime
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#defining-runtime-expression" class="md-nav__link">
+    Defining runtime expression
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runtime-tensor" class="md-nav__link">
+    Runtime tensor
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for-loop" class="md-nav__link">
+    For loop
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automatically-generating-nested-for-loops" class="md-nav__link">
+    Automatically generating nested for loops
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runtime-if-statements" class="md-nav__link">
+    Runtime if statements
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="chapter-5-runtime-expressions">Chapter 5. Runtime expressions<a class="headerlink" href="#chapter-5-runtime-expressions" title="Permanent link">&para;</a></h1>
+<p>We have now come through series of features that compile time expression has. But as I mentioned earlier, the primary purpose of compile time expression is generating runtime expressions. Runtime expressions will be translated into executable binary after lowering and applying some optimizations. To do so, compile time expression can treat runtime expression as a 'value'. In this chapter, I will show you how you can write runtime expression, and use it in compile time to generate appropriate output expression.</p>
+<h2 id="defining-runtime-expression">Defining runtime expression<a class="headerlink" href="#defining-runtime-expression" title="Permanent link">&para;</a></h2>
+<p>In compile time expression, we have seen runtime expression can be described as follows. (If you don't remember, go back to Chapter 1)
+<div class="highlight"><pre><span></span><code>let rtExpr = !{&lt;some runtime expression&gt;}
+&lt;next compile time expression to execute&gt;
+</code></pre></div>
+As we see, runtime expression is embedded in compile time expression as a value. Moreover, we can nest compile time expression and runtime expression for generating runtime expression (runtime code in otherwords). This concept is a key to understanding how Opto works.</p>
+<p>In runtime, everything is similar to compile time, except the following:</p>
+<ol>
+<li>
+<p>It does not have closure or recursion</p>
+<ul>
+<li>We use for loops instead!</li>
+</ul>
+</li>
+<li>
+<p>we can manage our memory</p>
+<ul>
+<li>Use alloc</type, alignment/>() for allocation</li>
+<li>Use load, store expressions to read and store the value to the memory</li>
+</ul>
+</li>
+<li>
+<p>No tuple types</p>
+</li>
+<li>List type is only allowed with 'idx' type</li>
+<li>Tensors are mutable</li>
+<li>Just like compile time code, definitions with 'let' bindings are immutable. However, only runtime tensors can be modified by 'store' function.</li>
+</ol>
+<p>Let me explain these with examples.
+Runtime code is closely related to hardware. Therefore, we can explicitly allocate, load and store to the memory. Following example allocates a tensor, and stores data from given tensor called 'data' after multiplying by 2.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Allocates tensor</span>
+<span class="n">let</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alloc</span><span class="o">&lt;/</span><span class="n">$</span><span class="p">{</span><span class="n">rt_tensor</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span><span class="w"> </span><span class="n">rt_number</span><span class="p">(</span><span class="s">&quot;f32&quot;</span><span class="p">))},</span><span class="w"> </span><span class="mi">64</span><span class="o">/&gt;</span><span class="p">()</span>
+
+<span class="c1">// Nested for loop for storing a value</span>
+<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="mi">0</span><span class="n">i</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">10</span><span class="n">i</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="mi">1</span><span class="n">i</span><span class="p">){</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="mi">0</span><span class="n">i</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">10</span><span class="n">i</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="mi">1</span><span class="n">i</span><span class="p">){</span>
+<span class="w">        </span><span class="n">let</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">load</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">])</span><span class="w"> </span><span class="c1">// Load the value from the tensor &#39;data&#39;</span>
+<span class="w">        </span><span class="n">store</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">],</span><span class="w"> </span><span class="n">value</span><span class="o">*</span><span class="mf">2.0f</span><span class="p">)</span><span class="w"> </span><span class="c1">// Store the value to the allocated buffer</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="runtime-tensor">Runtime tensor<a class="headerlink" href="#runtime-tensor" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Allocating a tensor</strong></p>
+<p>Tensor allocation can be done with alloc<!--(runtime_type), alignment/-->(). runtime_type is tensor runtime type defined in compile time. In the above example, we used compile time block ${} to express runtime tensor type. alignment means memory alignment of the tensor. For amd64 architectures, it is best to align it on 64-bit boundary, because most of its vector instructions requires value to be aligned in 64-bit boundary.</p>
+<pre><code>alloc&lt;/runtime tensor type, alignment/&gt;() -&gt; returns runtime tensor
+</code></pre>
+<ul>
+<li>
+<p>Note : Lifetime of the tensor</p>
+<p>Tensor is allocated in heap by default, and it will be freed automatically (or destroyed) when program's control flow exists the current scope. Internally, Opto compiler automatically puts memory free instruction at the end of the scope for all tensors that have been allocated inside the current scope.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Loading and storing to tensor</strong></p>
+<p>tensor load and store can be done with dedicated load, and store functions</p>
+<pre><code>load(tensor, index list) -&gt; returns the loaded value
+store(tensor, index list, value to store) -&gt; returns the value that has been stored
+</code></pre>
+<p>Index list is list of indices used to access a value in the tensor.</p>
+</li>
+</ol>
+<h2 id="for-loop">For loop<a class="headerlink" href="#for-loop" title="Permanent link">&para;</a></h2>
+<p>We can use for loops in runtime code. However its form is little different with what we saw in python or C.</p>
+<div class="highlight"><pre><span></span><code>// Basic format of for loop
+for(iterator_variable from begin_idx to end_idx step step_size) [iterator_variables : initial_value, ...]{
+    // Body expression
+}
+</code></pre></div>
+<p>In the for loop, we cannot have conditions other than range. Moreover, this range must be fixed in compile time. This is due to optimitization issues. We need to know the range and step of the for loop before optimization so we can decide how to optimize the for loop.</p>
+<p>Something that might be new to you is concept called <em>iterator_vairable</em>. This is used when we have to use destructive update. As we all know, let bindings in Opto is immutable unless it's tensor. However, in the for loop, we might want to update some value we have already defined. 
+Suppose we want to add up all values in the tensor. In this case, it is necessary to define a value and keep adding to that value.</p>
+<p>To support this without violating the immutability, this is where <em>iterator_variable</em> comes into play.</p>
+<p>This code calculates sum of all values in the tensor called 'data' and stores it in 'result'. 
+<div class="highlight"><pre><span></span><code>// Basic format of for loop
+let initialSum = 0.0f
+let result = 
+    for(itr from 0i to 10i step 1i) [sumOnUpdate : initialSum]{
+        sumOnUpdate + load(data, [itr])
+    }
+result
+</code></pre></div></p>
+<p>The initial value of the sum is stored in 'initialSum' with zero. When for loops starts its iteration, initialSum is captured in value called 'sumOnUpdate'. In the body of for loop, the returned value from the last expression is stored in 'sumOnUpdate' for the next iteration. Since we are adding value loaded from 'data' and passing it to 'sumOnUpdate', 'sumOnUpdate' in the next iteration will equal ('sumOnUpdate' in current iteration + loaded value from 'data).  When this procedure continues, we end up adding all elements in 'data'.
+The return value of the for loop is the value of the 'sumOnUpdate' updated from the last iteration. Therefore, 'result' becomes the result we want.</p>
+<p>We can use iterator variables when we need to use the result of the body expression of for, but please note that number of return values and number of iterator variables should match unless there are no iterator variables.</p>
+<p>If we don't require any iterator variables, we can omit bracket '[]', and for loop won't return any values.</p>
+<h2 id="automatically-generating-nested-for-loops">Automatically generating nested for loops<a class="headerlink" href="#automatically-generating-nested-for-loops" title="Permanent link">&para;</a></h2>
+<p>In some cases, we might not know the number of required nested for loops. This case frequently happens if we don't know the dimension of the given tensor. Supppose we have to add two tensors one by one, and we need to broadcast between them. We will have to make nested for loops to do so, but number of loops depends on the dimension of input tensors. In Opto, answer to this problem is 'rt_for', which is compile time expression that will generated nested runtime for loops.
+Here is the simple use case.</p>
+<div class="highlight"><pre><span></span><code>let iteratorNames = [&quot;itr0&quot;, &quot;itr1&quot;, &quot;itr2&quot;]
+let loops = ([0i, 3i, 1i], [0i, 10i, 1i], [0i, 5i, 1i])
+let initialValue = 0.0f
+
+!{
+    let returnedValue = ${
+        rt_for(iteratorNames : loops)} [&quot;updateValue&quot; : initialValue]{
+            // Body function
+            // Note rt_for is the compile time expression. Therefore, body has to be compile time expression
+            !{
+                updateValue + load(data, iteratorNames)
+            }
+        }
+    returnedValue
+}
+</code></pre></div>
+<p>Now this will be converted to following runtime code.</p>
+<div class="highlight"><pre><span></span><code>let returnedValue = for(itr0 from 0i to 3i step 1i) [updateValue_0 : 0.000000f] {
+    for(itr1 from 0i to 3i step 1i) [updateValue_1 : updateValue_0] {
+        for(itr2 from 0i to 3i step 1i) [updateValue : updateValue_1] {
+            updateValue + load(data, [itr0, itr1, itr2])
+        }
+    }
+}
+returnedValue
+</code></pre></div>
+<p>How cool is that? We have successfully created nested for loop using list of iterator names and loop range lists.
+Just like normal runtime for loops we can omit '[]' bracket or leave it empty if we don't need iterator variables. If there are no iterator variables, return value of the body will be ignored.</p>
+<div class="highlight"><pre><span></span><code>// rt_for without iterator variables
+rt_for(iteratorNames : loops) {
+        // Body function
+        // Note rt_for is the compile time expression. Therefore, body has to be compile time expression
+        !{
+            let value = load(src, iteratorNames)
+            store(dest, iteratorNames, value) 
+        }
+    }
+</code></pre></div>
+<p>Just be careful that rt_for is compile time expression. Thats why we had to give the name 'updateValue' as a string in compile time, so its converted into identifier in runtime. Also, we have to put compile time expression inside the body of rt_for.</p>
+<p>Here is the description of each section in rt_for expression.</p>
+<pre><code>rt_for(itr_variable_list: itr_range_list) [update_value : initial_value, ...]{
+    // Body of the expresion
+}
+</code></pre>
+<ul>
+<li>itr_variable_list : list of iteration variables to be used in runtime. Given as list of string. Beginning of the list indicates outermost loop.</li>
+<li>itr_range_list : list of iteration variables used for each loop level. Given as list of list with 3 values indicating [begin index, end index, step size]. Beginning  of the list indicates outermost loop.</li>
+<li>update_value : name of the value to be updated.</li>
+<li>initial_value : value to initialize update_value in the first loop.</li>
+</ul>
+<h2 id="runtime-if-statements">Runtime if statements<a class="headerlink" href="#runtime-if-statements" title="Permanent link">&para;</a></h2>
+<p>We can use if statement in runtime just like what we did in copmile time. However, it is important to note some differences between these two cases.</p>
+<p>The key differences are:</p>
+<ol>
+<li>Since there is no 'none' type in runtime, we must return same type in both if and else block or return nothing from neither of the blocks.</li>
+<li>Return type must be number type.<ul>
+<li>Note : this restriction will be removed later on.</li>
+</ul>
+</li>
+<li>'else' block is omittable only if 'if' block returns nothing.</li>
+</ol>
+<div class="highlight"><pre><span></span><code>    let returnVal  = if(cast&lt;/f32/&gt;(${t[0]}) + 1.0f &gt; cast&lt;/f32/&gt;(${t[1]} - 1i)){
+        cast&lt;/f32/&gt;(cast&lt;/i32/&gt;(${t[1]} - 1i))
+    } else {
+        cast&lt;/f32/&gt;(${t[0]}) + 1.0f
+    }
+</code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.tabs.link"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.b78d2936.min.js"></script>
+      
+    
+  </body>
+</html>

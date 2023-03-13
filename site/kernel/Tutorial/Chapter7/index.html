@@ -1,0 +1,2207 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://example.enerzai.com/optimav2/kernel/Tutorial/Chapter7/">
+      
+      
+        <link rel="prev" href="../Chapter6/">
+      
+      
+        <link rel="next" href="../../../runtime/cpp/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.1">
+    
+    
+      
+        <title>Chapter7 - OptimaV2 Document</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.402914a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-7-putting-it-all-together" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="OptimaV2 Document" class="md-header__button md-logo" aria-label="OptimaV2 Document" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OptimaV2 Document
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter7
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ENERZAi/OptimaV2-Docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="OptimaV2 Document" class="md-nav__button md-logo" aria-label="OptimaV2 Document" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    OptimaV2 Document
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ENERZAi/OptimaV2-Docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          User Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guide/install/" class="md-nav__link">
+        Install
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guide/convert/" class="md-nav__link">
+        Convert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guide/inference/" class="md-nav__link">
+        Inference
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Opto Language
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Opto Language
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+          Tutorial
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorial
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HowToRead/" class="md-nav__link">
+        How to read this tutorial
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapter1/" class="md-nav__link">
+        Chapter1
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapter2/" class="md-nav__link">
+        Chapter2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapter3/" class="md-nav__link">
+        Chapter3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapter4/" class="md-nav__link">
+        Chapter4
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapter5/" class="md-nav__link">
+        Chapter5
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Chapter6/" class="md-nav__link">
+        Chapter6
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Chapter7
+      </a>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Runtime API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Runtime API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/cpp/">C++</a>
+          
+            <label for="__nav_4_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          C++
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_1" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/cpp/classes/">Classes</a>
+          
+            <label for="__nav_4_1_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Classes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/classes/buffer_holder/" class="md-nav__link">
+        BufferHolder
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/classes/context/" class="md-nav__link">
+        Context
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/classes/infer_request/" class="md-nav__link">
+        InferRequest
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/classes/model/" class="md-nav__link">
+        Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/classes/shape/" class="md-nav__link">
+        Shape
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/classes/tensor/" class="md-nav__link">
+        Tensor
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_2" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/cpp/enums/">Enumerations</a>
+          
+            <label for="__nav_4_1_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Enumerations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/enums/device_kind/" class="md-nav__link">
+        DeviceKind
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/enums/element_type/" class="md-nav__link">
+        ElementType
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/enums/framework_kind/" class="md-nav__link">
+        FrameworkKind
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/enums/log_level/" class="md-nav__link">
+        LogLevel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/enums/profile_kind/" class="md-nav__link">
+        ProfileKind
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_3" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/cpp/exceptions/">Exceptions</a>
+          
+            <label for="__nav_4_1_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Exceptions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/exception/" class="md-nav__link">
+        Exception
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/backend/" class="md-nav__link">
+        BackendException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/infer/" class="md-nav__link">
+        InferException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/initialization_failed/" class="md-nav__link">
+        InitalizationFailedException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/invalid_argument/" class="md-nav__link">
+        InvalidArgumentException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/invalid_extension/" class="md-nav__link">
+        InvalidExtensionException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/invalid_model/" class="md-nav__link">
+        InvalidModelException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/invalid_operation/" class="md-nav__link">
+        InvalidOperationException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/out_of_resource/" class="md-nav__link">
+        OutOfResourceException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/exceptions/unsupported_model/" class="md-nav__link">
+        UnsupportedModelException
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_4" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/cpp/functions/">Functions</a>
+          
+            <label for="__nav_4_1_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          Functions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/enumerate/" class="md-nav__link">
+        enumerate
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/get_cause/" class="md-nav__link">
+        getCause
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/get_size_of_element/" class="md-nav__link">
+        getSizeOfElement
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/is_device_cpu/" class="md-nav__link">
+        isDeviceCPU
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/is_device_gpu/" class="md-nav__link">
+        isDeviceGPU
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/is_device_npu/" class="md-nav__link">
+        isDeviceNPU
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/range/" class="md-nav__link">
+        range
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/throw_format/" class="md-nav__link">
+        throwFormat
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/functions/to_string/" class="md-nav__link">
+        toString
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_5" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/cpp/structs/">Structures</a>
+          
+            <label for="__nav_4_1_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_5">
+          <span class="md-nav__icon md-icon"></span>
+          Structures
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/structs/context_options/" class="md-nav__link">
+        ContextOptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/structs/device_info/" class="md-nav__link">
+        DeviceInfo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/structs/profile_data/" class="md-nav__link">
+        ProfileData
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/structs/tensor_info/" class="md-nav__link">
+        TensorInfo
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_6" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/cpp/typedefs/">Typedefs</a>
+          
+            <label for="__nav_4_1_6">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_6">
+          <span class="md-nav__icon md-icon"></span>
+          Typedefs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/typedefs/infer_request_callback/" class="md-nav__link">
+        InferRequestCallback
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cpp/typedefs/version_tuple/" class="md-nav__link">
+        VersionTuple
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/python/">Python</a>
+          
+            <label for="__nav_4_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_1" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/python/classes/">Classes</a>
+          
+            <label for="__nav_4_2_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Classes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/classes/context/" class="md-nav__link">
+        Context
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/classes/device_info/" class="md-nav__link">
+        DeviceInfo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/classes/infer_request/" class="md-nav__link">
+        InferRequest
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/classes/model/" class="md-nav__link">
+        Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/classes/profile_data/" class="md-nav__link">
+        ProfileData
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/classes/tensor/" class="md-nav__link">
+        Tensor
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/classes/tensor_info/" class="md-nav__link">
+        TensorInfo
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_2" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/python/enums/">Enumerations</a>
+          
+            <label for="__nav_4_2_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Enumerations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/enums/device_kind/" class="md-nav__link">
+        DeviceKind
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/enums/element_type/" class="md-nav__link">
+        ElementType
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/enums/framework_kind/" class="md-nav__link">
+        FrameworkKind
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/enums/log_level/" class="md-nav__link">
+        LogLevel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/enums/profile_kind/" class="md-nav__link">
+        ProfileKind
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_3" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/python/exceptions/">Exceptions</a>
+          
+            <label for="__nav_4_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Exceptions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/exception/" class="md-nav__link">
+        Exception
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/backend/" class="md-nav__link">
+        BackendException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/infer/" class="md-nav__link">
+        InferException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/initialization_failed/" class="md-nav__link">
+        InitalizationFailedException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/invalid_argument/" class="md-nav__link">
+        InvalidArgumentException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/invalid_extension/" class="md-nav__link">
+        InvalidExtensionException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/invalid_model/" class="md-nav__link">
+        InvalidModelException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/invalid_operation/" class="md-nav__link">
+        InvalidOperationException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/out_of_resource/" class="md-nav__link">
+        OutOfResourceException
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/exceptions/unsupported_model/" class="md-nav__link">
+        UnsupportedModelException
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2_4" >
+      
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../runtime/python/functions/">Functions</a>
+          
+            <label for="__nav_4_2_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_2_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Functions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/functions/get_element_size/" class="md-nav__link">
+        get_element_size
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/functions/is_device_cpu/" class="md-nav__link">
+        is_device_cpu
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/functions/is_device_gpu/" class="md-nav__link">
+        is_device_gpu
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/python/functions/is_device_npu/" class="md-nav__link">
+        is_device_npu
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Misc
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Misc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../runtime/cross_build/" class="md-nav__link">
+        Cross Compile The Runtime
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="chapter-7-putting-it-all-together">Chapter 7. Putting it all together<a class="headerlink" href="#chapter-7-putting-it-all-together" title="Permanent link">&para;</a></h1>
+<p>We can now bring everything together and implement actual layer that can be used in OptimaV2. We will interpret 'add' kernel that will add two tensors(a and b) together and writes it to the output (c), while given shape inputs can be arbitrary.</p>
+<p>Let's start off by defining a module.
+<div class="highlight"><pre><span></span><code>template&lt;/aType : rt_type, bType : rt_type, outputType : rt_type/&gt;
+module add(a : aType, b : bType, c : outputType) {
+    // implement!
+}
+</code></pre></div>
+We have defined type of the inputs a, b and c as an template argument. These are runtime types that will be translated into type expression in runtime code. Recall that runtime expressions and types are treated as value in compile time. Therefore, we can receive them as template argument and define type of a, b and c which are runtime arguments.</p>
+<p>First, since shape of a,b and c are arbitrary, let's get their shapes and calculate broadcasted shape which should match the shape of the output 'c'.</p>
+<p><div class="highlight"><pre><span></span><code>template&lt;/aType : rt_type, bType : rt_type, outputType : rt_type/&gt;
+module add(a : aType, b : bType, c : outputType) {
+    let shapeC = shapeof(outputType)
+    let shapeA = shapeof(aType)
+    let shapeB = shapeof(bType)
+
+    // Get broadcasted shape with builtin broadcast function
+    let broadcastedShape = broadcast &lt;| shapeA &lt;| shapeB
+
+    // Throw an exception if broadcasted shape does not match output shape
+    let _ = if(broadcastedShape != shapeC){
+        except(&quot;Shape mismatch between broadcasted shape : (&quot; + toStr(broadcastedShape) + &quot;) and output shape! : (&quot; + toStr(shapeC) + &quot;)&quot;)
+    }
+
+    // Implement!
+}
+</code></pre></div>
+Now we have calculated broadcated shape using builtin broadcast function. After that, broadcasted shape is compared with shapeC and exception is thrown if shape does not match.</p>
+<p>Since shape is arbitrary, we cannot determine exactly how many for loops are required to iterate through the tensors. Therefore, we have to use 'rt_for' to generate arbitrary number of nested runtime loops. To do so, we need appropriate iterator names, and range lists.</p>
+<p>Following function generates iterator name lists. With the prefix saved in 'itrName' value, this function will generate list of string, each element representing iterator name for each loop. If 'itrName' is "itr", return value of this function would look like ["itr_0", "itr_1", ..., "itr_n"] where n equals (length of broadcastedShape - 1).</p>
+<div class="highlight"><pre><span></span><code>let rec genItrNames itrName index = 
+    if(index &gt;= len(broadcastedShape)){
+        []
+    } else {
+        (itrName + &quot;_&quot; + toStr(index)) :&gt; genItrNames &lt;| itrName &lt;| (index + 1)
+    }
+</code></pre></div>
+<p>Moreover, we have to create runtime list to access each tensor. This access list should be different according to how shape was broadcasted. We should not put iterator over the number of dimensions of given tensor, and index should be always zero if corresponding dimension has only one element.</p>
+<p>Following function will generate appropriate access list, we define 'filter' function, which will put zero if corresponding dimension has one element. Otherwise, dimension will be iterated with iterator variable representing current dimension.</p>
+<div class="highlight"><pre><span></span><code>let rec filter index tensorShape itrNames = 
+    if(index &gt;= len(tensorShape)) {
+        []
+    } else {
+        if(tensorShape[index] == 1) {
+            !{0i} :&gt; filter &lt;| (index + 1) &lt;| tensorShape &lt;| itrNames
+        } else {
+            !{${itrNames[index]}} :&gt; filter &lt;| (index + 1) &lt;| tensorShape &lt;| itrNames
+        }
+    }
+</code></pre></div>
+<p>Now we are ready to generate iterator names, iterator range, and access list.</p>
+<div class="highlight"><pre><span></span><code>template&lt;/aType : rt_type, bType : rt_type, outputType : rt_type/&gt;
+module add(a : aType, b : bType, c : outputType) {
+    let shapeC = shapeof(outputType)
+    let shapeA = shapeof(aType)
+    let shapeB = shapeof(bType)
+
+    // Get broadcasted shape with builtin broadcast function
+    // We use builtin broadcast function here. This builtin function will automatically broadcast two shapes if they are broadcastable.
+    // Refer to Chapter 6 for more information
+    let broadcastedShape = broadcast &lt;| shapeA &lt;| shapeB
+
+    // Throw an exception if broadcasted shape does not match output shape
+    let _ = if(broadcastedShape != shapeC){
+        // &#39;except&#39; keyword throws exception with given messages below 
+        except(&quot;Shape mismatch between broadcasted shape : (&quot; + toStr(broadcastedShape) + &quot;) and output shape! : (&quot; + toStr(shapeC) + &quot;)&quot;)
+    }
+
+    // This function will generate iterator names
+    let rec genItrNames itrName index = 
+        if(index &gt;= len(broadcastedShape)){
+            []
+        } else {
+            (itrName + &quot;_&quot; + toStr(index)) :&gt; genItrNames &lt;| itrName &lt;| (index + 1)
+        }
+
+    // This function generates iterator list
+    // Note how filter function generates filtered outputs
+    let rec filter index tensorShape itrNames = 
+        if(index &gt;= len(tensorShape)) {
+            []
+        } else {
+            if(tensorShape[index] == 1) {
+                !{0i} :&gt; filter &lt;| (index + 1) &lt;| tensorShape &lt;| itrNames
+            } else {
+                !{${itrNames[index]}} :&gt; filter &lt;| (index + 1) &lt;| tensorShape &lt;| itrNames
+            }
+        }
+
+    // Create list of iterator range list which is list&lt;list&lt;idx&gt;&gt;
+    // We use &#39;fold&#39; builtin function to achieve this. This will gather all iterator range and put them into the list.
+    // For more information about &#39;fold&#39;, go back to Chapter 6.
+    let indices = fold &lt;| [] &lt;| broadcastedShape &lt;| lambda (s, t) { s&lt;: [0i, t, 1i] }
+    // Create list of iterator names
+    let itrNames = genItrNames &lt;| &quot;itr&quot; &lt;| 0i
+    // Create access lists for each tensor
+    let cBroadcastedIndices = filter &lt;| 0i &lt;| shapeC &lt;| itrNames
+    let aBroadcastedIndices = filter &lt;| 0i &lt;| shapeA &lt;| itrNames
+    let bBroadcastedIndices = filter &lt;| 0i &lt;| shapeB &lt;| itrNames
+
+    // Implement
+}
+</code></pre></div>
+<p>Now we can finish writing this layer by calling rt_for and geneting the nested loop we want.</p>
+<div class="highlight"><pre><span></span><code>template&lt;/aType : rt_type, bType : rt_type, outputType : rt_type/&gt;
+module add(a : aType, b : bType, c : outputType) {
+    let shapeC = shapeof(outputType)
+    let shapeA = shapeof(aType)
+    let shapeB = shapeof(bType)
+
+    // Get broadcasted shape with builtin broadcast function
+    let broadcastedShape = broadcast &lt;| shapeA &lt;| shapeB
+
+    // Throw an exception if broadcasted shape does not match output shape
+    let _ = if(broadcastedShape != shapeC){
+        except(&quot;Shape mismatch between broadcasted shape : (&quot; + toStr(broadcastedShape) + &quot;) and output shape! : (&quot; + toStr(shapeC) + &quot;)&quot;)
+    }
+
+    // This function will generate iterator names
+    let rec genItrNames itrName index = 
+        if(index &gt;= len(broadcastedShape)){
+            []
+        } else {
+            (itrName + &quot;_&quot; + toStr(index)) :&gt; genItrNames &lt;| itrName &lt;| (index + 1i)
+        }
+
+    // This function generates iterator list
+    let rec filter index tensorShape itrNames = 
+        if(index &gt;= len(tensorShape)) {
+            []
+        } else {
+            if(tensorShape[index] == 1) {
+                !{0i} :&gt; filter &lt;| (index + 1) &lt;| tensorShape &lt;| itrNames
+            } else {
+                !{${itrNames[index]}} :&gt; filter &lt;| (index + 1) &lt;| tensorShape &lt;| itrNames
+            }
+        }
+
+    // Create list of iterator range list which is list&lt;list&lt;idx&gt;&gt;
+    let indices = fold &lt;| [] &lt;| broadcastedShape &lt;| lambda (s, t) { s&lt;: [0i, t, 1i] }
+
+    // Create list of iterator names
+    let itrNames = genItrNames &lt;| &quot;itr&quot; &lt;| 0i
+
+    // Create access lists for each tensor
+    let cBroadcastedIndices = filter &lt;| 0i &lt;| shapeC &lt;| itrNames
+    let aBroadcastedIndices = filter &lt;| 0i &lt;| shapeA &lt;| itrNames
+    let bBroadcastedIndices = filter &lt;| 0i &lt;| shapeB &lt;| itrNames
+
+    // Generate rt_for 
+    rt_for(itrNames : indices) [] {
+        // Runtime code block that loads data from a, b and stores added value to c
+        !{
+            let aV = load(a, ${aBroadcastedIndices})
+            let bV = load(b, ${bBroadcastedIndices})
+            store(c, ${cBroadcastedIndices}, aV + bV)
+        }
+    }
+}
+</code></pre></div>
+<p>That's it! we have created our layer that adds two tensors element-wise regardless of their input shapes (As long as they are broadcastable and conditions are met).</p>
+<p>Let's see how our add layer is converted to runtime code. Let's give these parameters, and run our code.
+(aType : tensor&lt;(1,5,100), f32&gt;, bType : tensor&lt;(4,2,5,100), f32&gt;, outputType : tensor&lt;(4,2,5,100), f32&gt;)</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">opto</span>
+
+<span class="n">opto</span><span class="o">.</span><span class="n">OptoLayerInstance</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="s2">&quot;add.opto&quot;</span><span class="p">,</span> <span class="s2">&quot;add_rt.opto&quot;</span><span class="p">)</span>
+<span class="n">layer</span><span class="o">.</span><span class="n">add_param</span><span class="p">(</span><span class="s2">&quot;aType&quot;</span><span class="p">,</span> <span class="n">opto</span><span class="o">.</span><span class="n">RtTensorType</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">opto</span><span class="o">.</span><span class="n">NumberType</span><span class="o">.</span><span class="n">F32</span><span class="p">))</span>
+<span class="n">layer</span><span class="o">.</span><span class="n">add_param</span><span class="p">(</span><span class="s2">&quot;bType&quot;</span><span class="p">,</span> <span class="n">opto</span><span class="o">.</span><span class="n">RtTensorType</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">opto</span><span class="o">.</span><span class="n">NumberType</span><span class="o">.</span><span class="n">F32</span><span class="p">))</span>
+<span class="n">layer</span><span class="o">.</span><span class="n">add_param</span><span class="p">(</span><span class="s2">&quot;outputType&quot;</span><span class="p">,</span> <span class="n">opto</span><span class="o">.</span><span class="n">RtTensorType</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">opto</span><span class="o">.</span><span class="n">NumberType</span><span class="o">.</span><span class="n">F32</span><span class="p">))</span>
+<span class="n">layer</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<p>Here is the output (add_rt.opto).
+<div class="highlight"><pre><span></span><code>module(a : tensor&lt;(1, 5, 100), f32&gt;, b : tensor&lt;(4, 2, 5, 100), f32&gt;, c : tensor&lt;(4, 2, 5, 100), f32&gt;){
+for(itr_0i from 0i to 4i step 1i)  [] {
+    for(itr_1i from 0i to 2i step 1i)  [] {
+      for(itr_2i from 0i to 5i step 1i)  [] {
+        for(itr_3i from 0i to 100i step 1i)  [] {
+          let aV = load(a, [0i, itr_1i, itr_2i])
+          let bV = load(b, [itr_0i, itr_1i, itr_2i, itr_3i])
+          store(c, [itr_0i, itr_1i, itr_2i, itr_3i], (aV) + (bV))
+        }
+      }
+    }
+  }
+}
+</code></pre></div></p>
+<p>How cool is that? Our compile time code has generated runtime code that has successfully calculated broadcasted shape (4, 2, 5, 100) and coverted it into nested loop. Note how access list was generated. They are correctly indexing our tensors, despite they are broadcasted. Now our runtime code will be further lowered down to binary by OptimaV2 tranlation units, and become executable binary that computer can run.</p>
+<p>What if dimension(or shape) of inputs change? Without power of Opto, we would have to rewrite the whole code, with modified number of loops and indices. If we have to do this every time, It will be very inefficient and time consuming. However, with opto this kind of task is piece of cake. We can simply give different inputs as template arguments, and our Opto code will generate appropriate code.</p>
+<p>Let's change shape of input 'a' like following:</p>
+<ul>
+<li>a : (3, 1, 2, 5, 100)</li>
+<li>b : (4, 2, 5, 100)</li>
+<li>c : (3, 4, 2, 5, 100)</li>
+</ul>
+<p>Let's run it with new shapes.
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">opto</span>
+
+<span class="n">opto</span><span class="o">.</span><span class="n">OptoLayerInstance</span><span class="p">(</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="s2">&quot;add.opto&quot;</span><span class="p">,</span> <span class="s2">&quot;add_rt.opto&quot;</span><span class="p">)</span>
+<span class="n">layer</span><span class="o">.</span><span class="n">add_param</span><span class="p">(</span><span class="s2">&quot;aType&quot;</span><span class="p">,</span> <span class="n">opto</span><span class="o">.</span><span class="n">RtTensorType</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">opto</span><span class="o">.</span><span class="n">NumberType</span><span class="o">.</span><span class="n">F32</span><span class="p">))</span>
+<span class="n">layer</span><span class="o">.</span><span class="n">add_param</span><span class="p">(</span><span class="s2">&quot;bType&quot;</span><span class="p">,</span> <span class="n">opto</span><span class="o">.</span><span class="n">RtTensorType</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">opto</span><span class="o">.</span><span class="n">NumberType</span><span class="o">.</span><span class="n">F32</span><span class="p">))</span>
+<span class="n">layer</span><span class="o">.</span><span class="n">add_param</span><span class="p">(</span><span class="s2">&quot;outputType&quot;</span><span class="p">,</span> <span class="n">opto</span><span class="o">.</span><span class="n">RtTensorType</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">opto</span><span class="o">.</span><span class="n">NumberType</span><span class="o">.</span><span class="n">F32</span><span class="p">))</span>
+<span class="n">layer</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></p>
+<p>Following code is generated runtime code output from our Opto implementation.
+<div class="highlight"><pre><span></span><code>module(a : tensor&lt;(3, 1, 2, 5, 100), f32&gt;, b : tensor&lt;(4, 2, 5, 100), f32&gt;, c : tensor&lt;(3, 4, 2, 5, 100), f32&gt;){
+for(itr_0i from 0i to 3i step 1i)  [] { // This loop has been added automatically by our Opto implementation
+    for(itr_1 from 0i to 4i step 1i)  [] {
+      for(itr_2 from 0i to 2i step 1i)  [] {
+        for(itr_3 from 0i to 5i step 1i)  [] {
+          for(itr_4 from 0i to 100i step 1i)  [] {
+            let aV = load(a, [itr_0i, 0i, itr_2, itr_3, itr_4]) // Observe how iterator indices has changed to follow the new shape
+            let bV = load(b, [itr_0i, itr_1, itr_2, itr_3])
+            store(c, [itr_0i, itr_1, itr_2, itr_3, itr_4], (aV) + (bV))
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre></div>
+We can observe our opto copmiler has successfully generated one more loop for added dimension.</p>
+<p>In the below figure, you can observe which part of our compile-time code is generating specific part of runtime output. This will help you to recap how compile time code generates runtime code. </p>
+<p><strong>Compile time add</strong>
+<img alt="add_example" src="../../../img/add_example_highlighted.png" /></p>
+<p><strong>Generated runtime output</strong>
+<img alt="add_example_rt" src="../../../img/add_example_rt_highlighted.png" /></p>
+<p>Code blocks highlighted in yellow generates indices used to load and store from tensors while code blocks highlighted in blue generates for loops.
+Lastly, code blocks highlighted in green indicates runtime types given as static template arguments.
+It is best to follow the code again and see how each part of compile time code generates runtime code.</p>
+<p>Now, you have gone through all tutorials I have prepared. I hope you enjoy programming in Opto. If you need more information, you can refer to our reference page in notion (This will be moved to another document in the near future), or contact me directly! (email : <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#97;&#101;&#119;&#111;&#111;&#46;&#107;&#105;&#109;&#64;&#101;&#110;&#101;&#114;&#122;&#97;&#105;&#46;&#99;&#111;&#109;">&#106;&#97;&#101;&#119;&#111;&#111;&#46;&#107;&#105;&#109;&#64;&#101;&#110;&#101;&#114;&#122;&#97;&#105;&#46;&#99;&#111;&#109;</a>).</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.tabs.link"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.b78d2936.min.js"></script>
+      
+    
+  </body>
+</html>
