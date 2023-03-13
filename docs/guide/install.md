@@ -27,9 +27,9 @@ Since OptimaV2 is on alpha testing phase, it is not yet open to public network y
     * At least 8GB or more ram is recommended
     
 === "OptimaV2 Runtime"
-    * CPU : amd64 (Intel64) or arm64 based processor
+    * CPU : arm, amd64(Intel64) or arm64 based processor
         * Tested on following platforms
-            * raspberry pi (64bit ubuntu, 64bit raspbian)
+            * raspberry pi (64bit ubuntu, 64bit raspbian, 32bit debian bullseye)
             * Qualcomm SM-8150 develepment board (ubuntu 18.04 LTS)
             * amd64 based linux systems
     * Operating system : Linux (ubuntu 18.04 with python 3.6 or above)
